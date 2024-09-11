@@ -3,9 +3,9 @@
 
 
 Team A:
-Baeuchler Stefanie
-Feher-Lehrner Maria-Luise
-Hofbauer Lisa
+
+
+
 Kogler Paul
 
 ---
