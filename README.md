@@ -3,10 +3,10 @@
 
 
 Team A:
-
-
-
 Kogler Paul
+
+
+
 
 ---
 ## Kontext und Einordnung
