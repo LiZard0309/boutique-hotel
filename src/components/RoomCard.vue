@@ -1,23 +1,35 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import bedroomImage from "@/assets/bedroom.jpg";
 
 export default {
-  name: "rooms-card",
+  name: "RoomCard",
   components: {IconBedKingOutline},
-  data() {
-    return {
-      bedroomImage,
-    };
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    beds: {
+      type: Number,
+      required: true,
+    },
   },
-}
+};
 </script>
 
 <template>
   <div>
     <b-card
-        title="Zimmer Name"
-        :img-src="bedroomImage"
+        :title="title"
+        :img-src="image"
         img-alt="Image"
         img-top
         tag="article"
@@ -25,13 +37,13 @@ export default {
         class="mb-2"
     >
       <b-card-text>
-        Preis €/Nacht
+        Preis {{ price }} €/Nacht
       </b-card-text>
 
       <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
       <br/>
       <IconBedKingOutline></IconBedKingOutline>
-      <p>2 Betten</p>
+      <p>{{ beds }} Betten</p>
 
     </b-card>
   </div>
