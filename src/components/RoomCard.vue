@@ -42,8 +42,10 @@ export default {
 
       <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
       <br/>
-      <IconBedKingOutline></IconBedKingOutline>
-      <p>{{ beds }} Betten</p>
+      <div class="bed-info">
+        <IconBedKingOutline />
+        <p>{{ beds }} Betten</p>
+      </div>
 
     </b-card>
   </div>
@@ -51,4 +53,29 @@ export default {
 
 <style scoped>
 
+.room-card {
+  max-width: 20rem;
+  margin: auto;
+}
+
+
+@media (min-width: 1024px) {
+  .room-card {
+    max-width: 30rem;
+  }
+}
+
+
+.bed-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+
+.bed-info p {
+  margin-left: 8px;
+  margin-bottom: 0;
+  font-weight: bold;
+}
 </style>
