@@ -44,7 +44,7 @@ export default {
         img-alt="Image"
         img-top
         tag="article"
-        style="max-width: 20rem;"
+        style="max-width: 50rem;"
         class="mb-2"
     >
       <b-card-text>
@@ -100,6 +100,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 8px;
 }
 
 .left-content {
