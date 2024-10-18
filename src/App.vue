@@ -1,7 +1,4 @@
 <script setup>
-
-import Homescreen from "@/views/Homescreen.vue";
-import AboutView from "@/views/AboutView.vue";
 import HomeView from "@/views/HomeView.vue";
 </script>
 
