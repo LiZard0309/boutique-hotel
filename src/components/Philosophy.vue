@@ -11,15 +11,10 @@
     <br>
     <br>
 
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore
-      magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-      gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-      sadipscing
-      elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-      eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum
-      dolor sit amet. </p>
+    <p>Im Hotel <strong>Alpenblick Boutique Resort</strong> stehen Sie als Gast im Mittelpunkt. Unser Team setzt alles
+      daran, Ihren Aufenthalt zu
+      einem besonderen Erlebnis zu machen – mit persönlichem Service, außergewöhnlicher Liebe zum Detail und dem
+      Bestreben, jeden Moment einzigartig zu gestalten. </p>
 
     <br>
 
@@ -27,25 +22,14 @@
 
     <br>
 
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore
-      magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-      gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-      sadipscing
-      elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-      eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum
-      dolor sit amet. </p>
+    <p>Für uns ist Gastfreundschaft mehr als nur ein Wort. Sie ist das Fundament, auf dem wir unser Hotel aufgebaut
+      haben. Wir glauben daran, dass ein herzlicher Empfang, authentische Erlebnisse und ein individuelles Ambiente die
+      Grundlage für unvergessliche Momente sind. Als familiengeführtes Boutique-Hotel sind wir stolz auf unsere enge
+      Verbindung zur Region und unseren verantwortungsvollen Umgang mit Ressourcen. Nachhaltigkeit und der Erhalt der
+      natürlichen Schönheit unserer Umgebung liegen uns besonders am Herzen. </p>
 
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore
-      magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-      gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-      sadipscing
-      elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-      eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum
-      dolor sit amet. </p>
+    <p>Unser Ziel ist es, einen Ort zu schaffen, an dem Sie zur Ruhe kommen, neue Energie tanken und den Alltag hinter
+      sich lassen können. Wir freuen uns, Sie bald in unserem kleinen Paradies willkommen zu heißen. </p>
 
     <br>
 
