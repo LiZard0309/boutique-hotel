@@ -11,9 +11,7 @@
         Annehmlichkeiten.</p>
     </div>
     <div class="paragraph">
-      <p>Egal, ob Sie einen romantischen Kurzurlaub planen, die Region erkunden oder einfach nur abschalten möchten –
-        bei uns sind Sie in den besten Händen. Lassen Sie sich von unserer Gastfreundschaft und der Liebe zum Detail
-        verzaubern. Wir freuen uns darauf, Ihnen unvergessliche Momente zu bereiten.</p>
+      <p>Egal, ob Sie einen romantischen Kurzurlaub planen, die Region erkunden oder einfach nur abschalten möchten – bei uns sind Sie in den besten Händen. Lassen Sie sich von unserer Gastfreundschaft und der Liebe zum Detail verzaubern. Wir freuen uns darauf, Ihnen unvergessliche Momente zu bereiten.</p>
     </div>
   </div>
 </template>
@@ -25,13 +23,23 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  column-gap: 2rem;
   margin: 20px auto;
 }
 
 .paragraph {
   text-align: justify;
-  flex-basis: 1200px;
+  flex: 1;
+  min-width: 300px;
   margin: 10px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .paragraph {
+    min-width: 90%;
+  }
+}
+
 </style>

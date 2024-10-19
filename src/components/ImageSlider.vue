@@ -1,19 +1,25 @@
 <template>
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button
+          v-for="(image, index) in images"
+          :key="index"
+          type="button"
+          :data-bs-target="'#carouselExampleIndicators'"
+          :data-bs-slide-to="index"
+          :class="{ active: index === 0 }"
+          aria-current="index === 0"
+          :aria-label="'Slide ' + (index + 1)"
+      ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://picsum.photos/1024/480/?image=10" class="d-block w-100" alt="First Slide">
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/1024/480/?image=12" class="d-block w-100" alt="Second Slide">
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/1024/480/?image=22" class="d-block w-100" alt="Third Slide">
+      <div
+          v-for="(image, index) in images"
+          :key="index"
+          class="carousel-item"
+          :class="{ active: index === 0 }"
+      >
+        <img :src="image.src" class="d-block w-100" :alt="image.alt">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -28,7 +34,15 @@
 </template>
 
 <script setup>
-// Keine zusätzliche Logik nötig, da das Carousel von Bootstrap selbst gesteuert wird.
+import { defineProps } from 'vue';
+
+// Definiere die Props, die die Bilder empfangen
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true
+  }
+});
 </script>
 
 <style scoped>
