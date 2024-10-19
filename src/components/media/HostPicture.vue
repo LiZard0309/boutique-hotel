@@ -1,28 +1,19 @@
 <script>
+import hostPicture from '@/assets/hosts.jpeg';
+
 export default {
   name: 'ImageComponent',
-  props: {
-    imageSrc: {
-      type: String,
-      required: true,
-    },
-    altText: {
-      type: String,
-      default: 'Image',
-    },
-    caption: {
-      type: String,
-      default: '',
-    },
+  data() {
+    return {
+      imageSrc: hostPicture,
+    };
   },
 };
-
 </script>
 
 <template>
   <div class="image-container">
-    <img :src="require('@/assets/hosts.jpeg')" :alt="altText" class="styled-image" />
-    <p>{{ caption }}</p>
+    <img :src="imageSrc" :alt="altText" class="styled-image" />
   </div>
 </template>
 
@@ -44,3 +35,4 @@ export default {
   margin-bottom: 8px;
 }
 </style>
+
