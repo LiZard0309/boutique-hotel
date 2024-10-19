@@ -12,7 +12,7 @@
 
         <div>
           <b-navbar-brand class="navbar-titel">
-            Boutique Hotel
+            Alpenblick
           </b-navbar-brand>
         </div>
 

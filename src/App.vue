@@ -14,6 +14,8 @@ import Navbar from "@/components/Navbar.vue";
 </template>
 
 <style scoped>
+#app {
+}
 
 .main-content {
   max-width: 1200px; /* Maximale Breite der App */

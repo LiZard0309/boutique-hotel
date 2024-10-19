@@ -11,7 +11,7 @@ export default {
   <div class="container">
     <div>
       <h1>__________</h1>
-      <h1>4 Sterne Superior Hotel La Vie Élégante</h1>
+      <h1>4 Sterne Superior Alpenblick Boutique Resort</h1>
       <h3> – wo Luxus auf Herzlichkeit trifft –</h3>
     </div>
     <div>

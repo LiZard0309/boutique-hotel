@@ -1,39 +1,61 @@
+<script>
+export default {
+  data() {
+    return {
+      images: [
+        { src: "https://picsum.photos/800/600/?image=35" },
+        { src: "https://picsum.photos/800/600/?image=34" },
+        { src: "https://picsum.photos/800/600/?image=33" },
+        { src: "https://picsum.photos/800/600/?image=32" },
+        { src: "https://picsum.photos/800/600/?image=31" },
+        { src: "https://picsum.photos/800/600/?image=30" },
+      ],
+      isOverlayVisible: false,
+      activeImage: "",
+    };
+  },
+  methods: {
+    openOverlay(image) {
+      if (window.innerWidth > 768) {
+        this.activeImage = image;
+        this.isOverlayVisible = true;
+      }
+    },
+    closeOverlay() {
+      this.isOverlayVisible = false;
+    },
+  },
+};
+</script>
+
 <template>
   <div>
-    <h2>Das erwartet dich</h2>
+    <h2 class="headline">Das erwartet dich</h2>
     <div class="container">
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=35" class="img-fluid" alt="Slide 1">
+      <div class="image-item" v-for="(image, index) in images" :key="index">
+        <img
+            :src="image.src"
+            :alt="`Slide ${index + 1}`"
+            class="img-fluid"
+            @click="openOverlay(image.src)"
+        />
       </div>
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=34" class="img-fluid" alt="Slide 2">
-      </div>
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=33" class="img-fluid" alt="Slide 3">
-      </div>
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=32" class="img-fluid" alt="Slide 4">
-      </div>
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=31" class="img-fluid" alt="Slide 5">
-      </div>
-      <div class="image-item">
-        <img src="https://picsum.photos/400/300/?image=30" class="img-fluid" alt="Slide 6">
+    </div>
+
+    <div v-if="isOverlayVisible" class="overlay" @click="closeOverlay">
+      <div class="overlay-content">
+        <img :src="activeImage" class="large-image" />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "Activities"
-}
-</script>
+
 
 <style scoped>
-h2 {
-  color: dimgrey;
+.headline {
   margin-left: 20px;
+  color: dimgray;
 }
 
 .container {
@@ -43,14 +65,71 @@ h2 {
 }
 
 .image-item {
-  flex: 1 0 30%; /* 30% Basis für die Breite, damit 3 Bilder in einer Reihe Platz haben */
-  margin: 10px; /* Abstand zwischen den Bildern */
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  flex: 1 0 30%;
+  margin: 10px;
+  position: relative;
 }
 
-/* Auf kleinen Bildschirmen die Bilder in voller Breite darstellen */
+.image-item img {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-item img:hover {
+  transform: scale(1.05);
+  transition: transform 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.overlay-content {
+  position: relative;
+}
+
+.large-image {
+  width: auto;
+  height: 90%;
+}
+
+.overlay-content img {
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+
+}
+
+.overlay-content:after {
+  content: "✕";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .image-item {
-    flex: 1 0 100%; /* Auf kleinen Bildschirmen 100% Breite für jedes Bild */
+    flex: 1 0 80%;
   }
 }
 </style>
