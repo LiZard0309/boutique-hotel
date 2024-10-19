@@ -42,7 +42,7 @@ export default {
         :title="roomName"
         :img-src="image"
         img-alt="Image"
-        img-top
+        img-top="true"
         tag="article"
         style="max-width: 50rem;"
         class="mb-4"
