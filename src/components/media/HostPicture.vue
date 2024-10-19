@@ -18,6 +18,7 @@ export default {
 </template>
 
 <style scoped>
+
 .image-container {
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@ export default {
   padding: 10px;
   border-radius: 8px;
   background-color: #f9f9f9;
+  width: 100%;
 }
 
 .styled-image {
@@ -34,5 +36,6 @@ export default {
   border-radius: 5px;
   margin-bottom: 8px;
 }
+
 </style>
 

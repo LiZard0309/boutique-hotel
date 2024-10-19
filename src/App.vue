@@ -17,12 +17,10 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-<style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
 }
-
 
 nav {
   width: 100%;
@@ -56,17 +54,10 @@ nav a:first-of-type {
     padding-right: calc(var(--section-gap) / 2);
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
-
     padding: 1rem 0;
     margin-top: 1rem;
   }

@@ -13,6 +13,8 @@ import HostPicture from '../components/media/HostPicture.vue'
 .about {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 </style>
