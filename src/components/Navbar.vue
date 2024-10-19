@@ -6,13 +6,13 @@
       <b-container class="navbar-container">
         <div>
           <b-navbar-brand href="#">
-            <img alt="Hotellogo" src="../assets/Logos/Logo2_clean.png" height="60"/>
+            <img alt="Hotellogo" src="../assets/Logos/Logo2_clean.png" class="navbar-logo" height="60"/>
           </b-navbar-brand>
         </div>
 
         <div>
           <b-navbar-brand class="navbar-titel">
-            <img alt="HotelName" src="../assets/Logos/Logo3_clean.png" height="60"/>
+            <img alt="HotelName" src="../assets/Logos/Logo3_clean.png" class="navbar-logo" height="60"/>
           </b-navbar-brand>
         </div>
 
@@ -82,7 +82,16 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.navbar-logo {
+  width: auto;
+  max-height: 60px;
+}
+
+
 @media (max-width: 991px) {
+  .navbar-logo {
+    max-height: 30px;
+  }
   .navbar-collapse {
     position: absolute;
     top: 100%;
@@ -107,4 +116,12 @@
     align-items: flex-end;
   }
 }
+
+/* Zwischengröße von 600px bis 900px */
+@media (min-width: 600px) and (max-width: 993px) {
+  .navbar-logo {
+    max-height: 50px;
+  }
+}
+
 </style>
