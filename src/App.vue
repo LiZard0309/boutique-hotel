@@ -1,4 +1,5 @@
 <script setup>
+
 import HomeView from "@/views/HomeView.vue";
 import Navbar from "@/components/Navbar.vue";
 </script>
@@ -10,8 +11,9 @@ import Navbar from "@/components/Navbar.vue";
       <home-view></home-view>
     </div>
   </div>
-
 </template>
+
+
 
 <style scoped>
 #app {
@@ -22,5 +24,6 @@ import Navbar from "@/components/Navbar.vue";
   margin: 0 auto;
   padding: 20px 20px;
 }
+
 
 </style>
