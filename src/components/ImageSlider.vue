@@ -19,7 +19,7 @@
           class="carousel-item"
           :class="{ active: index === 0 }"
       >
-        <img :src="image.src" class="d-block w-100" :alt="image.alt">
+        <img :src="image.src" class="d-block w-100 slider-image" :alt="image.alt">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -36,7 +36,6 @@
 <script setup>
 import { defineProps } from 'vue';
 
-// Definiere die Props, die die Bilder empfangen
 const props = defineProps({
   images: {
     type: Array,
@@ -45,6 +44,12 @@ const props = defineProps({
 });
 </script>
 
+
+
 <style scoped>
-/* Füge hier deine eigenen Styles hinzu, falls nötig */
+.slider-image{
+  height: 500px;
+  object-fit: cover;
+  width: 100%;
+}
 </style>

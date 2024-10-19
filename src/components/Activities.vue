@@ -3,12 +3,12 @@ export default {
   data() {
     return {
       images: [
-        { src: "https://picsum.photos/800/600/?image=35" },
-        { src: "https://picsum.photos/800/600/?image=34" },
-        { src: "https://picsum.photos/800/600/?image=33" },
-        { src: "https://picsum.photos/800/600/?image=32" },
-        { src: "https://picsum.photos/800/600/?image=31" },
-        { src: "https://picsum.photos/800/600/?image=30" },
+        { src: "https://hotelmayr.com/wp-content/uploads/2019/08/wanderurlaub-berge-wanderer-wanderschuhe-1920x1248.jpg" },
+        { src: "https://www.kaunertaler-gletscher.at/mediatypes/contentImgLightbox/wandern-oesterreich-karwendel.jpg" },
+        { src: "https://cdn.escapio.com/public/cache/hotel/plain-nowater/x/10623_hotel_schoenblick_belvedere_0812718.jpg" },
+        { src: "https://www.jetset-media.de/wp-content/uploads/2023/12/restaurant_allegra_c_urs_wyss_hotel_belvedere.jpg" },
+        { src: "https://www.chmoser.ch/trips/berichte/images/02_Belvedere_Zinal_060221.jpg" },
+        { src: "https://img.oastatic.com/img2/41507448/3840x0/variant.jpg" },
       ],
       isOverlayVisible: false,
       activeImage: "",
@@ -61,7 +61,8 @@ export default {
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-item {
@@ -76,6 +77,9 @@ export default {
 .image-item img {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
 .image-item img:hover {
@@ -102,8 +106,9 @@ export default {
 }
 
 .large-image {
-  width: auto;
-  height: 90%;
+  width: 800px;
+  height: 600px;
+  object-fit: cover;
 }
 
 .overlay-content img {

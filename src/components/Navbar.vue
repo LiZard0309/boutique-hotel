@@ -6,13 +6,13 @@
       <b-container class="navbar-container">
         <div>
           <b-navbar-brand href="#">
-            <img alt="Hotellogo" src="../assets/Logos/Hotel_Logo.png" height="60"/>
+            <img alt="Hotellogo" src="../assets/Logos/Logo2_clean.png" height="60"/>
           </b-navbar-brand>
         </div>
 
         <div>
           <b-navbar-brand class="navbar-titel">
-            Alpenblick
+            <img alt="HotelName" src="../assets/Logos/Logo3_clean.png" height="60"/>
           </b-navbar-brand>
         </div>
 
@@ -63,6 +63,7 @@
   align-items: flex-end;
   width: 100%;
   margin-top: 1rem;
+  padding-bottom: 5px;
 }
 
 /* Stil für den Hotelnamen */
