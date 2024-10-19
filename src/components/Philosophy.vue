@@ -29,7 +29,7 @@
       natürlichen Schönheit unserer Umgebung liegen uns besonders am Herzen. </p>
 
     <p>Unser Ziel ist es, einen Ort zu schaffen, an dem Sie zur Ruhe kommen, neue Energie tanken und den Alltag hinter
-      sich lassen können. Wir freuen uns, Sie bald in unserem kleinen Paradies willkommen zu heißen. </p>
+      sich lassen können. Wir freuen uns, Sie bald in unserem kleinen Paradies willkommen zu heißen.  </p>
 
     <br>
 
