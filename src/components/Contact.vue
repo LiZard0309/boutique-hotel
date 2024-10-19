@@ -1,25 +1,33 @@
 <script>
+
 export default {
   name: "Contact",
 
   data(){
     return {
-      email: "hotel@email.com"
+      phone: "05/12345678",
+      email: "office@alpenblick-resort.at"
     }
   }
 }
 </script>
 
 <template>
-  <h4>Noch Fragen? </h4>
-  <p> Kontaktieren Sie uns: <a href="">{{email}}</a></p>
+  <p class="subtitle">Kontaktdaten:</p>
+  <p> Telefon: {{phone}}</p>
+  <p> E-Mail: <span class="email">{{email}}</span> </p>
+  <p> Fax: {{phone}}-02</p>
 
 </template>
 
 <style scoped>
 
-h4 {
+.subtitle {
   font-weight: bold;
 }
 
+.email {
+  color: blue;
+  text-decoration: underline;
+}
 </style>

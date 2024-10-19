@@ -11,7 +11,11 @@ export default {
 <template>
   <body>
   <Directions></Directions>
+
+  <h4>Noch Fragen? </h4>
+  <br>
   <Contact></Contact>
+  <br>
   </body>
 
 
@@ -21,4 +25,9 @@ export default {
 body {
   margin: 2rem;
 }
+
+h4 {
+  font-weight: bold;
+}
+
 </style>
