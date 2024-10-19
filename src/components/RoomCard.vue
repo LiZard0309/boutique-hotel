@@ -45,7 +45,7 @@ export default {
         img-top
         tag="article"
         style="max-width: 50rem;"
-        class="mb-2"
+        class="mb-4"
     >
       <b-card-text>
         Preis {{ pricePerNight }} €/Nacht
