@@ -23,15 +23,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
   width: 100%;
 }
 
 .styled-image {
-  max-width: 100%;
+  width: 70%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 8px;

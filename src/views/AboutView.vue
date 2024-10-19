@@ -1,12 +1,11 @@
 <script setup>
 import HostPicture from '../components/media/HostPicture.vue'
+import Philosophy from "@/components/Philosophy.vue";
 </script>
 
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
   <HostPicture/>
+  <Philosophy/>
 </template>
 
 <style>
