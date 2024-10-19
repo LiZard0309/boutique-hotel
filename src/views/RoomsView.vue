@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="rooms-view-container">
     <div v-for="(room, index) in rooms" :key="index">
       <RoomCard
           :roomName="room.roomName"
@@ -35,5 +35,8 @@ export default {
 </template>
 
 <style scoped>
+.rooms-view-container{
+  padding: 0.5rem;
+}
 
 </style>
