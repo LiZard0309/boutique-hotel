@@ -2,24 +2,19 @@
 import TheWelcome from '../components/ImageSlider.vue'
 import Navbar from "@/components/Navbar.vue";
 import ImageSlider from "@/components/ImageSlider.vue";
-import Welcome from "@/components/Welcome.vue";
+import Welcome from "@/components/WelcomeHeadline.vue";
+import WelcomeText from "@/components/WelcomeText.vue";
 </script>
 
 <template>
   <main>
-    <div class="main-headline">
-      <welcome/>
-    </div>
     <image-slider/>
+    <welcome/>
+    <welcome-text/>
   </main>
 </template>
 
 
 <style scoped>
 
-.main-headline {
-  text-align: center;
-  margin: 2rem 0;
-  color: dimgrey;
-}
 </style>
