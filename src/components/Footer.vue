@@ -22,4 +22,8 @@ export default {
   padding-left: 1.5rem;
 }
 
+.footer-container a {
+  color: #ffffff;
+}
+
 </style>
