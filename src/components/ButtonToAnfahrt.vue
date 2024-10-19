@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -9,10 +9,12 @@
         <img alt="Anfahrt" src="../assets/Logos/Arrow_Anfahrt.png" height="100"/>
       </div>
       <div>
-        <a href="/dein-ziel-link" class="hover-underline-animation left anfahrt-link">So finden Sie zu unserem Hotel!</a>
+        <RouterLink to="/contact" class="hover-underline-animation"> So finden Sie zu unserem Hotel! </RouterLink>
+        <!--a href="" class="hover-underline-animation left anfahrt-link">So finden Sie zu unserem Hotel! </a-->
       </div>
     </div>
   </div>
+
 </template>
 
 

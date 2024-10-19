@@ -1,12 +1,16 @@
 <script setup>
+
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
     <b-navbar toggleable="lg" type="light" variant="light" class="navbar">
       <b-container class="navbar-container">
         <div>
-          <b-navbar-brand href="#">
+          <b-navbar-brand>
+            <RouterLink to="/">
             <img alt="Hotellogo" src="../assets/Logos/Logo2_clean.png" class="navbar-logo" height="60"/>
+            </RouterLink>
           </b-navbar-brand>
         </div>
 
@@ -26,8 +30,11 @@
           <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
             <b-navbar-nav class="menu-items">
               <b-nav-item href="#">Zimmer</b-nav-item>
-              <b-nav-item href="#">Über uns</b-nav-item>
-              <b-nav-item href="#">Anfahrt</b-nav-item>
+              <b-nav-item href="#">Über uns </b-nav-item>
+              <b-nav-item>
+              <RouterLink to="/contact">Anfahrt und Kontakt</RouterLink>
+              </b-nav-item>
+
               <b-nav-item href="#">Login</b-nav-item>
             </b-navbar-nav>
 
@@ -47,6 +54,7 @@
         </div>
       </b-container>
     </b-navbar>
+
 </template>
 
 <style scoped>
