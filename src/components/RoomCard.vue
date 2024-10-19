@@ -1,7 +1,7 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
 import IconImage from "@/components/icons/IconImage.vue";
-import { BCard, BButton, BCollapse } from "bootstrap-vue-3";
+import {BCard, BButton, BCollapse} from "bootstrap-vue-3";
 
 export default {
   name: "RoomCard",
@@ -38,46 +38,50 @@ export default {
 
 <template>
   <div>
-    <b-card
-        :title="roomName"
-        :img-src="image"
-        img-alt="Image"
-        img-top="true"
-        tag="article"
-        style="max-width: 50rem;"
-        class="mb-4"
-    >
-      <b-card-text>
-        Preis {{ pricePerNight }} €/Nacht
-      </b-card-text>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <b-card
+            :title="roomName"
+            :img-src="image"
+            img-alt="Image"
+            img-top="true"
+            tag="article"
+            style="max-width: 50rem;"
+            class="mb-4"
+        >
+          <b-card-text>
+            Preis {{ pricePerNight }} €/Nacht
+          </b-card-text>
 
-      <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
-      <br/>
+          <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
+          <br/>
 
-      <div class="room-info">
-        <div class="left-content">
-          <IconBedKingOutline />
-          <p>{{ beds }} Betten</p>
-        </div>
+          <div class="room-info">
+            <div class="left-content">
+              <IconBedKingOutline/>
+              <p>{{ beds }} Betten</p>
+            </div>
 
-        <div class="right-content">
-          <a href="#" @click.prevent="showDetails = !showDetails" class="details-link">
-            Weitere Details
-            <span class="arrow" v-if="!showDetails">▼</span>
-            <span class="arrow" v-else>▲</span>
-          </a>
-        </div>
-      </div>
-
-      <b-collapse :visible="showDetails">
-        <div class="extras">
-          <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-            <IconImage class="image-icon"/>
+            <div class="right-content">
+              <a href="#" @click.prevent="showDetails = !showDetails" class="details-link">
+                Weitere Details
+                <span class="arrow" v-if="!showDetails">▼</span>
+                <span class="arrow" v-else>▲</span>
+              </a>
+            </div>
           </div>
-        </div>
-      </b-collapse>
 
-    </b-card>
+          <b-collapse :visible="showDetails">
+            <div class="extras">
+              <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
+                <IconImage class="image-icon"/>
+              </div>
+            </div>
+          </b-collapse>
+
+        </b-card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -135,9 +139,9 @@ export default {
   margin-right: 10px;
   margin-bottom: 10px;
 
-.image-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
+  .image-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 </style>
