@@ -1,15 +1,36 @@
-<script setup>
+<template>
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://picsum.photos/1024/480/?image=10" class="d-block w-100" alt="First Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="https://picsum.photos/1024/480/?image=12" class="d-block w-100" alt="Second Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="https://picsum.photos/1024/480/?image=22" class="d-block w-100" alt="Third Slide">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</template>
 
+<script setup>
+// Keine zusätzliche Logik nötig, da das Carousel von Bootstrap selbst gesteuert wird.
 </script>
 
-<template>
-  <h1>Willkommen in unserem Hotel!</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, in, quaerat. Aliquid beatae debitis deleniti distinctio dolores, earum est facilis iure nisi, obcaecati pariatur repellat repudiandae similique tempora velit voluptas!</p>
-</template>
+<style scoped>
+/* Füge hier deine eigenen Styles hinzu, falls nötig */
+</style>
