@@ -9,8 +9,6 @@ import Footer from '@/components/Footer.vue'
     <div class="wrapper">
 
       <nav>
-        <RouterLink to="/rooms">Unsere Zimmer</RouterLink>
-        <RouterLink to="/imprint">Impressum</RouterLink>
       </nav>
 
     </div>
