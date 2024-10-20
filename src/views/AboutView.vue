@@ -4,6 +4,7 @@ import Philosophy from "@/components/Philosophy.vue";
 </script>
 
 <template>
+
   <HostPicture/>
   <Philosophy/>
 </template>

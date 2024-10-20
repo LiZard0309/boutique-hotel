@@ -8,7 +8,7 @@
           :data-bs-target="'#carouselExampleIndicators'"
           :data-bs-slide-to="index"
           :class="{ active: index === 0 }"
-          aria-current="index === 0"
+          :aria-current="index === 0"
           :aria-label="'Slide ' + (index + 1)"
       ></button>
     </div>

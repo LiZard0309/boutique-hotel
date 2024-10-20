@@ -30,7 +30,9 @@ import { RouterLink, RouterView } from 'vue-router'
           <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
             <b-navbar-nav class="menu-items">
               <b-nav-item href="#">Zimmer</b-nav-item>
-              <b-nav-item href="#">Über uns </b-nav-item>
+              <b-nav-item href="#">
+                <RouterLink to="/about">Über uns</RouterLink>
+              </b-nav-item>
               <b-nav-item>
               <RouterLink to="/contact">Anfahrt und Kontakt</RouterLink>
               </b-nav-item>
