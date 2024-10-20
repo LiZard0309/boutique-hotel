@@ -90,6 +90,15 @@ import {RouterLink, RouterView} from 'vue-router'
   padding-bottom: 5px;
 }
 
+.navbar-container a{
+  color: #000;
+  text-decoration: none;
+}
+
+.navbar-container a:hover{
+  text-decoration: underline;
+}
+
 /* Stil für den Hotelnamen */
 .navbar-titel {
   font-size: 24px;
