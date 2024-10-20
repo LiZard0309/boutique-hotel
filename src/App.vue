@@ -11,7 +11,7 @@ import Navbar from "@/components/Navbar.vue";
   <div id="app">
     <div class="main-content">
       <navbar></navbar>
-      <RouterView />
+      <RouterView/>
 
     </div>
 

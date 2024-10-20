@@ -29,12 +29,21 @@ import { RouterLink, RouterView } from 'vue-router'
         <div>
           <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
             <b-navbar-nav class="menu-items">
-              <b-nav-item href="#">Zimmer</b-nav-item>
-              <b-nav-item href="#">
+
+              <b-nav-item>
+              <RouterLink to="/rooms">Zimmer</RouterLink>
+              </b-nav-item>
+
+              <b-nav-item>
                 <RouterLink to="/about">Über uns</RouterLink>
               </b-nav-item>
+
               <b-nav-item>
               <RouterLink to="/contact">Anfahrt und Kontakt</RouterLink>
+              </b-nav-item>
+
+              <b-nav-item>
+                <RouterLink to="/imprint">Impressum</RouterLink>
               </b-nav-item>
 
               <b-nav-item href="#">Login</b-nav-item>
