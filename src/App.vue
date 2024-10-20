@@ -14,9 +14,9 @@ import Navbar from "@/components/Navbar.vue";
       <RouterView />
 
     </div>
-  </header>
 
-  <RouterView/>
+
+
   <footer>
     <Footer/>
   </footer>
