@@ -5,8 +5,8 @@ export default {
 
   data() {
     return {
-      phone: "+49 (0) 123 456789",
-      email: "info@lavieelegante.de"
+      phone: "+43 (0) 123 456789",
+      email: "info@alpenblick.at"
     }
   }
 }

@@ -13,22 +13,22 @@ export default {
       <div class="col-md-6 mx-auto">
         <h1>Impressum</h1>
         <br/>
-        <h2>Angaben gemäß § 5 TMG:</h2>
-        <p>Hotel La Vie Élégante<br/>
+
+        <p>Hotel Alpenblick<br/>
           Inhaberin: Marie Dupont<br/>
-          Bergstraße 12<br/>
-          12345 Sonnental<br/>
-          Deutschland</p>
+          Höchstädtplatz 6<br/>
+          1200 Wien<br/>
+          Österreich</p>
 
         <Contact/>
-        <p>UID-Nr: DE123456789<br/>
+        <p>UID-Nr: AT123456789<br/>
           Finanzamt Sonnental</p>
         <br/>
         <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</h2>
         <p>Marie Dupont<br/>
-          Bergstraße 12<br/>
-          12345 Sonnental<br/>
-          Deutschland</p>
+          Höchstädtplatz 6<br/>
+          1200 Wien<br/>
+          Österreich</p>
       </div>
     </div>
   </div>
