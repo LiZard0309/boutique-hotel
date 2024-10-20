@@ -1,6 +1,9 @@
 <script>
+import Contact from "@/components/Contact.vue";
+
 export default {
-  name: "ImpressumView"
+  name: "ImpressumView",
+  components: {Contact}
 }
 </script>
 
@@ -16,10 +19,8 @@ export default {
           Bergstraße 12<br/>
           12345 Sonnental<br/>
           Deutschland</p>
-        <h2>Kontakt:</h2>
-        <p>Telefon: +49 (0) 123 456789<br/>
-          E-Mail: info@lavieelegante.de<br/>
-          Website: www.lavieelegante.de</p>
+
+        <Contact/>
         <p>UID-Nr: DE123456789<br/>
           Finanzamt Sonnental</p>
         <br/>

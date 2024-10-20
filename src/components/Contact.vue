@@ -3,10 +3,10 @@
 export default {
   name: "Contact",
 
-  data(){
+  data() {
     return {
-      phone: "05/12345678",
-      email: "office@alpenblick-resort.at"
+      phone: "+49 (0) 123 456789",
+      email: "info@lavieelegante.de"
     }
   }
 }
@@ -14,9 +14,9 @@ export default {
 
 <template>
   <p class="subtitle">Kontaktdaten:</p>
-  <p> Telefon: {{phone}}</p>
-  <p> E-Mail: <span class="email">{{email}}</span> </p>
-  <p> Fax: {{phone}}-02</p>
+  <p> Telefon: {{ phone }}<br/>
+    E-Mail: <span class="email">{{ email }}</span> <br/>
+    Fax: {{ phone }}-02</p>
 
 </template>
 
