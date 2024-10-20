@@ -1,70 +1,74 @@
 <script setup>
 
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterLink, RouterView} from 'vue-router'
 </script>
 
 <template>
-    <b-navbar toggleable="lg" type="light" variant="light" class="navbar">
-      <b-container class="navbar-container">
-        <div>
-          <b-navbar-brand>
-            <RouterLink to="/">
+  <b-navbar toggleable="lg" type="light" variant="light" class="navbar">
+    <b-container class="navbar-container">
+      <div>
+        <b-navbar-brand>
+          <RouterLink to="/">
             <img alt="Hotellogo" src="../assets/Logos/Logo2_clean.png" class="navbar-logo" height="60"/>
-            </RouterLink>
-          </b-navbar-brand>
-        </div>
+          </RouterLink>
+        </b-navbar-brand>
+      </div>
 
-        <div>
-          <b-navbar-brand class="navbar-titel">
-            <img alt="HotelName" src="../assets/Logos/Logo3_clean.png" class="navbar-logo" height="60"/>
-          </b-navbar-brand>
-        </div>
+      <div>
+        <b-navbar-brand class="navbar-titel">
+          <img alt="HotelName" src="../assets/Logos/Logo3_clean.png" class="navbar-logo" height="60"/>
+        </b-navbar-brand>
+      </div>
 
-        <!-- Burger-Menu rechts -->
-        <div class="navbar-right">
-          <b-navbar-toggle class="navbar-burger" target="nav-collapse">
-          </b-navbar-toggle>
-        </div>
+      <!-- Burger-Menu rechts -->
+      <div class="navbar-right">
+        <b-navbar-toggle class="navbar-burger" target="nav-collapse">
+        </b-navbar-toggle>
+      </div>
 
-        <div>
-          <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
-            <b-navbar-nav class="menu-items">
+      <div>
+        <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
+          <b-navbar-nav class="menu-items">
 
-              <b-nav-item>
+            <b-nav-item>
+              <RouterLink to="/">Start</RouterLink>
+            </b-nav-item>
+
+            <b-nav-item>
               <RouterLink to="/rooms">Zimmer</RouterLink>
-              </b-nav-item>
+            </b-nav-item>
 
-              <b-nav-item>
-                <RouterLink to="/about">Über uns</RouterLink>
-              </b-nav-item>
+            <b-nav-item>
+              <RouterLink to="/about">Über uns</RouterLink>
+            </b-nav-item>
 
-              <b-nav-item>
+            <b-nav-item>
               <RouterLink to="/contact">Anfahrt und Kontakt</RouterLink>
-              </b-nav-item>
+            </b-nav-item>
 
-              <b-nav-item>
-                <RouterLink to="/imprint">Impressum</RouterLink>
-              </b-nav-item>
+            <b-nav-item>
+              <RouterLink to="/imprint">Impressum</RouterLink>
+            </b-nav-item>
 
-              <b-nav-item href="#">Login</b-nav-item>
-            </b-navbar-nav>
+            <b-nav-item href="#">Login</b-nav-item>
+          </b-navbar-nav>
 
-            <!-- Right aligned nav items -->
-            <b-navbar-nav class="ml-auto menu-items">
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto menu-items">
 
-              <b-nav-item-dropdown right>
-                <!-- Using 'button-content' slot -->
-                <template #button-content>
-                  <em>User</em>
-                </template>
-                <b-dropdown-item href="#">Buchungshistorie</b-dropdown-item>
-                <b-dropdown-item href="#">Logout</b-dropdown-item>
-              </b-nav-item-dropdown>
-            </b-navbar-nav>
-          </b-collapse>
-        </div>
-      </b-container>
-    </b-navbar>
+            <b-nav-item-dropdown right>
+              <!-- Using 'button-content' slot -->
+              <template #button-content>
+                <em>User</em>
+              </template>
+              <b-dropdown-item href="#">Buchungshistorie</b-dropdown-item>
+              <b-dropdown-item href="#">Logout</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
+      </div>
+    </b-container>
+  </b-navbar>
 
 </template>
 
@@ -76,6 +80,7 @@ import { RouterLink, RouterView } from 'vue-router'
   z-index: 1000;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
+
 .navbar-container {
   display: flex;
   justify-content: space-between;
@@ -90,7 +95,8 @@ import { RouterLink, RouterView } from 'vue-router'
   font-size: 24px;
   font-weight: bold;
 }
-.navbar-burger{
+
+.navbar-burger {
   border: none;
 }
 
@@ -111,6 +117,7 @@ import { RouterLink, RouterView } from 'vue-router'
   .navbar-logo {
     max-height: 30px;
   }
+
   .navbar-collapse {
     position: absolute;
     top: 100%;
@@ -119,17 +126,20 @@ import { RouterLink, RouterView } from 'vue-router'
     width: 100%;
     padding: 0 1rem;
   }
+
   .menu-items {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
 }
+
 @media (min-width: 992px) {
   .navbar-collapse {
     background-color: transparent;
     box-shadow: none;
   }
+
   .menu-items {
     display: flex;
     align-items: flex-end;
