@@ -22,7 +22,7 @@ export default {
 
         <Contact/>
         <p>UID-Nr: AT123456789<br/>
-          Finanzamt Sonnental</p>
+          Finanzamt Wien</p>
         <br/>
         <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</h2>
         <p>Marie Dupont<br/>
