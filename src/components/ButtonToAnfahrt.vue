@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import {RouterLink, RouterView} from 'vue-router'
 </script>
 
 <template>
@@ -9,8 +9,9 @@ import { RouterLink, RouterView } from 'vue-router'
         <img alt="Anfahrt" src="../assets/Logos/Arrow_Anfahrt.png" height="100"/>
       </div>
       <div>
-        <RouterLink to="/contact" class="hover-underline-animation"> So finden Sie zu unserem Hotel! </RouterLink>
-        <!--a href="" class="hover-underline-animation left anfahrt-link">So finden Sie zu unserem Hotel! </a-->
+        <RouterLink to="/contact" class="hover-underline-animation left anfahrt-link">
+          So finden Sie zu unserem Hotel!
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -36,6 +37,7 @@ import { RouterLink, RouterView } from 'vue-router'
 .anfahrt-button:hover {
   transform: scale(1.05) translateX(42px);
   transition: transform 0.4s ease;
+
   .anfahrt-icon {
     transition: transform 0.8s ease;
   }
@@ -85,9 +87,10 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 @media (max-width: 768px) {
-  .anfahrt-icon{
+  .anfahrt-icon {
     display: none;
   }
+
   .anfahrt-link {
     font-size: 1rem;
   }

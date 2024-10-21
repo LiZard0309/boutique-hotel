@@ -12,17 +12,13 @@ import Navbar from "@/components/Navbar.vue";
     <div class="main-content">
       <navbar></navbar>
       <RouterView/>
-
     </div>
 
-
-
-  <footer>
-    <Footer/>
-  </footer>
+    <footer>
+      <Footer/>
+    </footer>
   </div>
 </template>
-
 
 
 <style scoped>
