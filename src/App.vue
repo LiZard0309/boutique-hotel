@@ -8,9 +8,9 @@ import Navbar from "@/components/Navbar.vue";
 </script>
 
 <template>
+  <navbar></navbar>
   <div id="app">
     <div class="main-content">
-      <navbar></navbar>
       <RouterView/>
     </div>
 
