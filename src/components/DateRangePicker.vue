@@ -1,13 +1,31 @@
 <script>
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+
 export default {
   name: 'DateRangePicker',
+  components: { VueDatePicker },
+
   data() {
     return {
-      selectedRange: null,
+      selectedRange: { start: null, end: null },
       minDate: this.getTomorrowDate(),
       maxDate: this.getSixMonthsFromNow(),
+      rangeConfig: {
+        showCalendars: 2,
+      },
     };
   },
+
+  watch: {
+    selectedRange: {
+      handler(newVal) {
+        this.$emit('date-selected', newVal);
+      },
+      deep: true,
+    },
+  },
+  
   methods: {
     getTomorrowDate() {
       const tomorrow = new Date();
@@ -30,14 +48,26 @@ export default {
 
 <template>
   <div>
-    <b-form-group label="Select a Date Range">
-      <b-calendar
-          v-model="selectedRange"
-          range
-          :min="minDate"
-          :max="maxDate"
-          :date-disabled-fn="disableDatesBeforeMin"
-      ></b-calendar>
+    <b-form-group label="Wählen Sie Ankunfts- und Abreisedatum">
+      <div class="d-flex">
+        <vue-date-picker
+            v-model="selectedRange.start"
+            format="yyyy-MM-dd"
+            locale="de"
+        :min-date="minDate"
+        :max-date="maxDate"
+        placeholder="Startdatum"
+        class="me-2"
+        />
+        <vue-date-picker
+            v-model="selectedRange.end"
+            format="yyyy-MM-dd"
+            locale="de"
+        :min-date="minDate"
+        :max-date="maxDate"
+        placeholder="Enddatum"
+        />
+      </div>
     </b-form-group>
   </div>
 </template>
