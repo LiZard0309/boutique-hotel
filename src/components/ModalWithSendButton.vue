@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BaseModal',
+  name: 'ModalWithSendButton',
   props: {
     title: {
       type: String,
@@ -15,30 +15,24 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      showModal: false,
-    };
-  },
   methods: {
     handleButtonClick() {
       // Emit an event to inform parent that the button was clicked
       this.actionHandler();
-      this.showModal = false; // Close the modal after the action (optional)
-    },
-    onModalShown() {
-      // Reset or focus logic when the modal is opened (if needed)
+      this.$emit('update:modelValue', false); // Emit to close the modal
     },
   },
 };
 </script>
 
 <template>
-  <b-modal v-model="showModal" :title="title">
+  <b-modal id="modalWithSendButton" :title="title" @hide="handleButtonClick">
     <!-- Slot to accept any content -->
     <slot></slot>
     <!-- Button to trigger form submission or AJAX call -->
-    <b-button variant="success" @click="handleButtonClick">{{ buttonText }}</b-button>
+    <template #modal-footer>
+      <b-button variant="success" @click="handleButtonClick">{{ buttonText }}</b-button>
+    </template>
   </b-modal>
 </template>
 
