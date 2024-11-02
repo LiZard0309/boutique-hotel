@@ -1,11 +1,13 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
 import IconImage from "@/components/icons/IconImage.vue";
-import {BCard, BButton, BCollapse} from "bootstrap-vue-3";
+import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
+import DateRangePicker from "@/components/DateRangePicker.vue";
+
 
 export default {
   name: "RoomCard",
-  components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse},
+  components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse, BModal, DateRangePicker},
   props: {
     roomName: {
       type: String,
@@ -30,8 +32,21 @@ export default {
   },
   data() {
     return {
-      showDetails: false, // Controls the accordion visibility
+      showDetails: false, // Controls the "extras-"accordion visibility
+      showModal: false,
+      selectedDates: null
     };
+  },
+  methods: {
+    handleDateSelection(dates) {
+      this.selectedDates = dates; // Store selected dates if needed
+    },
+    submitDates() {
+      // This method can be called to trigger API calls
+      console.log("Selected Dates:", this.selectedDates);
+      // Here you can perform any API call or processing
+      this.showModal = false; // Close the modal after submission
+    },
   },
 };
 </script>
@@ -53,12 +68,12 @@ export default {
             Preis {{ pricePerNight }} €/Nacht
           </b-card-text>
 
-          <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
+          <b-button variant="primary" @click="showModal = true">Verfügbarkeit prüfen</b-button>
           <br/>
 
           <div class="room-info">
             <div class="left-content">
-              <IconBedKingOutline/>
+              <icon-bed-king-outline/>
               <p>{{ beds }} Betten</p>
             </div>
 
@@ -74,14 +89,20 @@ export default {
           <b-collapse :visible="showDetails">
             <div class="extras">
               <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-                <IconImage class="image-icon"/>
+                <icon-image class="image-icon"/>
               </div>
             </div>
           </b-collapse>
 
         </b-card>
+
+        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="submitDates">
+          <DateRangePicker @date-selected="handleDateSelection"/>
+        </b-modal>
+
       </div>
     </div>
+
   </div>
 </template>
 
