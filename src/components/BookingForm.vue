@@ -1,5 +1,4 @@
 <template>
-  <b-modal v-model="isModalVisible" title="Zimmer buchen" @ok="submitBooking" ok-title="Buchung überprüfen" hide-footer>
     <b-form @submit.prevent="submitBooking">
       <b-form-group label="Vorname" label-for="firstname">
         <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben" />
@@ -37,23 +36,16 @@
         <b-form-radio-group v-model="bookingData.breakfast" :options="['Ja', 'Nein']" />
       </b-form-group>
 
-      <!-- Button zum Überprüfen der Buchung -->
-      <div class="text-right">
+      <div class="text-right mt-4">
         <b-button variant="secondary" @click="closeModal">Abbrechen</b-button>
         <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
       </div>
     </b-form>
-  </b-modal>
 </template>
 
 <script>
 export default {
-  props: {
-    isModalVisible: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  name: "BookingForm",
   data() {
     return {
       confirmEmail: '',
@@ -68,17 +60,15 @@ export default {
   },
   methods: {
     submitBooking() {
-      // Überprüfen, ob die E-Mails übereinstimmen
       if (this.bookingData.email !== this.confirmEmail) {
         alert('Die E-Mail-Adressen stimmen nicht überein.');
         return;
       }
-      // Wenn die E-Mails übereinstimmen, werden die Buchungsdaten an den Parent übergeben
       this.$emit('submit', this.bookingData);
       this.closeModal();
     },
     closeModal() {
-      this.$emit('close');
+      this.$emit('update:isVisible', false);
     },
   },
 };
