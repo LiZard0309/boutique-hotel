@@ -1,5 +1,5 @@
 <template>
-  <b-modal v-model="isModalVisible" title="Buchungsdaten überprüfen" @ok="confirmBooking" ok-title="Zimmer buchen" hide-footer>
+  <b-modal v-model="isModalVisible" title="Buchungsdaten überprüfen" @ok="confirmBooking" ok-title="Buchung bestätigen" hide-footer>
     <div class="review-content">
       <p><strong>Zimmer:</strong> {{ bookingData.roomName }}</p>
       <p><strong>Zeitraum:</strong> {{ bookingData.fromDate }} - {{ bookingData.toDate }}</p>
@@ -13,7 +13,7 @@
     <!-- Buttons zum Schließen und Bestätigen der Buchung -->
     <div class="text-right">
       <b-button variant="secondary" @click="closeModal">Daten ändern</b-button>
-      <b-button variant="primary" @click="confirmBooking">Zimmer buchen</b-button>
+      <b-button variant="primary" @click="confirmBooking">Buchung bestätigen</b-button>
     </div>
   </b-modal>
 </template>
