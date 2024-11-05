@@ -3,6 +3,9 @@ import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
 import IconImage from "@/components/icons/IconImage.vue";
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import DateRangePicker from "@/components/DateRangePicker.vue";
+import {useRoomsStore} from "@/stores/rooms";
+
+const store = useRoomsStore();
 
 //TODO: UI Case Unterschiede zwischen "Verfügbarkeit noch nicht gecheckt", "gecheckt und verfügbar" und "gecheckt aber nicht verfügbar" ausarbeiten.
 //--> Ein Element, das entweder nicht angezeigt wird, oder ein ja/nein Symbol ist.
@@ -10,6 +13,7 @@ import DateRangePicker from "@/components/DateRangePicker.vue";
 export default {
   name: "RoomCard",
   components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse, BModal, DateRangePicker},
+
   props: {
     roomName: {
       type: String,
