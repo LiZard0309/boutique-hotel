@@ -2,17 +2,26 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
+//TODO: Date Range Picker weiter modifizieren:
+// 1) Datumsformat für API Call anpassen
+// 2) Uhrzeitpicker weg
+// 3) evtl. nur 1 Kalender zeigen
+// 4) evtl. Select weg!
+
+//TODO: Error Handling: Derzeit ist es noch möglich ein Enddatum auszuwählen, das vor dem Startdatum liegt.
+
 export default {
   name: 'DateRangePicker',
-  components: { VueDatePicker },
+  components: {VueDatePicker},
 
   data() {
     return {
-      selectedRange: { start: null, end: null },
+      selectedRange: {start: null, end: null},
       minDate: this.getTomorrowDate(),
       maxDate: this.getSixMonthsFromNow(),
       rangeConfig: {
-        showCalendars: 2,
+        //showCalendars: 2,
+        partialRange: false
       },
     };
   },
@@ -25,7 +34,7 @@ export default {
       deep: true,
     },
   },
-  
+
   methods: {
     getTomorrowDate() {
       const tomorrow = new Date();
@@ -54,18 +63,20 @@ export default {
             v-model="selectedRange.start"
             format="yyyy-MM-dd"
             locale="de"
-        :min-date="minDate"
-        :max-date="maxDate"
-        placeholder="Startdatum"
-        class="me-2"
+            :min-date="minDate"
+            :max-date="maxDate"
+            enable-time-picker="false"
+            placeholder="Startdatum"
+            class="me-2"
         />
         <vue-date-picker
             v-model="selectedRange.end"
             format="yyyy-MM-dd"
             locale="de"
-        :min-date="minDate"
-        :max-date="maxDate"
-        placeholder="Enddatum"
+            :min-date="minDate"
+            :max-date="maxDate"
+            enable-time-picker="false"
+            placeholder="Enddatum"
         />
       </div>
     </b-form-group>

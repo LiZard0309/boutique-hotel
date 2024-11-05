@@ -4,6 +4,8 @@ import IconImage from "@/components/icons/IconImage.vue";
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import DateRangePicker from "@/components/DateRangePicker.vue";
 
+//TODO: UI Case Unterschiede zwischen "Verfügbarkeit noch nicht gecheckt", "gecheckt und verfügbar" und "gecheckt aber nicht verfügbar" ausarbeiten.
+//--> Ein Element, das entweder nicht angezeigt wird, oder ein ja/nein Symbol ist.
 
 export default {
   name: "RoomCard",
@@ -29,6 +31,7 @@ export default {
       type: Array,
       required: true,
     },
+    //TODO? Braucht es hier dann noch eine zusätzliche Property für das Verfügbarkeitssymbol??
   },
   data() {
     return {
@@ -47,6 +50,7 @@ export default {
       // Here you can perform any API call or processing
       this.showModal = false; // Close the modal after submission
     },
+    //TODO: wahrschienlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
   },
 };
 </script>
