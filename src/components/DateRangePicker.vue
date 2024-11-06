@@ -1,6 +1,7 @@
 <script>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import {useRoomsStore} from "@/stores/rooms";
 
 //TODO: Date Range Picker weiter modifizieren:
 // 1) Datumsformat für API Call anpassen
@@ -29,7 +30,11 @@ export default {
   watch: {
     selectedRange: {
       handler(newVal) {
-        this.$emit('date-selected', newVal);
+        const formattedRange = {
+          start: newVal.start ? this.formatDate(newVal.start) : null,
+          end: newVal.end ? this.formatDate(newVal.end) : null,
+        };
+        this.$emit('date-selected', formattedRange);
       },
       deep: true,
     },
@@ -50,6 +55,13 @@ export default {
       const selectedDate = new Date(date);
       const minDate = new Date(this.minDate);
       return selectedDate < minDate;
+    },
+    formatDate(date) {
+      if (!date) return null;
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     },
   },
 };
