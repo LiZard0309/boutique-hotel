@@ -5,8 +5,6 @@ import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import DateRangePicker from "@/components/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
 
-const store = useRoomsStore();
-
 //TODO: UI Case Unterschiede zwischen "Verfügbarkeit noch nicht gecheckt", "gecheckt und verfügbar" und "gecheckt aber nicht verfügbar" ausarbeiten.
 //--> Ein Element, das entweder nicht angezeigt wird, oder ein ja/nein Symbol ist.
 
@@ -41,7 +39,8 @@ export default {
     return {
       showDetails: false, // Controls the "extras-"accordion visibility
       showModal: false,
-      selectedDates: null
+      selectedDates: null,
+      roomsStore: useRoomsStore(),
     };
   },
   methods: {
@@ -52,10 +51,25 @@ export default {
       // This method can be called to trigger API calls
       console.log("Selected Dates:", this.selectedDates);
       // Here you can perform any API call or processing
+
+      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
+      this.roomsStore.fetchRoomAvailability();
+
+      console.log("current apiData:", this.roomsStore.apiData);
+
       this.showModal = false; // Close the modal after submission
     },
-    //TODO: wahrschienlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
+    //TODO: wahrscheinlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
   },
+
+  watch: {
+    //
+    "roomsStore.apiData"(newApiData) {
+      if (newApiData && typeof newApiData.available === "boolean") {
+        console.log("Room availability:", newApiData.available ? "Available" : "Not available");
+      }
+    }
+  }
 };
 </script>
 
