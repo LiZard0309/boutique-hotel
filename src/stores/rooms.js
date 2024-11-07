@@ -15,16 +15,12 @@ export const useRoomsStore = defineStore('rooms', {
         roomId: 1,
         apiData: null,
     }),
-    getters: {
-        roomAvailability() {
-            return this.apiData;
-        }
-    },
+
     actions: {
 
-        fetchRoomAvailability() {
+        async fetchRoomAvailability() {
             try{
-            const response = axios.get(`${apiUrl}room/${this.roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
+            const response = await axios.get(`${apiUrl}room/${this.roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
                 .then(response => {
                     console.log("response:", response)
                     console.log("response.data:", response.data.available)
@@ -38,6 +34,9 @@ export const useRoomsStore = defineStore('rooms', {
         setDateRange(startDate, endDate) {
             this.dateRange.startDate = startDate;
             this.dateRange.endDate = endDate;
+        },
+        setRoomId(id){
+            this.roomId = id;
         }
     }
 })

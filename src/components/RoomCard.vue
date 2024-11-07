@@ -40,20 +40,19 @@ export default {
       showDetails: false, // Controls the "extras-"accordion visibility
       showModal: false,
       selectedDates: null,
-      roomsStore: useRoomsStore(),
     };
   },
   methods: {
     handleDateSelection(dates) {
       this.selectedDates = dates; // Store selected dates if needed
     },
-    submitDates() {
+    async submitDates() {
       // This method can be called to trigger API calls
       console.log("Selected Dates:", this.selectedDates);
       // Here you can perform any API call or processing
 
       this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
-      this.roomsStore.fetchRoomAvailability();
+      await this.roomsStore.fetchRoomAvailability();
 
       console.log("current apiData:", this.roomsStore.apiData);
 
@@ -61,12 +60,19 @@ export default {
     },
     //TODO: wahrscheinlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
   },
-
+  computed: {
+    roomsStore() {
+      return useRoomsStore();
+    },
+    roomAvailability() {
+      return this.roomsStore.apiData;
+    }
+  },
+//Ich glaub den watcher braucht es jetzt doch nicht TODO: wahrscheinlich rauslöschen.
   watch: {
-    //
-    "roomsStore.apiData"(newApiData) {
-      if (newApiData && typeof newApiData.available === "boolean") {
-        console.log("Room availability:", newApiData.available ? "Available" : "Not available");
+    roomAvailability(newAvailability) {
+      if (typeof newAvailability === "boolean") {
+        console.log("Room availability:", newAvailability ? "Available" : "Not available");
       }
     }
   }
