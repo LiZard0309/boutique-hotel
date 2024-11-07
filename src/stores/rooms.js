@@ -1,17 +1,47 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import {ref, computed} from 'vue'
+import {defineStore} from 'pinia'
 import axios from 'axios'
 
-export const useRoomsStore = defineStore('rooms', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+//const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/room/";
 
-  const dateRange = computed(() => {})
+let requestUrl;
+export const useRoomsStore = defineStore('rooms', {
+    state: () => ({
+        dateRange: {
+            startDate: null,
+            endDate: null
+        },
+        roomId: null,
+        apiData: null,
+    }),
+    getter: {
+        roomAvailability() {
+            return this.apiData;
+        }
+    },
+    actions: {
 
-  axios.get()
+        fetchApiData() {
+            axios.get(`https://boutique-hotel.helmuth-lammer.at/api/v1/room/${this.roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
+                .then(response => {
+                    this.apiData = response.data
+                })
 
-  return { count, doubleCount, increment }
+            /*try {
+                if (this.dateRange.startDate && this.dateRange.endDate) {
+                    const response = axios.get(`https://boutique-hotel.helmuth-lammer.at/api/v1/room/${this.roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
+                        .then(response => {this.apiData = response.data})
+                } else {
+                    console.warn('Date range is not set');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }*/
+        },
+        setDateRange(startDate, endDate) {
+            this.dateRange.startDate = startDate;
+            this.dateRange.endDate = endDate;
+            this.fetchApiData(); // Automatically fetch data when date range is updated
+        }
+    }
 })
