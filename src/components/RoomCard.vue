@@ -7,6 +7,10 @@ export default {
   name: "RoomCard",
   components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse},
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     roomName: {
       type: String,
       required: true,
@@ -27,6 +31,12 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  methods: {
+    checkAvailability() {
+      this.$emit('check-availability', this.id);
+      console.log("Button wurde geklickt, Verfügbarkeit wird geprüft")
+    }
   },
   data() {
     return {
@@ -53,7 +63,7 @@ export default {
             Preis {{ pricePerNight }} €/Nacht
           </b-card-text>
 
-          <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
+          <b-button @click="checkAvailability" href="#" variant="primary">Verfügbarkeit prüfen</b-button>
           <br/>
 
           <div class="room-info">
