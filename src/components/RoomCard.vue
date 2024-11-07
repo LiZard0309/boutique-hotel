@@ -40,25 +40,8 @@ export default {
       showDetails: false, // Controls the "extras-"accordion visibility
       showModal: false,
       selectedDates: null,
+      isAvailable: null,
     };
-  },
-  methods: {
-    handleDateSelection(dates) {
-      this.selectedDates = dates; // Store selected dates if needed
-    },
-    async submitDates() {
-      // This method can be called to trigger API calls
-      console.log("Selected Dates:", this.selectedDates);
-      // Here you can perform any API call or processing
-
-      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
-      await this.roomsStore.fetchRoomAvailability();
-
-      console.log("current apiData:", this.roomsStore.apiData);
-
-      this.showModal = false; // Close the modal after submission
-    },
-    //TODO: wahrscheinlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
   },
   computed: {
     roomsStore() {
@@ -75,7 +58,23 @@ export default {
         console.log("Room availability:", newAvailability ? "Available" : "Not available");
       }
     }
-  }
+  },
+  methods: {
+    handleDateSelection(dates) {
+      this.selectedDates = dates; // Store selected dates if needed
+    },
+    async submitDates() {
+      console.log("Selected Dates:", this.selectedDates);
+
+      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
+      const response = await this.roomsStore.fetchRoomAvailability();
+      console.log("current apiData:", this.roomsStore.apiData);
+
+
+      this.showModal = false; // Close the modal after submission
+    },
+    //TODO: wahrscheinlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
+  },
 };
 </script>
 
