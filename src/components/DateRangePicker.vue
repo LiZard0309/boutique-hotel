@@ -3,12 +3,8 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 //TODO: Date Range Picker weiter modifizieren:
-// 1) Datumsformat für API Call anpassen
-// 2) Uhrzeitpicker weg
-// 3) evtl. nur 1 Kalender zeigen
 // 4) evtl. Select weg!
-
-//TODO: Error Handling: Derzeit ist es noch möglich ein Enddatum auszuwählen, das vor dem Startdatum liegt.
+// 5) evtl. Platzierung von Kalender-Element noch verändern.
 
 export default {
   name: 'DateRangePicker',
@@ -19,17 +15,20 @@ export default {
       selectedRange: {start: null, end: null},
       minDate: this.getTomorrowDate(),
       maxDate: this.getSixMonthsFromNow(),
-      rangeConfig: {
-        //showCalendars: 2,
-        partialRange: false
-      },
+      /*rangeConfig: {
+      },*/
     };
   },
 
   watch: {
     selectedRange: {
-      handler(newVal) {
-        this.$emit('date-selected', newVal);
+      handler(dateValue) {
+        const formattedRange = {
+          start: dateValue[0] ? this.formatDate(dateValue[0]) : null,
+          end: dateValue[1] ? this.formatDate(dateValue[1]) : null,
+        };
+
+        this.$emit('date-selected', formattedRange);
       },
       deep: true,
     },
@@ -51,32 +50,31 @@ export default {
       const minDate = new Date(this.minDate);
       return selectedDate < minDate;
     },
+    formatDate(date) {
+      if (!date) return null;
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    },
   },
 };
 </script>
 
 <template>
   <div>
-    <b-form-group label="Wählen Sie Ankunfts- und Abreisedatum">
+    <b-form-group label="Reisezeitraum">
       <div class="d-flex">
         <vue-date-picker
-            v-model="selectedRange.start"
+            v-model="selectedRange"
+            :range="{partialRange: false}"
             format="yyyy-MM-dd"
             locale="de"
             :min-date="minDate"
             :max-date="maxDate"
-            enable-time-picker="false"
-            placeholder="Startdatum"
-            class="me-2"
-        />
-        <vue-date-picker
-            v-model="selectedRange.end"
-            format="yyyy-MM-dd"
-            locale="de"
-            :min-date="minDate"
-            :max-date="maxDate"
-            enable-time-picker="false"
-            placeholder="Enddatum"
+            :enable-time-picker="false"
+            placeholder="Anreise? -> Abreise?"
+            class="date-range-picker"
         />
       </div>
     </b-form-group>
@@ -84,5 +82,7 @@ export default {
 </template>
 
 <style scoped>
-
+.date-range-picker {
+  width: 100%;
+}
 </style>

@@ -3,13 +3,21 @@ import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
 import IconImage from "@/components/icons/IconImage.vue";
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import DateRangePicker from "@/components/DateRangePicker.vue";
+import AvailabilityMessage from "@/components/AvailabilityMessage.vue";
+import IconCheck from "@/components/icons/IconCheck.vue";
+import IconExclamationMark from "@/components/icons/IconExclamationMark.vue";
 
 //TODO: UI Case Unterschiede zwischen "Verfügbarkeit noch nicht gecheckt", "gecheckt und verfügbar" und "gecheckt aber nicht verfügbar" ausarbeiten.
 //--> Ein Element, das entweder nicht angezeigt wird, oder ein ja/nein Symbol ist.
 
 export default {
   name: "RoomCard",
-  components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse, BModal, DateRangePicker},
+  components: {
+    IconExclamationMark,
+    IconCheck,
+    AvailabilityMessage,
+    IconBedKingOutline, IconImage, BCard, BButton, BCollapse, BModal, DateRangePicker
+  },
   props: {
     roomName: {
       type: String,
@@ -37,20 +45,61 @@ export default {
     return {
       showDetails: false, // Controls the "extras-"accordion visibility
       showModal: false,
-      selectedDates: null
+      selectedDates: null,
+
+      isAvailable: null,
+      availabilityMessage: ""
     };
+  },
+
+  computed: {
+
+    buttonText() {
+      if (this.isAvailable === true) return "Zimmer buchen";
+      if (this.isAvailable === false) return "Anderen Zeitraum prüfen";
+      return "Verfügbarkeit prüfen";
+
+    }
+
   },
   methods: {
     handleDateSelection(dates) {
       this.selectedDates = dates; // Store selected dates if needed
     },
+    checkAvailability() {
+      console.log("Check Availability");
+      this.showModal = true;
+    },
     submitDates() {
       // This method can be called to trigger API calls
       console.log("Selected Dates:", this.selectedDates);
       // Here you can perform any API call or processing
+
+      const response = true //Response of the API call --> returns true or false
+
+      if (response === true) {
+        this.isAvailable = true;
+        this.availabilityMessage = "Verfügbar"
+      } else {
+        this.isAvailable = false;
+        this.availabilityMessage = "Nicht verfügbar"
+      }
+
+      //bei Error:
+      //this.isAvailable = null und this.availabilityMessage=""
+
       this.showModal = false; // Close the modal after submission
     },
-    //TODO: wahrschienlich hier: Methode, die sobald ein Call abgeschickt wird, das Verfügbarkeitssymbol auf Sichtbar stellt. Und je nach Antwort nimmt das Symbol die eine oder andere Form an.
+    handleButtonMethod() {
+      if (this.isAvailable === true) {
+        return this.handleBooking();
+      }
+      return this.checkAvailability();
+    },
+    handleBooking() {
+      console.log("start booking process");
+    }
+
   },
 };
 </script>
@@ -72,8 +121,19 @@ export default {
             Preis {{ pricePerNight }} €/Nacht
           </b-card-text>
 
-          <b-button variant="primary" @click="showModal = true">Verfügbarkeit prüfen</b-button>
+          <b-button variant="primary" @click="handleButtonMethod">{{ buttonText }}</b-button>
           <br/>
+
+          <div v-show="availabilityMessage!==''">
+            <template v-if="isAvailable">
+              <IconCheck/>
+              <AvailabilityMessage availability-message="Verfügbar"/>
+            </template>
+            <template v-else>
+              <IconExclamationMark/>
+              <AvailabilityMessage availability-message="Nicht verfügbar"/>
+            </template>
+          </div>
 
           <div class="room-info">
             <div class="left-content">
@@ -169,4 +229,13 @@ export default {
     height: 1.5rem;
   }
 }
+
+.icon-available {
+  color: green;
+}
+
+.icon-not-available {
+  color: red;
+}
+
 </style>
