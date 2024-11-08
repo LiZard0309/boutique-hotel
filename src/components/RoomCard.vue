@@ -79,8 +79,7 @@ export default {
     handleDateSelection(dates) {
       this.selectedDates = dates; // Store selected dates if needed
     },
-    //TODO: Refactor method name to displayDatePickerModal
-    checkAvailability() {
+    displayDatePickerModal() {
       console.log("Check Availability");
       this.showModal = true;
     },
@@ -88,7 +87,8 @@ export default {
       console.log("Selected Dates:", this.selectedDates);
 
       this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
-      const response = await this.roomsStore.fetchRoomAvailability();
+      await this.roomsStore.fetchRoomAvailability();
+      const response = this.roomsStore.apiData
       console.log("current apiData:", this.roomsStore.apiData);
 
       if (response === true) {
@@ -108,7 +108,7 @@ export default {
       if (this.isAvailable === true) {
         return this.handleBooking();
       }
-      return this.checkAvailability();
+      return this.displayDatePickerModal();
     },
     handleBooking() {
       console.log("start booking process");
