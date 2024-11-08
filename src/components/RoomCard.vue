@@ -1,6 +1,7 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import { BCard, BButton, BCollapse } from "bootstrap-vue-3";
+import {BCard, BButton, BCollapse} from "bootstrap-vue-3";
+//Icons - Dynamische erstellung benötigt importierte Icons
 import SolarWineglassTriangleOutline from '~icons/solar/wineglass-triangle-outline?width=48px&height=48px';
 import CilBathroom from '~icons/cil/bathroom?width=48px&height=48px';
 import SolarTvOutline from '~icons/solar/tv-outline?width=48px&height=48px';
@@ -10,9 +11,10 @@ import LsiconWifiOutline from '~icons/lsicon/wifi-outline?width=48px&height=48px
 import SolarCupHotOutline from '~icons/solar/cup-hot-outline?width=48px&height=48px';
 import MynauiWheelchair from '~icons/mynaui/wheelchair?width=48px&height=48px';
 
+
 export default {
   name: "RoomCard",
-  components: { IconBedKingOutline, BCard, BButton, BCollapse },
+  components: {IconBedKingOutline, BCard, BButton, BCollapse},
   props: {
     id: {
       type: Number,
@@ -40,9 +42,13 @@ export default {
     },
   },
   methods: {
-    checkAvailability() {
+    openAvailabilityModal() {
+      //this.selectedDate = selectedDate;
       //this.$emit("check-availability", this.id);
-      console.log("Button wurde geklickt, Verfügbarkeit wird geprüft. RoomID:" + this.id);
+      console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.id);
+    },
+    reserveRoom () {
+      console.log("Zimmer wird reserviert:", this.id);
     },
     getExtraIcon(extraName) {
       const iconMapping = {
@@ -61,6 +67,9 @@ export default {
   data() {
     return {
       showDetails: false, // Controls the accordion visibility
+      availabilityChecked: false,
+      isAvailable: false,
+      selectedDate: "",
     };
   },
 };
@@ -77,26 +86,78 @@ export default {
             img-top="true"
             tag="article"
             style="max-width: 50rem;"
-            class="mb-4"
+            class="mb-4 shadow-sm"
         >
           <b-card-text>
-            Preis {{ pricePerNight }} €/Nacht
+            <span class="priceStyle">{{ pricePerNight }}€</span> /pro Nacht
+            <!-- Button logik -->
+            <div class="button-section">
+              <b-button
+                  v-if="!availabilityChecked"
+                  @click="openAvailabilityModal"
+                  variant="primary"
+              >Verfügbarkeit prüfen</b-button>
+
+              <b-button
+                  v-else-if="availabilityChecked && isAvailable"
+                  @click=""
+                  variant="primary"
+              >Reservieren</b-button>
+
+              <b-button
+                  v-else-if="availabilityChecked && !isAvailable"
+                  @click=""
+                  variant="primary"
+              >Anderes Datum Prüfen</b-button>
+            </div>
           </b-card-text>
 
-          <b-button @click="checkAvailability" variant="primary">Verfügbarkeit prüfen</b-button>
+          <!-- Datum logik -->
+
+
+          <div class="">
+            <div>
+              <div>
+                <i-QuillCalendar width="38" height="38" color="#2e2e2e"/>
+                27/06 - 29/06
+              </div>
+              <div>
+                <i-LaCheckCircle width="48" height="48" color="green"/>
+                Verfügbar
+                <i-CodiconError width="48" height="48" color="red"/>
+                Nicht Verfügbar
+              </div>
+            </div>
+          </div>
           <br/>
 
           <div class="room-info">
             <div class="left-content">
-              <IconBedKingOutline/>
-              <p>{{ beds }} Betten</p>
+
+              <i-TablerBed v-if="beds === 1" width="48" height="48" color="#2e2e2e"/>
+              <i-F7BedDouble v-else-if="beds === 2" width="48" height="48" color="#2e2e2e"/>
+              <template v-else-if="beds === 3">
+                <i-F7BedDouble width="48" height="48" color="#2e2e2e"/>
+                <i-TablerBed class="ms-sm-2" width="48" height="48" color="#2e2e2e"/>
+              </template>
+              <template v-else>
+                <i-F7BedDouble width="48" height="48" color="#2e2e2e"/>
+                <i-F7BedDouble class="ms-sm-2" width="48" height="48" color="#2e2e2e"/>
+              </template>
+              <p v-if="beds > 1">{{ beds }} Betten</p>
+              <p v-else>{{ beds }} Bett</p>
             </div>
 
             <div class="right-content">
-              <a href="#" @click.prevent="showDetails = !showDetails" class="details-link">
-                Weitere Details
-                <span class="arrow" v-if="!showDetails">▼</span>
-                <span class="arrow" v-else>▲</span>
+              <a @click.prevent="showDetails = !showDetails" class="details-link">
+                <div class="hover-underline-animation left" v-if="!showDetails">
+                  Weitere Details
+                </div>
+                <div class="hover-underline-animation left" v-else>
+                  Weniger Details
+                </div>
+                <i-IconamoonArrowDown2Thin v-if="!showDetails" class="arrow" width="48" height="48" color="#2e2e2e"/>
+                <i-IconamoonArrowUp2Thin v-else class="arrow" width="48" height="48" color="#2e2e2e"/>
               </a>
             </div>
           </div>
@@ -104,16 +165,16 @@ export default {
           <b-collapse :visible="showDetails">
             <div class="extras">
               <template v-for="(extra, index) in extras" :key="index">
-                  <div v-if="Object.values(extra) [0] === 1">
-                    <component
-                        :is="getExtraIcon(Object.keys(extra)[0])"
-                        width="28"
-                        height="28"
-                        color="black"
-                        :alt="Object.keys(extra)[0]"
-                        class="extra-icon"
-                    ></component>
-                  </div>
+                <div v-if="Object.values(extra) [0] === 1">
+                  <component
+                      :is="getExtraIcon(Object.keys(extra)[0])"
+                      width="32"
+                      height="32"
+                      color="#2e2e2e"
+                      :alt="Object.keys(extra)[0]"
+                      class="extra-icon"
+                  ></component>
+                </div>
               </template>
             </div>
           </b-collapse>
@@ -138,6 +199,11 @@ export default {
   }
 }
 
+.priceStyle {
+  font-size: 1.2rem;
+  font-weight: bold;
+
+}
 
 .room-info {
   display: flex;
@@ -148,18 +214,20 @@ export default {
 
 .left-content {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .left-content p {
-  margin-left: 8px;
+  font-size: 1.2rem;
+  margin-left: 10px;
   margin-bottom: 0;
   font-weight: bold;
 }
 
 .details-link {
-  color: blue;
-  text-decoration: underline;
+  color: #2e2e2e;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -173,7 +241,7 @@ export default {
   justify-content: start;
   align-items: center;
   flex-wrap: wrap;
-  margin: 15px 0 15px 0;
+  margin-top: 15px;
 }
 
 .extra-icon {
@@ -183,4 +251,35 @@ export default {
   margin: 0 10px 0 10px;
 
 }
+
+/* Hover-Animation für den Unterstrich */
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(130, 133, 157);
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+}
+
+.hover-underline-animation.left::after {
+  transform-origin: bottom right;
+}
+
+.hover-underline-animation.left:hover::after {
+  transform-origin: bottom left;
+}
+
 </style>
