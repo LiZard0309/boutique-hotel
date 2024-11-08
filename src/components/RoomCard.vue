@@ -1,11 +1,18 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import IconImage from "@/components/icons/IconImage.vue";
-import {BCard, BButton, BCollapse} from "bootstrap-vue-3";
+import { BCard, BButton, BCollapse } from "bootstrap-vue-3";
+import SolarWineglassTriangleOutline from '~icons/solar/wineglass-triangle-outline?width=48px&height=48px';
+import CilBathroom from '~icons/cil/bathroom?width=48px&height=48px';
+import SolarTvOutline from '~icons/solar/tv-outline?width=48px&height=48px';
+import SolarSofa3Outline from '~icons/solar/sofa-3-outline?width=48px&height=48px';
+import StreamlineHotelAirConditioner from '~icons/streamline/hotel-air-conditioner?width=48px&height=48px';
+import LsiconWifiOutline from '~icons/lsicon/wifi-outline?width=48px&height=48px';
+import SolarCupHotOutline from '~icons/solar/cup-hot-outline?width=48px&height=48px';
+import MynauiWheelchair from '~icons/mynaui/wheelchair?width=48px&height=48px';
 
 export default {
   name: "RoomCard",
-  components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse},
+  components: { IconBedKingOutline, BCard, BButton, BCollapse },
   props: {
     id: {
       type: Number,
@@ -34,9 +41,22 @@ export default {
   },
   methods: {
     checkAvailability() {
-      this.$emit('check-availability', this.id);
-      console.log("Button wurde geklickt, Verfügbarkeit wird geprüft")
-    }
+      //this.$emit("check-availability", this.id);
+      console.log("Button wurde geklickt, Verfügbarkeit wird geprüft. RoomID:" + this.id);
+    },
+    getExtraIcon(extraName) {
+      const iconMapping = {
+        bathroom: CilBathroom,
+        minibar: SolarWineglassTriangleOutline,
+        television: SolarTvOutline,
+        livingroom: SolarSofa3Outline,
+        aircondition: StreamlineHotelAirConditioner,
+        wifi: LsiconWifiOutline,
+        breakfast: SolarCupHotOutline,
+        "handicapped accessible": MynauiWheelchair,
+      };
+      return iconMapping[extraName];
+    },
   },
   data() {
     return {
@@ -63,7 +83,7 @@ export default {
             Preis {{ pricePerNight }} €/Nacht
           </b-card-text>
 
-          <b-button @click="checkAvailability" href="#" variant="primary">Verfügbarkeit prüfen</b-button>
+          <b-button @click="checkAvailability" variant="primary">Verfügbarkeit prüfen</b-button>
           <br/>
 
           <div class="room-info">
@@ -83,9 +103,18 @@ export default {
 
           <b-collapse :visible="showDetails">
             <div class="extras">
-              <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-                <IconImage class="image-icon"/>
-              </div>
+              <template v-for="(extra, index) in extras" :key="index">
+                  <div v-if="Object.values(extra) [0] === 1">
+                    <component
+                        :is="getExtraIcon(Object.keys(extra)[0])"
+                        width="28"
+                        height="28"
+                        color="black"
+                        :alt="Object.keys(extra)[0]"
+                        class="extra-icon"
+                    ></component>
+                  </div>
+              </template>
             </div>
           </b-collapse>
 
@@ -141,17 +170,17 @@ export default {
 /* Amenities section in the accordion */
 .extras {
   display: flex;
+  justify-content: start;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin: 15px 0 15px 0;
 }
 
 .extra-icon {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 auto;
+  margin: 0 10px 0 10px;
 
-  .image-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
 }
 </style>
