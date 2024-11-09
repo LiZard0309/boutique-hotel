@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import apiClient from "@/api/axios";
 import LoginForm from "@/components/LoginForm.vue";
 import BookingForm from "@/components/BookingForm.vue";
 import ReviewBooking from "@/components/ReviewBooking.vue";
@@ -68,9 +69,30 @@ export default {
       this.currentStep = "booking"; // Schaltet zurück zum Buchungsformular
     },
     confirmBooking() {
-      this.$emit("confirm");
-      this.closeModal();
-    },
+      const bookingPayload = {
+        firstname: this.bookingData.firstname,
+        lastname: this.bookingData.lastname,
+        email: this.bookingData.email,
+        birthdate: this.bookingData.birthdate,
+      };
+
+      apiClient
+          .post(`/room/1/from/2025-01-17/to/2025-01-20`, bookingPayload,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+              })
+          .then((response) => {
+            console.log("Buchung erfolgreich:", response.data);
+            alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
+            this.closeModal();
+          })
+          .catch((error) => {
+            console.error("Fehler bei der Buchung:", error);
+            alert("Fehler bei der Buchung.");
+          });
+    }
   },
 };
 </script>

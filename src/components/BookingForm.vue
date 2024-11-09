@@ -1,27 +1,29 @@
 <template>
   <b-form @submit.prevent="submitBooking">
     <b-form-group label="Vorname" label-for="firstname">
-      <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben" />
+      <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben"/>
     </b-form-group>
 
     <b-form-group label="Nachname" label-for="lastname">
-      <b-form-input id="lastname" v-model="bookingData.lastname" required placeholder="Nachname eingeben" />
+      <b-form-input id="lastname" v-model="bookingData.lastname" required placeholder="Nachname eingeben"/>
     </b-form-group>
 
     <b-form-group label="Geburtsdatum" label-for="birthdate">
-      <Datepicker id="birthdate" v-model="bookingData.birthdate" required placeholder="Geburtsdatum auswählen" />
+      <Datepicker id="birthdate" v-model="bookingData.birthdate" :format="format" required
+                  placeholder="Geburtsdatum auswählen"/>
     </b-form-group>
 
     <b-form-group label="E-Mail" label-for="email">
-      <b-form-input id="email" type="email" v-model="bookingData.email" required placeholder="E-Mail eingeben" />
+      <b-form-input id="email" type="email" v-model="bookingData.email" required placeholder="E-Mail eingeben"/>
     </b-form-group>
 
     <b-form-group label="E-Mail bestätigen" label-for="confirmEmail">
-      <b-form-input id="confirmEmail" type="email" v-model="confirmEmail" required placeholder="E-Mail erneut eingeben" />
+      <b-form-input id="confirmEmail" type="email" v-model="confirmEmail" required
+                    placeholder="E-Mail erneut eingeben"/>
     </b-form-group>
 
     <b-form-group label="Frühstück inkludiert?">
-      <b-form-radio-group v-model="bookingData.breakfast" :options="['Ja', 'Nein']" />
+      <b-form-radio-group v-model="bookingData.breakfast" :options="['Ja', 'Nein']"/>
     </b-form-group>
 
     <!-- Links ausgerichtete Buttons mit Abstand -->
@@ -58,9 +60,17 @@ export default {
         alert('Die E-Mail-Adressen stimmen nicht überein.');
         return;
       }
+      this.bookingData.birthdate = this.format(this.bookingData.birthdate);
       this.$emit('approve', this.bookingData); // Gibt die Buchungsdaten an BookingModal weiter
     },
-  },
+    format(date) {
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      return `${year}-${month}-${day}`;
+    }
+  }
 };
 </script>
 
@@ -70,7 +80,6 @@ export default {
   justify-content: flex-start;
 }
 
-/* Rechter Abstand für den ersten Button */
 .mr-2 {
   margin-right: 10px;
 }
