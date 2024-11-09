@@ -13,26 +13,26 @@
 
     <!-- Button zum Öffnen des Buchungsformulars -->
     <b-button variant="primary" class="mt-4" @click="openBookingModal">Zimmer buchen</b-button>
-    <booking-modal v-if="isBookingModalVisible"></booking-modal>
+
+    <!-- BookingModal Komponente -->
+    <BookingModal
+        :isVisible="isBookingModalVisible"
+        @update:isVisible="isBookingModalVisible = $event"
+        @close="isBookingModalVisible = false"
+    />
   </div>
 </template>
 
 <script>
 import bedroomImage from "@/assets/bedroom.jpg";
 import RoomCard from "@/components/RoomCard.vue";
-import LoginForm from "@/components/LoginForm.vue";
-import BookingForm from "@/components/BookingForm.vue";
-import ReviewBooking from "@/components/ReviewBooking.vue";
 import BookingModal from "@/components/modals/BookingModal.vue";
 
 export default {
   name: "RoomsView",
   components: {
-    BookingModal,
     RoomCard,
-    LoginForm,
-    BookingForm,
-    ReviewBooking,
+    BookingModal,
   },
   data() {
     return {
@@ -44,19 +44,13 @@ export default {
         { roomName: "Zimmer 5", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
       ],
       isBookingModalVisible: false,
-      bookingData: {}, // Speichert die Buchungsdaten zur Überprüfung
     };
   },
   methods: {
     openBookingModal() {
+      console.log("Button wurde geklickt");
       this.isBookingModalVisible = true;
     },
   },
 };
 </script>
-
-<style scoped>
-.rooms-view-container {
-  padding: 0.5rem;
-}
-</style>
