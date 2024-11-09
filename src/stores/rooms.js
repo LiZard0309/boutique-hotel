@@ -11,14 +11,12 @@ export const useRoomsStore = defineStore('rooms', {
             startDate: null,
             endDate: null
         },
-        //TODO: hier noch dynamisch übergebene room-id einbauen bzw. von branch U2 übernehmen
-        roomId: 1,
         apiData: null,
     }),
 
     actions: {
 
-        async fetchRoomAvailability() {
+        async fetchRoomAvailability(roomId) {
             try{
             const response = await axios.get(`${apiUrl}room/${this.roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
                 .then(response => {

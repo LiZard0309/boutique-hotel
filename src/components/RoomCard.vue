@@ -20,6 +20,10 @@ export default {
     IconBedKingOutline, IconImage, BCard, BButton, BCollapse, BModal, DateRangePicker
   },
   props: {
+    roomId: {
+      type: Number,
+      required: true,
+    },
     roomName: {
       type: String,
       required: true,
@@ -87,7 +91,7 @@ export default {
       console.log("Selected Dates:", this.selectedDates);
 
       this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
-      await this.roomsStore.fetchRoomAvailability();
+      await this.roomsStore.fetchRoomAvailability(this.roomId);
       const response = this.roomsStore.apiData
       console.log("current apiData:", this.roomsStore.apiData);
 
