@@ -33,6 +33,11 @@ export default {
       showDetails: false, // Controls the accordion visibility
     };
   },
+  methods: {
+    openBookingModal() {
+      this.$emit("openModal");
+    }
+  }
 };
 </script>
 
@@ -55,6 +60,7 @@ export default {
 
           <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
           <br/>
+          <b-button variant="primary" class="mt-4" @click="openBookingModal">Zimmer buchen</b-button>
 
           <div class="room-info">
             <div class="left-content">

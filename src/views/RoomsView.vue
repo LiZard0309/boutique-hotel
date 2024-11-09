@@ -8,14 +8,13 @@
           :image="room.image"
           :beds="room.beds"
           :extras="room.extras"
+          @openModal="openBookingModal(room.roomName)"
       />
     </div>
 
-    <!-- Button zum Öffnen des Buchungsformulars -->
-    <b-button variant="primary" class="mt-4" @click="openBookingModal">Zimmer buchen</b-button>
-
     <!-- BookingModal Komponente -->
     <BookingModal
+        :room-name="modalRoomName"
         :isVisible="isBookingModalVisible"
         @update:isVisible="isBookingModalVisible = $event"
         @close="isBookingModalVisible = false"
@@ -43,13 +42,14 @@ export default {
         { roomName: "Zimmer 4", pricePerNight: 90, image: bedroomImage, beds: 2, extras: Array(7).fill("image") },
         { roomName: "Zimmer 5", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
       ],
+      modalRoomName: '',
       isBookingModalVisible: false,
     };
   },
   methods: {
-    openBookingModal() {
-      console.log("Button wurde geklickt");
+    openBookingModal(roomName) {
       this.isBookingModalVisible = true;
+      this.modalRoomName = roomName;
     },
   },
 };
