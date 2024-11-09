@@ -24,8 +24,9 @@
       <b-form-radio-group v-model="bookingData.breakfast" :options="['Ja', 'Nein']" />
     </b-form-group>
 
-    <div class="text-right mt-4">
-      <b-button variant="secondary" @click="closeModal">Abbrechen</b-button>
+    <!-- Links ausgerichtete Buttons mit Abstand -->
+    <div class="button-container mt-4">
+      <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
     </div>
   </b-form>
@@ -57,11 +58,20 @@ export default {
         alert('Die E-Mail-Adressen stimmen nicht überein.');
         return;
       }
-      this.$emit('approve', { ...this.bookingData }); // Emit bookingData to BookingModal
-    },
-    closeModal() {
-      this.$emit("close");
+      this.$emit('approve', this.bookingData); // Gibt die Buchungsdaten an BookingModal weiter
     },
   },
 };
 </script>
+
+<style scoped>
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Rechter Abstand für den ersten Button */
+.mr-2 {
+  margin-right: 10px;
+}
+</style>

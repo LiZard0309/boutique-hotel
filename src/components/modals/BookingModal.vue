@@ -1,19 +1,17 @@
 <template>
   <b-modal v-model="internalVisible" title="Zimmer buchen" @hide="closeModal" hide-footer>
     <div v-if="currentStep === 'login'">
-      <LoginForm @login="handleLogin"/>
+      <LoginForm @login="handleLogin" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'booking'">
-      <BookingForm @approve="handleBookingSubmit"/>
+      <BookingForm @approve="handleBookingSubmit" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking :room-name="roomName"
                      :bookingData="bookingData"
                      @confirm="confirmBooking"
+                     @edit="editBooking"
                      @close="closeModal"/>
-    </div>
-    <div class="text-right mt-4">
-      <b-button variant="secondary" @click="closeModal">Abbrechen</b-button>
     </div>
   </b-modal>
 </template>
@@ -57,18 +55,19 @@ export default {
   },
   methods: {
     closeModal() {
-      this.$emit("update:isVisible", false);
+      this.$emit("update:isVisible", false); // Schließt das Modal
     },
-    handleLogin(loginData) {
-      this.currentStep = "booking";
+    handleLogin() {
+      this.currentStep = "booking"; // Wechselt zur Buchungsansicht
     },
     handleBookingSubmit(data) {
-      this.bookingData = data; // Store booking data for ReviewBooking
-      this.currentStep = "review"; // Switch to ReviewBooking
+      this.bookingData = data; // Speichert die Buchungsdaten
+      this.currentStep = "review"; // Wechsel zu ReviewBooking
+    },
+    editBooking() {
+      this.currentStep = "booking"; // Schaltet zurück zum Buchungsformular
     },
     confirmBooking() {
-      // TODO send axios with bookingData and roomName
-
       this.$emit("confirm");
       this.closeModal();
     },

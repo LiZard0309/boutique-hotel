@@ -6,8 +6,9 @@
     <p><strong>E-Mail:</strong> {{ bookingData.email }}</p>
     <p><strong>Frühstück:</strong> {{ bookingData.breakfast === 'Ja' ? 'Inklusive' : 'Nicht inklusive' }}</p>
 
-    <div class="text-right">
-      <b-button variant="secondary" @click="$emit('close')">Daten ändern</b-button>
+    <!-- Links ausgerichtete Buttons mit Abstand -->
+    <div class="button-container mt-4">
+      <b-button variant="secondary" class="mr-2" @click="$emit('edit')">Daten ändern</b-button>
       <b-button variant="primary" @click="$emit('confirm')">Buchung bestätigen</b-button>
     </div>
   </div>
@@ -28,5 +29,15 @@ export default {
 <style scoped>
 .review-content p {
   margin: 5px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Rechter Abstand für den ersten Button */
+.mr-2 {
+  margin-right: 10px;
 }
 </style>
