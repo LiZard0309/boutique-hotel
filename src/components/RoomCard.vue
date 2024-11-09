@@ -36,11 +36,11 @@ export default {
     },
   },
   methods: {
-    openAvailabilityModal() {
+    displayDatePickerModal() {
       //this.selectedDateRange = selectedDateRange;
       //this.$emit("check-availability", this.rommId);
       this.availabilityChecked = true;
-      this.isAvailable = Math.random() > 0.5;
+      //this.isAvailable = Math.random() > 0.5;
       console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.roomId);
     },
     reserveRoom () {
@@ -80,7 +80,7 @@ export default {
             <RoomActions
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"
-                @open-availability-modal="openAvailabilityModal"
+                @open-availability-modal="displayDatePickerModal"
                 @reserve-room="reserveRoom"
             />
           </div>
@@ -90,7 +90,7 @@ export default {
               :availabilityChecked="availabilityChecked"
               :isAvailable="isAvailable"
               :selectedDateRange="selectedDateRange"
-              @open-availability-modal="openAvailabilityModal"
+              @open-availability-modal="displayDatePickerModal"
           />
 
           <!-- Zimmerdetails und Extras -->
