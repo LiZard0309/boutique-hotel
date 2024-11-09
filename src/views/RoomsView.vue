@@ -141,7 +141,7 @@ export default {
   <div class="rooms-view-container">
     <div v-for="(room, index) in paginatedRooms" :key="index">
       <RoomCard
-          :id="room.id"
+          :roomId="room.id"
           :roomName="room.roomName"
           :pricePerNight="room.pricePerNight"
           :image="room.image"

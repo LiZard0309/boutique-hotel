@@ -10,7 +10,7 @@ export default {
   name: "RoomCard",
   components: {IconBedKingOutline, BCard, RoomDetails, RoomActions, RoomAvailabilityInfo},
   props: {
-    id: {
+    roomId: {
       type: Number,
       required: true,
     },
@@ -38,13 +38,13 @@ export default {
   methods: {
     openAvailabilityModal() {
       //this.selectedDateRange = selectedDateRange;
-      //this.$emit("check-availability", this.id);
+      //this.$emit("check-availability", this.rommId);
       this.availabilityChecked = true;
       this.isAvailable = Math.random() > 0.5;
-      console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.id);
+      console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.roomId);
     },
     reserveRoom () {
-      console.log("Zimmer wird reserviert:", this.id, this.selectedDateRange);
+      console.log("Zimmer wird reserviert:", this.roomId, this.selectedDateRange);
     },
   },
   data() {
