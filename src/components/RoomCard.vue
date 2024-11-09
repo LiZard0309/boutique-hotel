@@ -43,12 +43,14 @@ export default {
   },
   methods: {
     openAvailabilityModal() {
-      //this.selectedDate = selectedDate;
+      //this.selectedDateRange = selectedDateRange;
       //this.$emit("check-availability", this.id);
+      this.availabilityChecked = true;
+      this.isAvailable = Math.random() > 0.5;
       console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.id);
     },
     reserveRoom () {
-      console.log("Zimmer wird reserviert:", this.id);
+      console.log("Zimmer wird reserviert:", this.id, this.selectedDateRange);
     },
     getExtraIcon(extraName) {
       const iconMapping = {
@@ -68,8 +70,8 @@ export default {
     return {
       showDetails: false, // Controls the accordion visibility
       availabilityChecked: false,
-      isAvailable: false,
-      selectedDate: "",
+      isAvailable: null,
+      selectedDateRange: "19.4.25 - 23.4.25"
     };
   },
 };
@@ -88,10 +90,12 @@ export default {
             style="max-width: 50rem;"
             class="mb-4 shadow-sm"
         >
-          <b-card-text>
-            <span class="priceStyle">{{ pricePerNight }}€</span> /pro Nacht
+          <b-card-text class="button-section">
+            <div>
+              <span class="priceStyle">{{ pricePerNight }}€</span> /pro Nacht
+            </div>
             <!-- Button logik -->
-            <div class="button-section">
+            <div class="right-content">
               <b-button
                   v-if="!availabilityChecked"
                   @click="openAvailabilityModal"
@@ -100,36 +104,37 @@ export default {
 
               <b-button
                   v-else-if="availabilityChecked && isAvailable"
-                  @click=""
+                  @click="reserveRoom"
                   variant="primary"
               >Reservieren</b-button>
 
               <b-button
                   v-else-if="availabilityChecked && !isAvailable"
-                  @click=""
+                  @click="openAvailabilityModal"
                   variant="primary"
               >Anderes Datum Prüfen</b-button>
             </div>
           </b-card-text>
 
           <!-- Datum logik -->
-
-
-          <div class="">
-            <div>
-              <div>
-                <i-QuillCalendar width="38" height="38" color="#2e2e2e"/>
-                27/06 - 29/06
-              </div>
-              <div>
-                <i-LaCheckCircle width="48" height="48" color="green"/>
-                Verfügbar
-                <i-CodiconError width="48" height="48" color="red"/>
-                Nicht Verfügbar
+          <div v-if="availabilityChecked" class="availability-section">
+            <div @click.prevent="openAvailabilityModal" class="left-content">
+              <i-QuillCalendar width="38" height="38" color="#2e2e2e"/>
+              <div class="selected-date hover-underline-animation left">
+                {{ selectedDateRange }}
               </div>
             </div>
+            <div class="right-content">
+              <template v-if="isAvailable">
+                <i-LaCheckCircle width="42" height="42" color="green"/>
+                <span class="availability-text available-text">Verfügbar</span>
+              </template>
+              <template v-else>
+                <i-CodiconError width="42" height="42" color="red"/>
+                <span class="availability-text unavailable-text">Nicht Verfügbar</span>
+              </template>
+            </div>
           </div>
-          <br/>
 
           <div class="room-info">
             <div class="left-content">
@@ -148,7 +153,7 @@ export default {
               <p v-else>{{ beds }} Bett</p>
             </div>
 
-            <div class="right-content">
+            <div>
               <a @click.prevent="showDetails = !showDetails" class="details-link">
                 <div class="hover-underline-animation left" v-if="!showDetails">
                   Weitere Details
@@ -187,22 +192,29 @@ export default {
 
 <style scoped>
 
-.room-card {
-  max-width: 20rem;
-  margin: auto;
-}
-
-
-@media (min-width: 1024px) {
-  .room-card {
-    max-width: 30rem;
-  }
-}
-
 .priceStyle {
   font-size: 1.2rem;
   font-weight: bold;
 
+}
+
+.button-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.availability-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.selected-date {
+  margin-left: 10px;
+  color: #383838;
+  cursor: pointer;
 }
 
 .room-info {
@@ -214,8 +226,10 @@ export default {
 
 .left-content {
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+.right-content {
+  margin-right: 15px;
 }
 
 .left-content p {
@@ -235,6 +249,18 @@ export default {
   margin-left: 5px;
 }
 
+.availability-text {
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+.available-text {
+  color: green;
+}
+
+.unavailable-text {
+  color: red;
+}
 /* Amenities section in the accordion */
 .extras {
   display: flex;
