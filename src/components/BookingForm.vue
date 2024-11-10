@@ -22,11 +22,6 @@
                     placeholder="E-Mail erneut eingeben"/>
     </b-form-group>
 
-    <b-form-group label="Frühstück inkludiert?">
-      <b-form-radio-group v-model="bookingData.breakfast" :options="['Ja', 'Nein']"/>
-    </b-form-group>
-
-    <!-- Links ausgerichtete Buttons mit Abstand -->
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
@@ -50,7 +45,6 @@ export default {
         lastname: '',
         birthdate: null,
         email: '',
-        breakfast: 'Nein',
       },
     };
   },
@@ -61,7 +55,7 @@ export default {
         return;
       }
       this.bookingData.birthdate = this.format(this.bookingData.birthdate);
-      this.$emit('approve', this.bookingData); // Gibt die Buchungsdaten an BookingModal weiter
+      this.$emit('approve', this.bookingData);
     },
     format(date) {
       const day = date.getDate();
