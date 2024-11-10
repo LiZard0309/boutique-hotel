@@ -1,59 +1,69 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import { BCard } from "bootstrap-vue-3";
+import { BCard, BButton, BCollapse, BModal } from "bootstrap-vue-3";
 import RoomActions from "./roomCard/RoomActions.vue";
 import RoomDetails from "./roomCard/RoomDetails.vue";
 import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
-
+import DateRangePicker from "@/components/DateRangePicker.vue";
+import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "RoomCard",
-  components: {IconBedKingOutline, BCard, RoomDetails, RoomActions, RoomAvailabilityInfo},
+  components: {
+    RoomDetails,
+    RoomActions,
+    RoomAvailabilityInfo,
+    IconBedKingOutline, BCard, BButton, BCollapse, BModal, DateRangePicker
+  },
   props: {
-    roomId: {
-      type: Number,
-      required: true,
-    },
-    roomName: {
-      type: String,
-      required: true,
-    },
-    pricePerNight: {
-      type: Number,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-    beds: {
-      type: Number,
-      required: true,
-    },
-    extras: {
-      type: Array,
-      required: true,
-    },
+    roomId: {type: Number, required: true,},
+    roomName: {type: String, required: true,},
+    pricePerNight: {type: Number, required: true,},
+    image: {type: String, required: true,},
+    beds: {type: Number, required: true,},
+    extras: {type: Array, required: true,},
   },
   methods: {
     displayDatePickerModal() {
-      //this.selectedDateRange = selectedDateRange;
-      //this.$emit("check-availability", this.rommId);
-      this.availabilityChecked = true;
-      //this.isAvailable = Math.random() > 0.5;
-      console.log("Button wurde geklickt, Modal zur Datumsauswahl wird geöffnet. RoomID:", this.roomId);
+      this.showModal = true;
     },
     reserveRoom () {
       console.log("Zimmer wird reserviert:", this.roomId, this.selectedDateRange);
     },
+    handleDateSelection(dates) {
+      this.selectedDates = dates; // Store selected dates if needed
+    },
+    async submitDates() {
+      this.selectedDateRange = `${this.selectedDates.start} - ${this.selectedDates.end}`;
+
+      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
+      await this.roomsStore.fetchRoomAvailability(this.roomId);
+      const response = this.roomsStore.apiData
+      console.log("current apiData:", this.roomsStore.apiData);
+
+      if (response === true) {
+        this.isAvailable = true;
+      } else {
+        this.isAvailable = false;
+      }
+
+      this.availabilityChecked = true;
+      this.showModal = false; // Close the modal after submission
+    }
   },
   data() {
     return {
       showDetails: false, // Controls the accordion visibility
       availabilityChecked: false,
-      isAvailable: null,
-      selectedDateRange: "19.4.25 - 23.4.25"
+      isAvailable: false,
+      selectedDateRange: "",
+      showModal: false,
     };
+  },
+  computed: {
+    roomsStore() {
+      return useRoomsStore();
+    }
   },
 };
 </script>
@@ -71,7 +81,6 @@ export default {
             style="max-width: 50rem;"
             class="mb-4 shadow-sm"
         >
-
           <!-- Preis und Aktions-Button -->
           <div class="button-section">
             <div>
@@ -80,7 +89,7 @@ export default {
             <RoomActions
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"
-                @open-availability-modal="displayDatePickerModal"
+                @display-date-picker-modal="displayDatePickerModal"
                 @reserve-room="reserveRoom"
             />
           </div>
@@ -89,6 +98,7 @@ export default {
           <RoomAvailabilityInfo
               :availabilityChecked="availabilityChecked"
               :isAvailable="isAvailable"
+              :showModal="showModal"
               :selectedDateRange="selectedDateRange"
               @open-availability-modal="displayDatePickerModal"
           />
@@ -100,6 +110,11 @@ export default {
               :extras="extras"
           />
         </b-card>
+
+        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="submitDates">
+          <DateRangePicker @date-selected="handleDateSelection"/>
+        </b-modal>
+
       </div>
     </div>
   </div>

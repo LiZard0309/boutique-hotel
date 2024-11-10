@@ -3,6 +3,7 @@ export default {
   props: {
     isAvailable: Boolean,
     availabilityChecked: false,
+    showModal: Boolean,
     selectedDateRange: String
   },
   methods: {
@@ -23,11 +24,11 @@ export default {
       </div>
     </div>
     <div class="right-content">
-      <template v-if="isAvailable">
+      <template v-if="availabilityChecked && isAvailable">
         <i-LaCheckCircle width="35" height="35" color="green"/>
         <span class="availability-text available-text">Verfügbar</span>
       </template>
-      <template v-else>
+      <template v-else-if="availabilityChecked && !isAvailable">
         <i-CodiconError width="35" height="35" color="red"/>
         <span class="availability-text unavailable-text">Nicht Verfügbar</span>
       </template>

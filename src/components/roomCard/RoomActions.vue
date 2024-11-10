@@ -2,11 +2,11 @@
 export default {
   props: {
     availabilityChecked: Boolean,
-    isAvailable: Boolean
+    isAvailable: Boolean,
   },
   methods: {
-    openAvailabilityModal() {
-      this.$emit("open-availability-modal");
+    displayDatePickerModal() {
+      this.$emit("display-date-picker-modal");
     },
     reserveRoom() {
       this.$emit("reserve-room");
@@ -19,8 +19,8 @@ export default {
   <!-- Button logik -->
   <div class="right-content">
     <b-button
-        v-if="!availabilityChecked"
-        @click="openAvailabilityModal"
+        v-if="!availabilityChecked && !isAvailable"
+        @click="displayDatePickerModal"
         variant="primary"
     >Verfügbarkeit prüfen</b-button>
 
@@ -32,7 +32,7 @@ export default {
 
     <b-button
         v-else-if="availabilityChecked && !isAvailable"
-        @click="openAvailabilityModal"
+        @click="displayDatePickerModal"
         variant="primary"
     >Anderes Datum Prüfen</b-button>
   </div>

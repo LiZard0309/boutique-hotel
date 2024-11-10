@@ -2,9 +2,6 @@
 import bedroomImage from "@/assets/bedroom.jpg";
 import RoomCard from "@/components/RoomCard.vue";
 
-//Icons
-//<i-MaterialSymbolsLightBedOutline color="red" width="128" height="128" />
-
 export default {
   name: "RoomsView",
   components: {RoomCard},
@@ -141,7 +138,7 @@ export default {
   <div class="rooms-view-container">
     <div v-for="(room, index) in paginatedRooms" :key="index">
       <RoomCard
-          :roomId="room.id"
+          :room-id="room.id"
           :roomName="room.roomName"
           :pricePerNight="room.pricePerNight"
           :image="room.image"
