@@ -8,13 +8,13 @@
           :image="room.image"
           :beds="room.beds"
           :extras="room.extras"
-          @openModal="openBookingModal(room.roomName)"
+          @openModal="openBookingModal(room.number)"
       />
     </div>
 
     <!-- BookingModal Komponente -->
     <BookingModal
-        :room-name="modalRoomName"
+        :room-number="modalRoomNumber"
         :isVisible="isBookingModalVisible"
         @update:isVisible="isBookingModalVisible = $event"
         @close="isBookingModalVisible = false"
@@ -36,20 +36,22 @@ export default {
   data() {
     return {
       rooms: [
-        { roomName: "Zimmer 1", pricePerNight: 100, image: bedroomImage, beds: 2, extras: Array(8).fill("image") },
-        { roomName: "Zimmer 2", pricePerNight: 120, image: bedroomImage, beds: 3, extras: Array(5).fill("image") },
-        { roomName: "Zimmer 3", pricePerNight: 110, image: bedroomImage, beds: 1, extras: Array(3).fill("image") },
-        { roomName: "Zimmer 4", pricePerNight: 90, image: bedroomImage, beds: 2, extras: Array(7).fill("image") },
-        { roomName: "Zimmer 5", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
+        { number: 1, roomName: "Zimmer 1", pricePerNight: 100, image: bedroomImage, beds: 2, extras: Array(8).fill("image") },
+        { number: 2, roomName: "Zimmer 2", pricePerNight: 120, image: bedroomImage, beds: 3, extras: Array(5).fill("image") },
+        { number: 3, roomName: "Zimmer 3", pricePerNight: 110, image: bedroomImage, beds: 1, extras: Array(3).fill("image") },
+        { number: 4, roomName: "Zimmer 4", pricePerNight: 90, image: bedroomImage, beds: 2, extras: Array(7).fill("image") },
+        { number: 5, roomName: "Zimmer 5", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
+        { number: 10, roomName: "Zimmer 10", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
+        { number: 11, roomName: "Zimmer 11", pricePerNight: 105, image: bedroomImage, beds: 4, extras: Array(6).fill("image") },
       ],
-      modalRoomName: '',
+      modalRoomNumber: 0,
       isBookingModalVisible: false,
     };
   },
   methods: {
-    openBookingModal(roomName) {
+    openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
-      this.modalRoomName = roomName;
+      this.modalRoomNumber = roomNumber;
     },
   },
 };

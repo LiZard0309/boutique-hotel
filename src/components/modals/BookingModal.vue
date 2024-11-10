@@ -7,8 +7,7 @@
       <BookingForm @approve="handleBookingSubmit" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'review'">
-      <ReviewBooking :room-name="roomName"
-                     :bookingData="bookingData"
+      <ReviewBooking :bookingData="bookingData"
                      @confirm="confirmBooking"
                      @edit="editBooking"
                      @close="closeModal"/>
@@ -30,8 +29,8 @@ export default {
     ReviewBooking,
   },
   props: {
-    roomName: {
-      type: String,
+    roomNumber: {
+      type: Number,
       required: true,
     },
     isVisible: {
@@ -77,7 +76,7 @@ export default {
       };
 
       apiClient
-          .post(`/room/1/from/2025-01-17/to/2025-01-20`, bookingPayload,
+          .post(`/room/${this.roomNumber}/from/2025-01-17/to/2025-01-20`, bookingPayload,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('token')}`,
