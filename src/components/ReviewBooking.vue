@@ -1,10 +1,13 @@
 <template>
   <div class="review-content">
+    <p><strong>Zimmer: </strong>{{ bookingNumber}}</p>
+    <p><strong>Zeitraum:</strong></p>
+    <p><strong>Frühstück:</strong> {{ 'im Preis inbegriffen' }}</p>
+    <br/>
     <p><strong>Vorname:</strong> {{ bookingData.firstname }}</p>
     <p><strong>Nachname:</strong> {{ bookingData.lastname }}</p>
     <p><strong>Geburtsdatum:</strong> {{ bookingData.birthdate }}</p>
     <p><strong>E-Mail:</strong> {{ bookingData.email }}</p>
-    <p><strong>Frühstück:</strong> {{'im Preis inbegriffen' }}</p>
 
 
     <div class="button-container mt-4">
@@ -22,8 +25,13 @@ export default {
       type: Object,
       required: true,
     },
+    bookingNumber: {
+      type: Number,
+      required: true,
+    },
   },
 };
+
 </script>
 
 <style scoped>

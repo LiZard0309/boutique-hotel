@@ -7,7 +7,9 @@
       <BookingForm @approve="handleBookingSubmit" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'review'">
-      <ReviewBooking :bookingData="bookingData"
+      <ReviewBooking
+          :bookingNumber="roomNumber"
+          :bookingData="bookingData"
                      @confirm="confirmBooking"
                      @edit="editBooking"
                      @close="closeModal"/>
@@ -55,17 +57,17 @@ export default {
   },
   methods: {
     closeModal() {
-      this.$emit("update:isVisible", false); // Schließt das Modal
+      this.$emit("update:isVisible", false);
     },
     handleLogin() {
-      this.currentStep = "booking"; // Wechselt zur Buchungsansicht
+      this.currentStep = "booking";
     },
     handleBookingSubmit(data) {
-      this.bookingData = data; // Speichert die Buchungsdaten
-      this.currentStep = "review"; // Wechsel zu ReviewBooking
+      this.bookingData = data;
+      this.currentStep = "review";
     },
     editBooking() {
-      this.currentStep = "booking"; // Schaltet zurück zum Buchungsformular
+      this.currentStep = "booking";
     },
     confirmBooking() {
       const bookingPayload = {
@@ -83,7 +85,6 @@ export default {
                 },
               })
           .then((response) => {
-            console.log("Buchung erfolgreich:", response.data);
             alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
             this.closeModal();
           })
