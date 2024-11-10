@@ -17,7 +17,7 @@ export default {
   },
   props: {
     roomId: {type: Number, required: true,},
-    roomName: {type: String, required: true,},
+    roomsName: {type: String, required: true,},
     pricePerNight: {type: Number, required: true,},
     image: {type: String, required: true,},
     beds: {type: Number, required: true,},
@@ -73,7 +73,7 @@ export default {
     <div class="row">
       <div class="col-md-6 mx-auto">
         <b-card
-            :title="roomName"
+            :title="roomsName"
             :img-src="image"
             img-alt="Image"
             img-top="true"
