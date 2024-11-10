@@ -1,8 +1,3 @@
-<script setup>
-
-import {RouterLink} from 'vue-router'
-</script>
-
 <template>
   <b-navbar toggleable="lg" type="light" variant="light" class="navbar">
     <b-container class="navbar-container">
@@ -27,7 +22,7 @@ import {RouterLink} from 'vue-router'
       </div>
 
       <div>
-        <b-collapse id="nav-collapse" is-nav class="navbar-collapse">
+        <b-collapse id="nav-collapse" is-nav class="navbar-collapse" @mouseleave="hide">
           <b-navbar-nav class="menu-items">
 
             <b-nav-item>
@@ -71,7 +66,18 @@ import {RouterLink} from 'vue-router'
   </b-navbar>
 
 </template>
-
+<script>
+import {RouterLink} from 'vue-router'
+import * as $ from "jquery";
+export default {
+  name: "Navbar",
+  methods: {
+    hide() {
+      $('#nav-collapse').removeClass('show');
+    },
+  }
+}
+</script>
 <style scoped>
 /* Hauptcontainer der Navbar */
 .navbar {
