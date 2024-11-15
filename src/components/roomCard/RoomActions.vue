@@ -9,6 +9,7 @@ export default {
       this.$emit("display-date-picker-modal");
     },
     reserveRoom() {
+      //TODO: Hier noch einen refresh-check, ob Zimmer noch available ist und zum aktualisieren des gewählten Buchungsdatums im store einbauen.
       this.$emit("reserve-room");
     }
   }
