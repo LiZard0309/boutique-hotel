@@ -1,8 +1,7 @@
 <template>
   <b-modal v-model="internalVisible" title="Zimmer buchen" @hide="closeModal" hide-footer>
-    <!-- Beginnt direkt mit dem Buchungsformular -->
     <div v-if="currentStep === 'booking'">
-      <BookingForm @approve="handleBookingSubmit" @cancel="closeModal" />
+      <BookingForm @approve="handleBookingSubmit" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
@@ -82,12 +81,17 @@ export default {
               }
           )
           .then((response) => {
+            console.log(response);
             alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
             this.closeModal();
           })
           .catch((error) => {
             console.error("Fehler bei der Buchung:", error);
-            alert("Fehler bei der Buchung.");
+            if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen."))
+            {
+              window.location.href='/rooms';
+            };
+
           });
     },
   },
