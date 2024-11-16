@@ -1,41 +1,71 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import IconImage from "@/components/icons/IconImage.vue";
-import {BCard, BButton, BCollapse} from "bootstrap-vue-3";
+import { BCard, BButton, BCollapse, BModal } from "bootstrap-vue-3";
+import RoomActions from "./roomCard/RoomActions.vue";
+import RoomDetails from "./roomCard/RoomDetails.vue";
+import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
+import DateRangePicker from "@/components/DateRangePicker.vue";
+import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "RoomCard",
-  components: {IconBedKingOutline, IconImage, BCard, BButton, BCollapse},
-  props: {
-    roomName: {
-      type: String,
-      required: true,
-    },
-    pricePerNight: {
-      type: Number,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-    beds: {
-      type: Number,
-      required: true,
-    },
-    extras: {
-      type: Array,
-      required: true,
-    },
+  components: {
+    RoomDetails,
+    RoomActions,
+    RoomAvailabilityInfo,
+    IconBedKingOutline, BCard, BButton, BCollapse, BModal, DateRangePicker
   },
-  data() {
-    return {
-      showDetails: false, // Controls the accordion visibility
-    };
+  props: {
+    roomId: {type: Number, required: true,},
+    roomsName: {type: String, required: true,},
+    pricePerNight: {type: Number, required: true,},
+    image: {type: String, required: true,},
+    beds: {type: Number, required: true,},
+    extras: {type: Array, required: true,},
   },
   methods: {
     openBookingModal() {
       this.$emit("openModal");
+    },
+    displayDatePickerModal() {
+      this.showModal = true;
+    },
+    reserveRoom () {
+      console.log("Zimmer wird reserviert:", this.roomId, this.selectedDateRange);
+    },
+    handleDateSelection(dates) {
+      this.selectedDates = dates; // Store selected dates if needed
+    },
+    async submitDates() {
+      this.selectedDateRange = `${this.selectedDates.start} - ${this.selectedDates.end}`;
+
+      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
+      await this.roomsStore.fetchRoomAvailability(this.roomId);
+      const response = this.roomsStore.apiData
+      console.log("current apiData:", this.roomsStore.apiData);
+
+      if (response === true) {
+        this.isAvailable = true;
+      } else {
+        this.isAvailable = false;
+      }
+
+      this.availabilityChecked = true;
+      this.showModal = false; // Close the modal after submission
+    }
+  },
+  data() {
+    return {
+      showDetails: false, // Controls the accordion visibility
+      availabilityChecked: false,
+      isAvailable: false,
+      selectedDateRange: "",
+      showModal: false,
+    };
+  },
+  computed: {
+    roomsStore() {
+      return useRoomsStore();
     }
   }
 };
@@ -46,35 +76,33 @@ export default {
     <div class="row">
       <div class="col-md-6 mx-auto">
         <b-card
-            :title="roomName"
+            :title="roomsName"
             :img-src="image"
             img-alt="Image"
             img-top="true"
             tag="article"
             style="max-width: 50rem;"
-            class="mb-4"
+            class="mb-4 shadow-sm"
         >
+          <div class="button-section">
           <b-card-text>
-            Preis {{ pricePerNight }} €/Nacht
+            <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
           </b-card-text>
-
+          </div>
           <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
           <br/>
           <b-button variant="primary" class="mt-4" @click="openBookingModal">Zimmer buchen</b-button>
-
           <div class="room-info">
             <div class="left-content">
               <IconBedKingOutline/>
               <p>{{ beds }} Betten</p>
             </div>
-
-            <div class="right-content">
-              <a href="#" @click.prevent="showDetails = !showDetails" class="details-link">
-                Weitere Details
-                <span class="arrow" v-if="!showDetails">▼</span>
-                <span class="arrow" v-else>▲</span>
-              </a>
-            </div>
+            <RoomActions
+                :availabilityChecked="availabilityChecked"
+                :isAvailable="isAvailable"
+                @display-date-picker-modal="displayDatePickerModal"
+                @reserve-room="reserveRoom"
+            />
           </div>
 
           <b-collapse :visible="showDetails">
@@ -85,28 +113,39 @@ export default {
             </div>
           </b-collapse>
 
+          <!-- Verfügbarkeit und Datum -->
+          <RoomAvailabilityInfo
+              :availabilityChecked="availabilityChecked"
+              :isAvailable="isAvailable"
+              :showModal="showModal"
+              :selectedDateRange="selectedDateRange"
+              @open-availability-modal="displayDatePickerModal"
+          />
+
+          <!-- Zimmerdetails und Extras -->
+          <RoomDetails
+              :_showDetails="showDetails"
+              :beds="beds"
+              :extras="extras"
+          />
         </b-card>
+
+        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="submitDates">
+          <DateRangePicker @date-selected="handleDateSelection"/>
+        </b-modal>
+
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
-.room-card {
-  max-width: 20rem;
-  margin: auto;
+.priceStyle {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-
-@media (min-width: 1024px) {
-  .room-card {
-    max-width: 30rem;
-  }
-}
-
-
-.room-info {
+.button-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,7 +158,8 @@ export default {
 }
 
 .left-content p {
-  margin-left: 8px;
+  font-size: 1.2rem;
+  margin-left: 10px;
   margin-bottom: 0;
   font-weight: bold;
 }
