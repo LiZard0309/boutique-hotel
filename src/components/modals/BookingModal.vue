@@ -5,9 +5,7 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
-          :dates="dates"
           :bookingNumber="roomNumber"
-          :bookingData="bookingData"
           @confirm="confirmBooking"
           @edit="editBooking"
           @close="closeModal"
@@ -19,7 +17,8 @@
 <script>
 import apiClient from "@/api/axios"; // API-Client für Anfragen
 import BookingForm from "@/components/BookingForm.vue"; // Buchungsformular-Komponente
-import ReviewBooking from "@/components/ReviewBooking.vue"; // Überprüfungs-Komponente
+import ReviewBooking from "@/components/ReviewBooking.vue";
+import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "BookingModal",
@@ -28,10 +27,6 @@ export default {
     ReviewBooking,
   },
   props: {
-    dates: {
-      type: Object,
-      required: true,
-    },
     roomNumber: {
       type: Number,
       required: true,
@@ -45,7 +40,6 @@ export default {
     return {
       internalVisible: this.isVisible,
       currentStep: "booking", // Start direkt mit "booking"
-      bookingData: {}, // Speichert die Buchungsdaten
     };
   },
   watch: {
@@ -60,8 +54,7 @@ export default {
     closeModal() {
       this.$emit("update:isVisible", false); // Schließt das Modal
     },
-    handleBookingSubmit(data) {
-      this.bookingData = data; // Speichert die Buchungsdaten
+    handleBookingSubmit() {
       this.currentStep = "review"; // Wechselt zu ReviewBooking
     },
     editBooking() {
@@ -69,15 +62,15 @@ export default {
     },
     confirmBooking() {
       const bookingPayload = {
-        firstname: this.bookingData.firstname,
-        lastname: this.bookingData.lastname,
-        email: this.bookingData.email,
-        birthdate: this.bookingData.birthdate,
+        firstname: useRoomsStore().bookingData.firstname,
+        lastname: useRoomsStore().bookingData.lastname,
+        email: useRoomsStore().bookingData.email,
+        birthdate: useRoomsStore().bookingData.birthdate,
       };
 
       apiClient
           .post(
-              `/room/${this.roomNumber}/from/${this.dates.start}/to/${this.dates.end}`,
+              `/room/${this.roomNumber}/from/${useRoomsStore().getDateRange().startDate}/to/${useRoomsStore().getDateRange().endDate}`,
               bookingPayload,
               {
                 headers: {

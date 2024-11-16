@@ -1,7 +1,7 @@
 <template>
   <div class="review-content">
     <p><strong>Zimmer: </strong>{{ bookingNumber}}</p>
-    <p><strong>Zeitraum:</strong> {{ dates.start }} - {{ dates.end }}</p>
+    <p><strong>Zeitraum:</strong> {{ dates.startDate }} - {{ dates.endDate }}</p>
     <p><strong>Frühstück:</strong> {{ 'im Preis inbegriffen' }}</p>
     <br/>
     <p><strong>Vorname:</strong> {{ bookingData.firstname }}</p>
@@ -18,22 +18,24 @@
 </template>
 
 <script>
+import {useRoomsStore} from "@/stores/rooms";
+
 export default {
   name: "ReviewBooking",
   props: {
-    dates: {
-      type: Object,
-      required: true,
-    },
-    bookingData: {
-      type: Object,
-      required: true,
-    },
     bookingNumber: {
       type: Number,
       required: true,
     },
   },
+  computed: {
+    dates () {
+      return useRoomsStore().getDateRange();
+    },
+    bookingData () {
+      return useRoomsStore().bookingData;
+    }
+  }
 };
 
 </script>

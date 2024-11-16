@@ -22,7 +22,6 @@ export default {
   components: { RoomCard, BookingModal },
   data() {
     return {
-      dates: {},
       modalRoomNumber: 0,
       isBookingModalVisible: false,
       perPage: 5,
@@ -49,9 +48,6 @@ export default {
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
       this.modalRoomNumber = roomNumber;
-    },
-    setDates(dates) {
-      this.dates = dates;
     },
     changePage(page) {
       this.currentPage = page;
@@ -82,7 +78,6 @@ export default {
             :image="getRoomImage(room.id)"
             :beds="room.beds || null"
             :extras="room.extras || []"
-            @datesSelected="setDates($event)"
             @openModal="openBookingModal(room.id)"
         />
       </div>
@@ -100,7 +95,6 @@ export default {
 
     <!-- BookingModal Komponente -->
     <BookingModal
-        :dates="dates"
         :room-number="modalRoomNumber"
         :isVisible="isBookingModalVisible"
         @update:isVisible="isBookingModalVisible = $event"

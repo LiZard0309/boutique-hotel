@@ -11,6 +11,12 @@ export const useRoomsStore = defineStore('rooms', {
             startDate: null,
             endDate: null
         },
+        bookingData:  {
+            firstname: '',
+            lastname: '',
+            birthdate: null,
+            email: '',
+        },
         apiData: null,
     }),
 
@@ -44,8 +50,11 @@ export const useRoomsStore = defineStore('rooms', {
             this.dateRange.startDate = startDate;
             this.dateRange.endDate = endDate;
         },
-        setRoomId(id){
-            this.roomId = id;
+        getDateRange() {
+            return this.dateRange;
+        },
+        setBookingData(bookingData){
+            this.bookingData = bookingData;
         }
     }
 })

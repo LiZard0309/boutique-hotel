@@ -31,6 +31,7 @@
 
 <script>
 import Datepicker from "vue3-datepicker";
+import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "BookingForm",
@@ -55,7 +56,8 @@ export default {
         return;
       }
       this.bookingData.birthdate = this.format(this.bookingData.birthdate);
-      this.$emit('approve', this.bookingData);
+      useRoomsStore().setBookingData(this.bookingData);
+      this.$emit('approve');
     },
     format(date) {
       const day = date.getDate();

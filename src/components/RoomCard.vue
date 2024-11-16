@@ -49,7 +49,6 @@ export default {
 
       this.availabilityChecked = true;
       this.showModal = false; // Close the modal after submission
-      this.$emit("datesSelected", this.selectedDates);
     }
   },
   data() {
