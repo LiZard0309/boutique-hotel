@@ -1,7 +1,7 @@
 <template>
   <div class="review-content">
     <p><strong>Zimmer: </strong>{{ bookingNumber}}</p>
-    <p><strong>Zeitraum:</strong></p>
+    <p><strong>Zeitraum:</strong> {{ dates.start }} - {{ dates.end }}</p>
     <p><strong>Frühstück:</strong> {{ 'im Preis inbegriffen' }}</p>
     <br/>
     <p><strong>Vorname:</strong> {{ bookingData.firstname }}</p>
@@ -21,6 +21,10 @@
 export default {
   name: "ReviewBooking",
   props: {
+    dates: {
+      type: Object,
+      required: true,
+    },
     bookingData: {
       type: Object,
       required: true,

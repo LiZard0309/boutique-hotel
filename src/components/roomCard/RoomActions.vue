@@ -28,7 +28,7 @@ export default {
         v-else-if="availabilityChecked && isAvailable"
         @click="reserveRoom"
         variant="primary"
-    >Reservieren</b-button>
+    >Zimmer buchen</b-button>
 
     <b-button
         v-else-if="availabilityChecked && !isAvailable"

@@ -24,14 +24,11 @@ export default {
     extras: {type: Array, required: true,},
   },
   methods: {
-    openBookingModal() {
-      this.$emit("openModal");
-    },
     displayDatePickerModal() {
       this.showModal = true;
     },
     reserveRoom () {
-      console.log("Zimmer wird reserviert:", this.roomId, this.selectedDateRange);
+      this.$emit("openModal");
     },
     handleDateSelection(dates) {
       this.selectedDates = dates; // Store selected dates if needed
@@ -52,6 +49,7 @@ export default {
 
       this.availabilityChecked = true;
       this.showModal = false; // Close the modal after submission
+      this.$emit("datesSelected", this.selectedDates);
     }
   },
   data() {
@@ -89,14 +87,7 @@ export default {
             <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
           </b-card-text>
           </div>
-          <b-button href="#" variant="primary">Verfügbarkeit prüfen</b-button>
-          <br/>
-          <b-button variant="primary" class="mt-4" @click="openBookingModal">Zimmer buchen</b-button>
           <div class="room-info">
-            <div class="left-content">
-              <IconBedKingOutline/>
-              <p>{{ beds }} Betten</p>
-            </div>
             <RoomActions
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"

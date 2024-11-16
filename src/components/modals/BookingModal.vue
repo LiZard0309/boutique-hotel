@@ -5,6 +5,7 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
+          :dates="dates"
           :bookingNumber="roomNumber"
           :bookingData="bookingData"
           @confirm="confirmBooking"
@@ -27,6 +28,10 @@ export default {
     ReviewBooking,
   },
   props: {
+    dates: {
+      type: Object,
+      required: true,
+    },
     roomNumber: {
       type: Number,
       required: true,
@@ -72,7 +77,7 @@ export default {
 
       apiClient
           .post(
-              `/room/${this.roomNumber}/from/2024-12-17/to/2024-12-20`,
+              `/room/${this.roomNumber}/from/${this.dates.start}/to/${this.dates.end}`,
               bookingPayload,
               {
                 headers: {
