@@ -1,11 +1,13 @@
 <script>
-import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import RoomActions from "./roomCard/RoomActions.vue";
 import RoomDetails from "./roomCard/RoomDetails.vue";
 import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
+import AlertBooking from "./modals/AlertBooking.vue";
+import alertMessages from "./modals/alertMessages";
 import DateRangePicker from "@/components/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
+
 
 export default {
   name: "RoomCard",
@@ -13,7 +15,7 @@ export default {
     RoomDetails,
     RoomActions,
     RoomAvailabilityInfo,
-    IconBedKingOutline,
+    AlertBooking,
     BCard,
     BButton,
     BCollapse,
@@ -32,31 +34,38 @@ export default {
     displayDatePickerModal() {
       this.showModal = true;
     },
+
     async reserveRoom() {
       await this.submitDates();
       const response = this.roomsStore.apiData;
-      console.log("current Date in roomsStore:", this.roomsStore.dateRange);
-      console.log("current Date in this.selectedDates:", this.selectedDates);
+
       if (response === true) {
         this.$emit("openModal");
+      } else {
+        console.log("Booking failed, triggering alert...");
+        this.displayAlert(alertMessages.error, "danger");
       }
     },
+
+    handleCloseAlert() {
+      this.showAlert = false;
+    },
+
     handleDateSelection(dates) {
       this.selectedDates = dates;
     },
+
     async startDateCheck() {
       this.selectedDateRange = `${this.selectedDates.start} - ${this.selectedDates.end}`;
 
       await this.submitDates();
       const response = this.roomsStore.apiData;
-      console.log("response after refactor:", response);
 
       if (response === true) {
         this.isAvailable = true;
       } else {
         this.isAvailable = false;
       }
-
       this.availabilityChecked = true;
       this.showModal = false; // Close the modal after submission
     },
@@ -64,9 +73,16 @@ export default {
     async submitDates() {
       this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
       await this.roomsStore.fetchRoomAvailability(this.roomId);
-    }
+    },
 
+    displayAlert(message, type = "info") {
+      this.alertMessage = message;
+      this.alertType = type;
+      this.showAlert = true;
+      console.log(this.showAlert)
+    },
   },
+
   data() {
     return {
       showDetails: false, // Controls the accordion visibility
@@ -74,6 +90,9 @@ export default {
       isAvailable: false,
       selectedDateRange: "",
       showModal: false,
+      showAlert: false,
+      alertMessage: "error",
+      alertType: "info",
     };
   },
   computed: {
@@ -98,9 +117,9 @@ export default {
             class="mb-4 shadow-sm"
         >
           <div class="button-section">
-          <b-card-text>
-            <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
-          </b-card-text>
+            <b-card-text>
+              <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
+            </b-card-text>
             <RoomActions
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"
@@ -137,6 +156,13 @@ export default {
         <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="startDateCheck">
           <DateRangePicker @date-selected="handleDateSelection"/>
         </b-modal>
+
+        <AlertBooking
+            v-model="showAlert"
+            :type="alertType"
+            :message="alertMessage"
+            @close="handleCloseAlert"
+        />
 
       </div>
     </div>
