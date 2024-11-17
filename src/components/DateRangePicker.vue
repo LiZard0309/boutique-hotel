@@ -2,10 +2,6 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
-//TODO: Date Range Picker weiter modifizieren:
-// 4) evtl. Select weg!
-// 5) evtl. Platzierung von Kalender-Element noch verändern.
-
 export default {
   name: 'DateRangePicker',
   components: {VueDatePicker},
@@ -15,8 +11,6 @@ export default {
       selectedRange: {start: null, end: null},
       minDate: this.getTomorrowDate(),
       maxDate: this.getSixMonthsFromNow(),
-      /*rangeConfig: {
-      },*/
     };
   },
 

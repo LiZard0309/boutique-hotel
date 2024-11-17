@@ -1,6 +1,6 @@
 <script>
 import IconBedKingOutline from "@/components/icons/IconBedKingOutline.vue";
-import { BCard, BButton, BCollapse, BModal } from "bootstrap-vue-3";
+import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import RoomActions from "./roomCard/RoomActions.vue";
 import RoomDetails from "./roomCard/RoomDetails.vue";
 import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
@@ -13,7 +13,12 @@ export default {
     RoomDetails,
     RoomActions,
     RoomAvailabilityInfo,
-    IconBedKingOutline, BCard, BButton, BCollapse, BModal, DateRangePicker
+    IconBedKingOutline,
+    BCard,
+    BButton,
+    BCollapse,
+    BModal,
+    DateRangePicker
   },
   props: {
     roomId: {type: Number, required: true,},
@@ -27,19 +32,24 @@ export default {
     displayDatePickerModal() {
       this.showModal = true;
     },
-    reserveRoom () {
-      this.$emit("openModal");
+    async reserveRoom() {
+      await this.submitDates();
+      const response = this.roomsStore.apiData;
+      console.log("current Date in roomsStore:", this.roomsStore.dateRange);
+      console.log("current Date in this.selectedDates:", this.selectedDates);
+      if (response === true) {
+        this.$emit("openModal");
+      }
     },
     handleDateSelection(dates) {
-      this.selectedDates = dates; // Store selected dates if needed
+      this.selectedDates = dates;
     },
-    async submitDates() {
+    async startDateCheck() {
       this.selectedDateRange = `${this.selectedDates.start} - ${this.selectedDates.end}`;
 
-      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
-      await this.roomsStore.fetchRoomAvailability(this.roomId);
-      const response = this.roomsStore.apiData
-      console.log("current apiData:", this.roomsStore.apiData);
+      await this.submitDates();
+      const response = this.roomsStore.apiData;
+      console.log("response after refactor:", response);
 
       if (response === true) {
         this.isAvailable = true;
@@ -49,7 +59,13 @@ export default {
 
       this.availabilityChecked = true;
       this.showModal = false; // Close the modal after submission
+    },
+
+    async submitDates() {
+      this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
+      await this.roomsStore.fetchRoomAvailability(this.roomId);
     }
+
   },
   data() {
     return {
@@ -118,7 +134,7 @@ export default {
           />
         </b-card>
 
-        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="submitDates">
+        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="startDateCheck">
           <DateRangePicker @date-selected="handleDateSelection"/>
         </b-modal>
 
@@ -139,7 +155,6 @@ export default {
   align-items: center;
   margin-top: 8px;
 }
-
 
 .left-content p {
   font-size: 1.2rem;
