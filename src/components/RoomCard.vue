@@ -42,8 +42,8 @@ export default {
       if (response === true) {
         this.$emit("openModal");
       } else {
-        console.log("Booking failed, triggering alert...");
-        this.displayAlert(alertMessages.error, "danger");
+        this.alertMessage = alertMessages.error;
+        this.showAlert = true;
       }
     },
 
@@ -73,13 +73,6 @@ export default {
     async submitDates() {
       this.roomsStore.setDateRange(this.selectedDates.start, this.selectedDates.end);
       await this.roomsStore.fetchRoomAvailability(this.roomId);
-    },
-
-    displayAlert(message, type = "info") {
-      this.alertMessage = message;
-      this.alertType = type;
-      this.showAlert = true;
-      console.log(this.showAlert)
     },
   },
 
@@ -158,10 +151,9 @@ export default {
         </b-modal>
 
         <AlertBooking
-            v-model="showAlert"
-            :type="alertType"
+            :showAlert="showAlert"
             :message="alertMessage"
-            @close="handleCloseAlert"
+            @update:showAlert="showAlert = $event"
         />
 
       </div>
