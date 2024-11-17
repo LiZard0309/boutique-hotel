@@ -140,22 +140,12 @@ export default {
   margin-top: 8px;
 }
 
-.left-content {
-  display: flex;
-  align-items: center;
-}
 
 .left-content p {
   font-size: 1.2rem;
   margin-left: 10px;
   margin-bottom: 0;
   font-weight: bold;
-}
-
-.details-link {
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .details-link .arrow {
