@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import apiClient from "@/api/axios"; // API-Client für Anfragen
 import BookingForm from "@/components/BookingForm.vue"; // Buchungsformular-Komponente
 import ReviewBooking from "@/components/ReviewBooking.vue";
 import {useRoomsStore} from "@/stores/rooms";
@@ -60,7 +59,7 @@ export default {
     editBooking() {
       this.currentStep = "booking"; // Zurück zum Buchungsformular
     },
-    confirmBooking() {
+    async confirmBooking() {
       const bookingPayload = {
         firstname: useRoomsStore().bookingData.firstname,
         lastname: useRoomsStore().bookingData.lastname,
@@ -68,29 +67,15 @@ export default {
         birthdate: useRoomsStore().bookingData.birthdate,
       };
 
-      apiClient
-          .post(
-              `/room/${this.roomNumber}/from/${useRoomsStore().getDateRange().startDate}/to/${useRoomsStore().getDateRange().endDate}`,
-              bookingPayload,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`, // Token wird aus dem lokalen Speicher abgerufen
-                },
-              }
-          )
-          .then((response) => {
-            console.log(response);
-            alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
-            this.closeModal();
-          })
-          .catch((error) => {
-            console.error("Fehler bei der Buchung:", error);
-            if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen."))
-            {
-              window.location.href='/rooms';
-            };
-
-          });
+      const response = await useRoomsStore().postBookingData(this.roomNumber, bookingPayload);
+      if (response) {
+        alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
+        this.closeModal();
+      } else {
+        if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen.")) {
+          window.location.href = '/rooms';
+        };
+      }
     },
   },
 };
