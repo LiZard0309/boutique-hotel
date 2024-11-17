@@ -85,8 +85,6 @@ export default {
           <b-card-text>
             <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
           </b-card-text>
-          </div>
-          <div class="room-info">
             <RoomActions
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"
