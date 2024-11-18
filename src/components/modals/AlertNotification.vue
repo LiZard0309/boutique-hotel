@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <<div v-if="showAlert" class="alert-overlay">
+  <div v-if="showAlert" class="alert-overlay">
   <div class="alert-box">
     <p>{{ message }}</p>
     <button @click="closeAlert">OK</button>
