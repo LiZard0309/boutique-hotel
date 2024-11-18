@@ -2,7 +2,7 @@
 import bedroomImage from "@/assets/bedroom.jpg";
 import RoomCard from "@/components/RoomCard.vue";
 import BookingModal from "@/components/modals/BookingModal.vue";
-import { useRoomsStore } from "@/stores/rooms";
+import {useRoomsStore} from "@/stores/rooms";
 
 const ROOM_IMAGES = {
   1: '/src/assets/images/default_double_bedroom.jpg',
@@ -19,7 +19,7 @@ const ROOM_IMAGES = {
 
 export default {
   name: "RoomsView",
-  components: { RoomCard, BookingModal },
+  components: {RoomCard, BookingModal},
   data() {
     return {
       modalRoomNumber: 0,
@@ -29,6 +29,7 @@ export default {
       isLoading: true,
     };
   },
+
   computed: {
     rooms() {
       return this.roomsStore.rooms;
@@ -44,6 +45,7 @@ export default {
       return (roomId) => ROOM_IMAGES[roomId] || bedroomImage; // Bild aus Mapping, sonst Fallback
     },
   },
+
   methods: {
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
@@ -70,7 +72,7 @@ export default {
   <div class="rooms-view-container">
     <div v-if="isLoading">Loading rooms...</div>
     <div v-else>
-      <div v-for="(room, index) in paginatedRooms" :key="index">
+      <div v-for="(room) in paginatedRooms" :key="room.id">
         <RoomCard
             :room-id="room.id"
             :roomsName="room.roomsName || 'Unknown Room Name'"

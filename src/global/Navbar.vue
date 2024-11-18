@@ -1,5 +1,18 @@
+<script>
+import {RouterLink} from 'vue-router'
+import * as $ from "jquery";
+export default {
+  name: "Navbar",
+  methods: {
+    hide() {
+      $('#nav-collapse').removeClass('show');
+    },
+  }
+}
+</script>
+
 <template>
-  <b-navbar toggleable="lg" type="light" variant="light" class="navbar">
+  <b-navbar toggleable="md" type="light" variant="light" class="navbar">
     <b-container class="navbar-container">
       <div>
         <b-navbar-brand>
@@ -66,18 +79,7 @@
   </b-navbar>
 
 </template>
-<script>
-import {RouterLink} from 'vue-router'
-import * as $ from "jquery";
-export default {
-  name: "Navbar",
-  methods: {
-    hide() {
-      $('#nav-collapse').removeClass('show');
-    },
-  }
-}
-</script>
+
 <style scoped>
 /* Hauptcontainer der Navbar */
 .navbar {
@@ -127,12 +129,14 @@ export default {
   max-height: 60px;
 }
 
+.menu-items a {
+  white-space: nowrap; /* Prevents breaking text into multiple lines */
+}
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .navbar-logo {
     max-height: 30px;
   }
-
   .navbar-collapse {
     position: absolute;
     top: 100%;
@@ -141,12 +145,16 @@ export default {
     width: 100%;
     padding: 0 1rem;
   }
-
   .menu-items {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
+  .menu-items a {
+    font-size: 0.9rem; /* Slightly smaller text */
+    padding: 0 0.5rem; /* Reduce horizontal spacing */
+  }
+
 }
 
 @media (min-width: 992px) {
