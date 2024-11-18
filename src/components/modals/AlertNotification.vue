@@ -61,6 +61,7 @@ export default {
 .alert-box button {
   margin-top: 10px;
   padding: 8px 15px;
+  border-radius: 5px;
   font-size: 1rem;
   border: none;
   background-color: #007bff;

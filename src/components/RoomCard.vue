@@ -3,7 +3,7 @@ import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
 import RoomActions from "./roomCard/RoomActions.vue";
 import RoomDetails from "./roomCard/RoomDetails.vue";
 import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
-import AlertBooking from "./modals/AlertBooking.vue";
+import AlertNotification from "./modals/AlertNotification.vue";
 import alertMessages from "./modals/alertMessages";
 import DateRangePicker from "@/components/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
@@ -15,7 +15,7 @@ export default {
     RoomDetails,
     RoomActions,
     RoomAvailabilityInfo,
-    AlertBooking,
+    AlertNotification,
     BCard,
     BButton,
     BCollapse,
@@ -36,12 +36,15 @@ export default {
     },
 
     async reserveRoom() {
+      //check again if room is still available at requested dates and to reset date range in store - right before booking
       await this.submitDates();
       const response = this.roomsStore.apiData;
 
+      //if room is still available - booking modal opens to start process
       if (response === true) {
         this.$emit("openModal");
       } else {
+        //if room is not available anymore an error alert is shown
         this.alertMessage = alertMessages.error;
         this.showAlert = true;
       }
@@ -150,7 +153,7 @@ export default {
           <DateRangePicker @date-selected="handleDateSelection"/>
         </b-modal>
 
-        <AlertBooking
+        <AlertNotification
             :showAlert="showAlert"
             :message="alertMessage"
             @update:showAlert="showAlert = $event"

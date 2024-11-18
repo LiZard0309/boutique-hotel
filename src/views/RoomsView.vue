@@ -52,9 +52,6 @@ export default {
     changePage(page) {
       this.currentPage = page;
     },
-    /*handleAlert({ message, type }) {
-      this.$root.$emit("showAlert", { message, type });
-    },*/
   },
   async mounted() {
     try {
