@@ -50,10 +50,6 @@ export default {
       }
     },
 
-    handleCloseAlert() {
-      this.showAlert = false;
-    },
-
     handleDateSelection(dates) {
       this.selectedDates = dates;
     },
