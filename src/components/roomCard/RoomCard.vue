@@ -1,10 +1,10 @@
 <script>
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
-import RoomActions from "./roomCard/RoomActions.vue";
-import RoomDetails from "./roomCard/RoomDetails.vue";
-import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
-import AlertNotification from "./modals/AlertNotification.vue";
-import alertMessages from "./modals/alertMessages";
+import RoomActions from "./RoomActions.vue";
+import RoomDetails from "./RoomDetails.vue";
+import RoomAvailabilityInfo from "./RoomAvailabilityInfo.vue";
+import AlertNotification from "../modals/AlertNotification.vue";
+import alertMessages from "../modals/alertMessages";
 import DateRangePicker from "@/components/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
 
