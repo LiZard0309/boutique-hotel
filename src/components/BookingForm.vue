@@ -1,42 +1,11 @@
-<template>
-  <b-form @submit.prevent="submitBooking">
-    <b-form-group label="Vorname" label-for="firstname">
-      <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben"/>
-    </b-form-group>
-
-    <b-form-group label="Nachname" label-for="lastname">
-      <b-form-input id="lastname" v-model="bookingData.lastname" required placeholder="Nachname eingeben"/>
-    </b-form-group>
-
-    <b-form-group label="Geburtsdatum" label-for="birthdate">
-      <Datepicker id="birthdate" v-model="bookingData.birthdate" :format="format" required
-                  placeholder="Geburtsdatum auswählen"/>
-    </b-form-group>
-
-    <b-form-group label="E-Mail" label-for="email">
-      <b-form-input id="email" type="email" v-model="bookingData.email" required placeholder="E-Mail eingeben"/>
-    </b-form-group>
-
-    <b-form-group label="E-Mail bestätigen" label-for="confirmEmail">
-      <b-form-input id="confirmEmail" type="email" v-model="confirmEmail" required
-                    placeholder="E-Mail erneut eingeben"/>
-    </b-form-group>
-
-    <div class="button-container mt-4">
-      <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
-      <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
-    </div>
-  </b-form>
-</template>
-
 <script>
-import Datepicker from "vue3-datepicker";
+import VueDatePicker from '@vuepic/vue-datepicker';
 import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "BookingForm",
   components: {
-    Datepicker,
+    VueDatePicker
   },
   data() {
     return {
@@ -60,15 +29,57 @@ export default {
       this.$emit('approve');
     },
     format(date) {
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-
-      return `${year}-${month}-${day}`;
+      if (!date) return null;
+      return new Intl.DateTimeFormat('de-DE').format(date);
     }
+  },
+  computed: {
+    maxDate() {
+      const today = new Date();
+      today.setFullYear(today.getFullYear() - 18);
+      return today;
+    },
   }
 };
 </script>
+
+<template>
+  <b-form @submit.prevent="submitBooking">
+    <b-form-group label="Vorname" label-for="firstname">
+      <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben"/>
+    </b-form-group>
+
+    <b-form-group label="Nachname" label-for="lastname">
+      <b-form-input id="lastname" v-model="bookingData.lastname" required placeholder="Nachname eingeben"/>
+    </b-form-group>
+
+    <b-form-group label="Geburtsdatum" label-for="birthdate">
+      <VueDatePicker
+          id="birthdate"
+          v-model="bookingData.birthdate"
+          :max-date="maxDate"
+          :start-date="maxDate"
+          :enable-time-picker="false"
+          required
+          placeholder="Geburtsdatum auswählen"
+      />
+    </b-form-group>
+
+    <b-form-group label="E-Mail" label-for="email">
+      <b-form-input id="email" type="email" v-model="bookingData.email" required placeholder="E-Mail eingeben"/>
+    </b-form-group>
+
+    <b-form-group label="E-Mail bestätigen" label-for="confirmEmail">
+      <b-form-input id="confirmEmail" type="email" v-model="confirmEmail" required
+                    placeholder="E-Mail erneut eingeben"/>
+    </b-form-group>
+
+    <div class="button-container mt-4">
+      <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
+      <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
+    </div>
+  </b-form>
+</template>
 
 <style scoped>
 .button-container {
