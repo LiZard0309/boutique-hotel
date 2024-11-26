@@ -1,6 +1,7 @@
 <script>
 import {RouterLink} from 'vue-router'
 import * as $ from "jquery";
+
 export default {
   name: "Navbar",
   methods: {
@@ -35,7 +36,7 @@ export default {
       </div>
 
       <div>
-        <b-collapse id="nav-collapse" is-nav class="navbar-collapse" @mouseleave="hide">
+        <b-collapse id="nav-collapse" class="navbar-collapse" @mouseleave="hide">
           <b-navbar-nav class="menu-items">
 
             <b-nav-item>
@@ -59,10 +60,7 @@ export default {
             </b-nav-item>
 
             <b-nav-item href="#">Login</b-nav-item>
-          </b-navbar-nav>
 
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto menu-items">
 
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
@@ -98,12 +96,12 @@ export default {
   padding-bottom: 5px;
 }
 
-.navbar-container a{
+.navbar-container a {
   color: #000;
   text-decoration: none;
 }
 
-.navbar-container a:hover{
+.navbar-container a:hover {
   text-decoration: underline;
 }
 
@@ -137,6 +135,7 @@ export default {
   .navbar-logo {
     max-height: 30px;
   }
+
   .navbar-collapse {
     position: absolute;
     top: 100%;
@@ -145,11 +144,13 @@ export default {
     width: 100%;
     padding: 0 1rem;
   }
+
   .menu-items {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
+
   .menu-items a {
     font-size: 0.9rem; /* Slightly smaller text */
     padding: 0 0.5rem; /* Reduce horizontal spacing */
