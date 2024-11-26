@@ -1,5 +1,5 @@
 <script>
-import RoomsButton from "@/components/RoomsButton.vue";
+import RoomsButton from "@/components/ToRoomsLink.vue";
 
 export default {
   name: "Welcome",
