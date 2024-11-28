@@ -123,7 +123,6 @@ export default {
           <b-collapse :visible="showDetails">
             <div class="extras">
               <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-                <IconImage class="image-icon"/>
               </div>
             </div>
           </b-collapse>
@@ -194,10 +193,5 @@ export default {
 .extra-icon {
   margin-right: 10px;
   margin-bottom: 10px;
-
-  .image-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
 }
 </style>
