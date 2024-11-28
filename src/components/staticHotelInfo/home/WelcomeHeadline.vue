@@ -1,5 +1,5 @@
 <script>
-import ToRoomsLink from "@/components/ToRoomsLink.vue";
+import ToRoomsLink from "@/components/staticHotelInfo/home/ToRoomsLink.vue";
 
 export default {
   name: "Welcome",
