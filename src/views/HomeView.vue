@@ -1,5 +1,5 @@
 <script setup>
-import ImageSlider from "@/components/ImageSlider.vue";
+import ImageSlider from "@/components/staticHotelInfo/home/ImageSlider.vue";
 import Welcome from "@/components/staticHotelInfo/home/WelcomeHeadline.vue";
 import WelcomeText from "@/components/staticHotelInfo/home/WelcomeText.vue";
 import Activities from "@/components/Activities.vue";
