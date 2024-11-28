@@ -1,5 +1,5 @@
 <script>
-import hostPicture from '@/assets/hosts.jpeg';
+import hostPicture from '@/assets/Images/hosts.jpeg';
 
 export default {
   name: 'ImageComponent',

@@ -1,11 +1,11 @@
 <script>
 import {BCard, BButton, BCollapse, BModal} from "bootstrap-vue-3";
-import RoomActions from "./roomCard/RoomActions.vue";
-import RoomDetails from "./roomCard/RoomDetails.vue";
-import RoomAvailabilityInfo from "./roomCard/RoomAvailabilityInfo.vue";
-import AlertNotification from "./modals/AlertNotification.vue";
-import alertMessages from "./modals/alertMessages";
-import DateRangePicker from "@/components/DateRangePicker.vue";
+import RoomActions from "./RoomActions.vue";
+import RoomDetails from "./RoomDetails.vue";
+import RoomAvailabilityInfo from "./RoomAvailabilityInfo.vue";
+import AlertNotification from "../modals/AlertNotification.vue";
+import alertMessages from "../modals/alertMessages";
+import DateRangePicker from "@/components/roomCard/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
 
 
@@ -123,7 +123,6 @@ export default {
           <b-collapse :visible="showDetails">
             <div class="extras">
               <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-                <IconImage class="image-icon"/>
               </div>
             </div>
           </b-collapse>
@@ -194,10 +193,5 @@ export default {
 .extra-icon {
   margin-right: 10px;
   margin-bottom: 10px;
-
-  .image-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
 }
 </style>

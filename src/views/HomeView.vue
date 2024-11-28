@@ -1,9 +1,9 @@
 <script setup>
-import ImageSlider from "@/components/ImageSlider.vue";
-import Welcome from "@/components/WelcomeHeadline.vue";
-import WelcomeText from "@/components/WelcomeText.vue";
-import Activities from "@/components/Activities.vue";
-import ButtonToAnfahrt from "@/components/ButtonToAnfahrt.vue";
+import ImageSlider from "@/components/staticHotelInfo/home/ImageSlider.vue";
+import Welcome from "@/components/staticHotelInfo/home/WelcomeHeadline.vue";
+import WelcomeText from "@/components/staticHotelInfo/home/WelcomeText.vue";
+import Activities from "@/components/staticHotelInfo/home/Activities.vue";
+import ToDirectionsLink from "@/components/staticHotelInfo/home/ToDirectionsLink.vue";
 
 
 const hotelImages = [
@@ -21,7 +21,7 @@ const hotelImages = [
     <welcome/>
     <welcome-text/>
     <activities/>
-    <button-to-anfahrt/>
+    <to-directions-link/>
   </main>
 </template>
 

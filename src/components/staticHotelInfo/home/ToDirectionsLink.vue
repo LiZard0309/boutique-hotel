@@ -6,7 +6,7 @@ import {RouterLink, RouterView} from 'vue-router'
   <div>
     <div class="anfahrt-button">
       <div class="anfahrt-icon">
-        <img alt="Anfahrt" src="../assets/Logos/Arrow_Anfahrt.png" height="100"/>
+        <img alt="Anfahrt" src="../../../assets/Logos/Arrow_Anfahrt.png" height="100"/>
       </div>
       <div>
         <RouterLink to="/contact" class="hover-underline-animation left anfahrt-link">

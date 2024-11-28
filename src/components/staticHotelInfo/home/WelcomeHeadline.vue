@@ -1,9 +1,9 @@
 <script>
-import RoomsButton from "@/components/RoomsButton.vue";
+import ToRoomsLink from "@/components/staticHotelInfo/home/ToRoomsLink.vue";
 
 export default {
   name: "Welcome",
-  components: {RoomsButton}
+  components: {ToRoomsLink}
 }
 </script>
 
@@ -15,7 +15,7 @@ export default {
       <h3> – wo Luxus auf Herzlichkeit trifft –</h3>
     </div>
     <div>
-      <rooms-button/>
+      <to-rooms-link/>
     </div>
   </div>
 </template>

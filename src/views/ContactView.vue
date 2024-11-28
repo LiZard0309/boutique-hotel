@@ -1,6 +1,6 @@
 <script>
-import Contact from "@/components/Contact.vue";
-import Directions from "@/components/Directions.vue";
+import Contact from "@/components/staticHotelInfo/Contact.vue";
+import Directions from "@/components/staticHotelInfo/Directions.vue";
 
 export default {
   name: "ContactView",
