@@ -5,7 +5,7 @@ import RoomDetails from "./RoomDetails.vue";
 import RoomAvailabilityInfo from "./RoomAvailabilityInfo.vue";
 import AlertNotification from "../modals/AlertNotification.vue";
 import alertMessages from "../modals/alertMessages";
-import DateRangePicker from "@/components/DateRangePicker.vue";
+import DateRangePicker from "@/components/roomCard/DateRangePicker.vue";
 import {useRoomsStore} from "@/stores/rooms";
 
 
