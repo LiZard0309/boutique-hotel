@@ -2,7 +2,7 @@
 import {RouterLink} from "vue-router";
 
 export default {
-  name: "RoomsButton",
+  name: "ToRoomsLink",
   components: {RouterLink}
 }
 </script>
