@@ -1,6 +1,6 @@
 <script setup>
 import HostPicture from '../components/media/HostPicture.vue'
-import Philosophy from "@/components/Philosophy.vue";
+import Philosophy from "@/components/staticHotelInfo/Philosophy.vue";
 </script>
 
 <template>
