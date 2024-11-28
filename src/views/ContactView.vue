@@ -1,5 +1,5 @@
 <script>
-import Contact from "@/components/Contact.vue";
+import Contact from "@/components/staticHotelInfo/Contact.vue";
 import Directions from "@/components/Directions.vue";
 
 export default {
