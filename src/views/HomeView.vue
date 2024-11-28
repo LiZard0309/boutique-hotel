@@ -3,7 +3,7 @@ import ImageSlider from "@/components/ImageSlider.vue";
 import Welcome from "@/components/WelcomeHeadline.vue";
 import WelcomeText from "@/components/WelcomeText.vue";
 import Activities from "@/components/Activities.vue";
-import ButtonToAnfahrt from "@/components/ButtonToAnfahrt.vue";
+import ToDirectionsLink from "@/components/ToDirectionsLink.vue";
 
 
 const hotelImages = [
@@ -21,7 +21,7 @@ const hotelImages = [
     <welcome/>
     <welcome-text/>
     <activities/>
-    <button-to-anfahrt/>
+    <to-directions-link/>
   </main>
 </template>
 
