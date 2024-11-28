@@ -3,7 +3,7 @@ import ImageSlider from "@/components/ImageSlider.vue";
 import Welcome from "@/components/staticHotelInfo/home/WelcomeHeadline.vue";
 import WelcomeText from "@/components/staticHotelInfo/home/WelcomeText.vue";
 import Activities from "@/components/Activities.vue";
-import ToDirectionsLink from "@/components/ToDirectionsLink.vue";
+import ToDirectionsLink from "@/components/staticHotelInfo/home/ToDirectionsLink.vue";
 
 
 const hotelImages = [
