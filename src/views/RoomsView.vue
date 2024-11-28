@@ -1,5 +1,5 @@
 <script>
-import bedroomImage from "@/assets/bedroom.jpg";
+import bedroomImage from "@/assets/Images/default_double_bedroom.jpg";
 import RoomCard from "@/components/roomCard/RoomCard.vue";
 import BookingModal from "@/components/modals/BookingModal.vue";
 import {useRoomsStore} from "@/stores/rooms";
