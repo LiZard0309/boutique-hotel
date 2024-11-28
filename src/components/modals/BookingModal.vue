@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import BookingForm from "@/components/BookingForm.vue"; // Buchungsformular-Komponente
+import BookingForm from "@/components/forms/BookingForm.vue"; // Buchungsformular-Komponente
 import ReviewBooking from "@/components/ReviewBooking.vue";
 import {useRoomsStore} from "@/stores/rooms";
 
