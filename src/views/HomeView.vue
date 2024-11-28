@@ -2,7 +2,7 @@
 import ImageSlider from "@/components/staticHotelInfo/home/ImageSlider.vue";
 import Welcome from "@/components/staticHotelInfo/home/WelcomeHeadline.vue";
 import WelcomeText from "@/components/staticHotelInfo/home/WelcomeText.vue";
-import Activities from "@/components/Activities.vue";
+import Activities from "@/components/staticHotelInfo/home/Activities.vue";
 import ToDirectionsLink from "@/components/staticHotelInfo/home/ToDirectionsLink.vue";
 
 
