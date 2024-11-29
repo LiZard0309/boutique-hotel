@@ -175,6 +175,10 @@ export default {
   .navbar-logo {
     max-height: 50px;
   }
+  .navbar-collapse {
+    background-color: transparent;
+    box-shadow: none;
+  }
 }
 
 </style>
