@@ -70,7 +70,7 @@ export default {
 
 <template>
   <div class="rooms-view-container">
-    <div v-if="isLoading">Loading rooms...</div>
+    <div v-if="isLoading">Lade Zimmer...</div>
     <div v-else>
       <div v-for="(room) in paginatedRooms" :key="room.id">
         <RoomCard
