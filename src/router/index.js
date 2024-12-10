@@ -45,6 +45,12 @@ const router = createRouter({
             name: 'imprint',
             component: () => import('../views/ImprintView.vue')
         },
+
+        {
+            path: '/history',
+            name: 'history',
+            component: () => import('../views/BookingHistoryView.vue')
+        },
     ]
 })
 

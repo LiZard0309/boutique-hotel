@@ -67,7 +67,7 @@ export default {
               <template #button-content>
                 <em>User</em>
               </template>
-              <b-dropdown-item href="#">Buchungshistorie</b-dropdown-item>
+              <b-dropdown-item><RouterLink to="/history">Meine Buchungen</RouterLink></b-dropdown-item>
               <b-dropdown-item href="#">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
