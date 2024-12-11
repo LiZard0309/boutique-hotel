@@ -3,6 +3,8 @@ import bedroomImage from "@/assets/bedroom.jpg";
 import RoomCard from "@/components/RoomCard.vue";
 import BookingModal from "@/components/modals/BookingModal.vue";
 import {useRoomsStore} from "@/stores/rooms";
+import RoomPagination from "../components/RoomPagination.vue";
+import {usePaginationStore} from "../stores/usePaginationStore";
 
 const ROOM_IMAGES = {
   1: '/src/assets/images/default_double_bedroom.jpg',
@@ -19,13 +21,12 @@ const ROOM_IMAGES = {
 
 export default {
   name: "RoomsView",
-  components: {RoomCard, BookingModal},
+  components: {RoomPagination, RoomCard, BookingModal},
   data() {
     return {
       modalRoomNumber: 0,
       isBookingModalVisible: false,
-      perPage: 5,
-      currentPage: 1,
+      perPage: usePaginationStore().perPage,
       isLoading: true,
     };
   },
@@ -44,6 +45,9 @@ export default {
     getRoomImage() {
       return (roomId) => ROOM_IMAGES[roomId] || bedroomImage; // Bild aus Mapping, sonst Fallback
     },
+    currentPage() {
+      return usePaginationStore().currentPage
+    }
   },
 
   methods: {
@@ -52,6 +56,7 @@ export default {
       this.modalRoomNumber = roomNumber;
     },
     changePage(page) {
+      console.log(page)
       this.currentPage = page;
     },
   },
@@ -72,6 +77,7 @@ export default {
   <div class="rooms-view-container">
     <div v-if="isLoading">Loading rooms...</div>
     <div v-else>
+
       <div v-for="(room) in paginatedRooms" :key="room.id">
         <RoomCard
             :room-id="room.id"
@@ -83,16 +89,8 @@ export default {
             @openModal="openBookingModal(room.id)"
         />
       </div>
+      <room-pagination :rows="rooms.length"></room-pagination>
 
-      <b-pagination
-          v-model="currentPage"
-          :total-rows="rooms.length"
-          :per-page="perPage"
-          aria-controls="room-cards"
-          @change="changePage"
-          align="center"
-          class="mt-3"
-      ></b-pagination>
     </div>
 
     <!-- BookingModal Komponente -->
