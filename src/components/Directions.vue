@@ -10,15 +10,16 @@ export default {
 </script>
 
 <template>
-  <h4>So finden Sie uns: </h4>
+  <h1>__________</h1>
+  <h1>So finden Sie uns: </h1>
   <div class="container">
     <MediaMap></MediaMap>
   </div>
 
-  <div>
+  <div class="adress">
     <p class="subtitle">Anschrift:</p>
     <p> Hochstädtplatz 6, 1200 Wien </p>
-  </div>
+
 
   <div>
     <p class="subtitle">Anfahrt:</p>
@@ -32,16 +33,20 @@ export default {
       mit den Öffis: in Zug oder Bus einsteigen
     </p>
   </div>
+  </div>
 
 
 </template>
 
 <style scoped>
+
+
 .container {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding-top: 56.25%;
+  margin-bottom: 60px;
 
 }
 
@@ -49,10 +54,9 @@ export default {
   font-weight: bold;
 }
 
-h4 {
-  font-weight: bold;
+.adress {
+  margin-bottom: 60px;
 }
-
 
 
 </style>

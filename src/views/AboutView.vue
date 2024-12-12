@@ -4,17 +4,12 @@ import Philosophy from "@/components/Philosophy.vue";
 </script>
 
 <template>
-
+<body>
   <HostPicture/>
   <Philosophy/>
+</body>
 </template>
 
 <style>
-.about {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
+
 </style>

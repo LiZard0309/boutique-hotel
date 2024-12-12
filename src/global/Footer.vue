@@ -20,6 +20,7 @@ export default {
   color: #ffffff;
   padding-top: 1rem;
   padding-left: 1.5rem;
+
 }
 
 .footer-container a {

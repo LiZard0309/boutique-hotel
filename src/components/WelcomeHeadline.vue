@@ -12,7 +12,7 @@ export default {
     <div>
       <h1>__________</h1>
       <h1>4 Sterne Superior Alpenblick Boutique Resort</h1>
-      <h3> – wo Luxus auf Herzlichkeit trifft –</h3>
+      <h2> – wo Luxus auf Herzlichkeit trifft –</h2>
     </div>
     <div>
       <rooms-button/>
@@ -26,7 +26,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-h3 {
+h2 {
   color: dimgray;
   font-weight: lighter;
 }

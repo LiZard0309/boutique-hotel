@@ -12,7 +12,7 @@ export default {
   <body>
   <Directions></Directions>
 
-  <h4>Noch Fragen? </h4>
+  <h3>Noch Fragen? </h3>
   <br>
   <Contact></Contact>
   <br>

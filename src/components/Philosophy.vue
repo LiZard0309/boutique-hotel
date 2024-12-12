@@ -5,7 +5,7 @@
 <template>
 
   <div class="container">
-
+    <h1>__________</h1>
     <h1>Gastfreundschaft am Berg</h1>
 
     <br>
@@ -18,7 +18,7 @@
 
     <br>
 
-    <h3>Unsere Philosophie</h3>
+    <h2>Unsere Philosophie</h2>
 
     <br>
 
@@ -33,7 +33,7 @@
 
     <br>
 
-    <h5>Wir freuen uns auf Ihren Besuch,</h5>
+    <h4>Wir freuen uns auf Ihren Besuch,</h4>
     <div class="hostname">Ihre Familie Berger</div>
 
     <br>
@@ -46,7 +46,8 @@
 
 .hostname {
   font-family: "Caveat";
-  font-size: 35px
+  font-size: 35px;
+  color: #1a1d20;
 }
 
 p {

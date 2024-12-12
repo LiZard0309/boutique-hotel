@@ -16,6 +16,7 @@ const hotelImages = [
 </script>
 
 <template>
+  <body>
   <main>
     <image-slider :images="hotelImages"/>
     <welcome/>
@@ -23,6 +24,7 @@ const hotelImages = [
     <activities/>
     <button-to-anfahrt/>
   </main>
+  </body>
 </template>
 
 

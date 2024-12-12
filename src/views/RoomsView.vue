@@ -70,6 +70,8 @@ export default {
 
 <template>
   <div class="rooms-view-container">
+    <h1>__________</h1>
+    <h1>Wohnen im Boutique Resort Alpenblick****</h1>
     <div v-if="isLoading">Loading rooms...</div>
     <div v-else>
       <div v-for="(room) in paginatedRooms" :key="room.id">
@@ -106,7 +108,8 @@ export default {
 </template>
 
 <style scoped>
-.rooms-view-container {
-  padding: 0.5rem;
+
+h1 {
+  text-align: center;
 }
 </style>

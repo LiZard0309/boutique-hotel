@@ -22,6 +22,8 @@ export default {
 
 <style scoped>
 
+
+
 .subtitle {
   font-weight: bold;
 }

@@ -8,9 +8,11 @@ export default {
 </script>
 
 <template>
+  <body>
   <div>
     <div class="row imprint-container">
       <div class="col-md-6 mx-auto">
+        <h1>__________</h1>
         <h1>Impressum</h1>
         <br/>
 
@@ -24,7 +26,7 @@ export default {
         <p>UID-Nr: AT123456789<br/>
           Finanzamt Wien</p>
         <br/>
-        <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</h2>
+        <p class="paragraph">Verantwortlich für den Inhalt <br/> nach § 55 Abs. 2 RStV:</p>
         <p>Marie Dupont<br/>
           Höchstädtplatz 6<br/>
           1200 Wien<br/>
@@ -32,13 +34,27 @@ export default {
       </div>
     </div>
   </div>
+  </body>
 
 </template>
 
 <style scoped>
 
-.imprint-container{
-  padding: 0.5rem;
+.paragraph {
+  font-weight: bold;
 }
+
+.imprint-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+
+p {
+  text-align: justify;
+}
+
 
 </style>
