@@ -74,7 +74,7 @@ export default {
 
       const response = await useRoomsStore().postBookingData(this.roomNumber, bookingPayload);
       if (response) {
-        alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
+        alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
         this.closeModal();
       } else {
         if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen.")) {
