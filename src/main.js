@@ -8,10 +8,13 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import {useAuthStore} from "@/stores/login";
 
 const app = createApp(App)
 
 app.use(createPinia())
+useAuthStore().initializeAuth();
+
 app.use(router)
 app.use(BootstrapVue3)
 

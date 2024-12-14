@@ -1,10 +1,19 @@
 <script>
 import {RouterLink} from 'vue-router'
 import * as $ from "jquery";
+import {useAuthStore} from "@/stores/login";
+import LoginModal from "@/components/modals/LoginModal.vue";
 
 export default {
   name: "Navbar",
+  components: {LoginModal},
+  data() {
+    return {
+      login: false
+    };
+  },
   methods: {
+    useAuthStore,
     hide() {
       $('#nav-collapse').removeClass('show');
     },
@@ -59,16 +68,13 @@ export default {
               <RouterLink to="/imprint">Impressum</RouterLink>
             </b-nav-item>
 
-            <b-nav-item href="#">Login</b-nav-item>
+            <b-nav-item v-if="!useAuthStore().user" @click="this.login = true">Login</b-nav-item>
 
-
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
+            <b-nav-item-dropdown v-if="useAuthStore().user" right>
               <template #button-content>
                 <em>User</em>
               </template>
-              <b-dropdown-item href="#">Buchungshistorie</b-dropdown-item>
-              <b-dropdown-item href="#">Logout</b-dropdown-item>
+              <b-dropdown-item @click="useAuthStore().logout()">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -76,8 +82,8 @@ export default {
     </b-container>
   </b-navbar>
 
+  <login-modal v-if="login" @finish="login = false"/>
 </template>
-
 <style scoped>
 /* Hauptcontainer der Navbar */
 .navbar {
