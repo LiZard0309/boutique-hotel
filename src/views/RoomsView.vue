@@ -22,7 +22,6 @@ export default {
   components: {RoomCard, BookingModal},
   data() {
     return {
-      modalRoomNumber: 0,
       isBookingModalVisible: false,
       perPage: 5,
       currentPage: 1,
@@ -35,7 +34,6 @@ export default {
       return this.roomsStore.rooms;
     },
     paginatedRooms() {
-      console.log("paginatedRooms")
       const start = (this.currentPage - 1) * this.perPage;
       return this.rooms.slice(start, start + this.perPage);
     },
@@ -50,7 +48,6 @@ export default {
   methods: {
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
-      this.modalRoomNumber = roomNumber;
     },
   },
   async mounted() {
@@ -93,7 +90,6 @@ export default {
 
     <!-- BookingModal Komponente -->
     <BookingModal
-        :room-number="modalRoomNumber"
         :isVisible="isBookingModalVisible"
         @update:isVisible="isBookingModalVisible = $event"
         @close="isBookingModalVisible = false"

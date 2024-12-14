@@ -5,7 +5,6 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
-          :bookingNumber="roomID"
           @confirm="confirmBooking"
           @edit="editBooking"
           @close="closeModal"
@@ -26,10 +25,6 @@ export default {
     ReviewBooking,
   },
   props: {
-    roomNumber: {
-      type: Number,
-      required: true,
-    },
     isVisible: {
       type: Boolean,
       default: false,
@@ -50,11 +45,12 @@ export default {
     },
   },
   computed: {
-    roomID() {
-      return useRoomsStore().roomID
-    }
+
   },
   methods: {
+    roomNumber() {
+      return useRoomsStore().bookingData.roomID
+    },
     closeModal() {
       this.$emit("update:isVisible", false); // Schließt das Modal
     },
@@ -72,7 +68,7 @@ export default {
         birthdate: useRoomsStore().bookingData.birthdate,
       };
 
-      const response = await useRoomsStore().postBookingData(this.roomNumber, bookingPayload);
+      const response = await useRoomsStore().postBookingData(this.roomNumber(), bookingPayload);
       if (response) {
         alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
         this.closeModal();

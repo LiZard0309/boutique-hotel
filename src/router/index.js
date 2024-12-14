@@ -45,6 +45,11 @@ const router = createRouter({
             name: 'imprint',
             component: () => import('../views/ImprintView.vue')
         },
+        {
+            path: '/bookingConfirmation',
+            name: 'bookingConfirmation',
+            component: () => import('../views/BookingConfirmationView.vue')
+        },
     ]
 })
 

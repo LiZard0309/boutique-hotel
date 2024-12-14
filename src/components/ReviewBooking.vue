@@ -1,6 +1,6 @@
 <template>
   <div class="review-content">
-    <p><strong>Zimmer: </strong>{{ bookingNumber}}</p>
+    <p><strong>Zimmer: </strong>{{ bookingData.roomNumber}}</p>
     <p><strong>Zeitraum:</strong> {{ dates.startDate }} - {{ dates.endDate }}</p>
     <p><strong>Frühstück:</strong> {{ 'im Preis inbegriffen' }}</p>
     <br/>
@@ -22,12 +22,6 @@ import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "ReviewBooking",
-  props: {
-    bookingNumber: {
-      type: Number,
-      required: true,
-    },
-  },
   computed: {
     dates () {
       return useRoomsStore().getDateRange();
