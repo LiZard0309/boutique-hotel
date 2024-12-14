@@ -15,6 +15,9 @@ export const useRoomsStore = defineStore('rooms', {
             birthdate: null,
             email: '',
         },
+        roomID: null,
+        rooms: [],
+
         apiData: null,
     }),
 
@@ -56,6 +59,9 @@ export const useRoomsStore = defineStore('rooms', {
                     console.error("Fehler bei der Buchung:", error);
                     return false;
                 });
+        },
+        setSelectedRoomID(roomId) {
+            this.roomID = roomId;
         },
         setDateRange(startDate, endDate) {
             this.dateRange.startDate = startDate;

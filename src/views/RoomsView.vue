@@ -35,6 +35,7 @@ export default {
       return this.roomsStore.rooms;
     },
     paginatedRooms() {
+      console.log("paginatedRooms")
       const start = (this.currentPage - 1) * this.perPage;
       return this.rooms.slice(start, start + this.perPage);
     },
@@ -50,9 +51,6 @@ export default {
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
       this.modalRoomNumber = roomNumber;
-    },
-    changePage(page) {
-      this.currentPage = page;
     },
   },
   async mounted() {
@@ -88,8 +86,6 @@ export default {
           v-model="currentPage"
           :total-rows="rooms.length"
           :per-page="perPage"
-          aria-controls="room-cards"
-          @change="changePage"
           align="center"
           class="mt-3"
       ></b-pagination>

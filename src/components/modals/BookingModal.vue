@@ -5,7 +5,7 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
-          :bookingNumber="roomNumber"
+          :bookingNumber="roomID"
           @confirm="confirmBooking"
           @edit="editBooking"
           @close="closeModal"
@@ -48,6 +48,11 @@ export default {
     internalVisible(newVal) {
       this.$emit("update:isVisible", newVal);
     },
+  },
+  computed: {
+    roomID() {
+      return useRoomsStore().roomID
+    }
   },
   methods: {
     closeModal() {

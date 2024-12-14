@@ -39,6 +39,7 @@ export default {
       //check again if room is still available at requested dates and to reset date range in store - right before booking
       await this.submitDates();
       const response = this.roomsStore.apiData;
+      this.roomsStore.setSelectedRoomID(this.roomId)
 
       //if room is still available - booking modal opens to start process
       if (response === true) {
