@@ -5,6 +5,8 @@ import BookingDataOverview from "@BookingDataOverview.vue";
 export default {
   name: "BookingHistoryCard",
   components: {
+    BCard,
+    BookingDataOverview,
 
   }
 }
