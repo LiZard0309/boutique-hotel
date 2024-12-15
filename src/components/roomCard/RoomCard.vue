@@ -29,6 +29,7 @@ export default {
     image: {type: String, required: true,},
     beds: {type: Number, required: true,},
     extras: {type: Array, required: true,},
+    buttons: {type: Boolean, required: true}
   },
   methods: {
     displayDatePickerModal() {
@@ -113,12 +114,16 @@ export default {
             <b-card-text>
               <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
             </b-card-text>
-            <RoomActions
+            <RoomActions v-if="buttons"
                 :availabilityChecked="availabilityChecked"
                 :isAvailable="isAvailable"
                 @display-date-picker-modal="displayDatePickerModal"
                 @reserve-room="reserveRoom"
             />
+            <div class="d-flex align-items-center gap-2" v-else>
+              <i-LaCheckCircle width="35" height="35" color="green"/>
+              <p class="mb-0">Frühstück ist inbegriffen</p>
+            </div>
           </div>
 
           <b-collapse :visible="showDetails">

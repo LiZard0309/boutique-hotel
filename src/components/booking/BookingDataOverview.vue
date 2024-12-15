@@ -39,7 +39,7 @@ export default {
     <h1>Buchungsbestätigung</h1>
     <div class="stay-details">
       <h3>Details zu Ihrem Aufenthalt:</h3>
-      <p><strong>Buchungs-ID:</strong> {{ bookingData.bookingId }}</p>
+      <p><strong>Buchungs-ID:</strong> {{ bookingData.bookingId || "unkown"  }}</p>
     </div>
 
     <div class="personal-details">
@@ -52,7 +52,7 @@ export default {
 
     <div class="booking-period">
       <h3>Ihr Buchungszeitraum:</h3>
-      <p><strong>{{ dateRange.startDate }}</strong> bis <strong>{{ dateRange.endDate }}</strong></p>
+      <p><strong>{{ dateRange.startDate || "unkown" }}</strong> bis <strong>{{ dateRange.endDate || "unkown" }}</strong></p>
     </div>
   </div>
 </template>
