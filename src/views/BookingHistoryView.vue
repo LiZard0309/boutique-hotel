@@ -3,11 +3,10 @@ import BookingHistoryCard from "@/components/booking/BookingHistoryCard.vue";
 import {useUserStore} from "@/stores/user";
 import {usePaginationStore} from "../stores/usePaginationStore";
 import BookingsPagination from "../components/booking/BookingsPagination.vue";
-import RoomPagination from "../components/RoomPagination.vue";
 
 export default {
   name: "BookingHistoryView",
-  components: {RoomPagination, BookingHistoryCard, BookingsPagination},
+  components: {BookingHistoryCard, BookingsPagination},
 
   data() {
     return {
@@ -23,14 +22,6 @@ export default {
     bookings() {
       return this.userStore.bookings;
     },
-    upcomingBookings() {
-      const now = new Date();
-      return this.bookings.filter(booking => new Date(booking.endDate) >= now);
-    },
-    pastBookings() {
-      const now = new Date();
-      return this.bookings.filter(booking => new Date(booking.endDate) < now);
-    },
     currentPage() {
       return usePaginationStore().currentPage
     },
@@ -41,7 +32,14 @@ export default {
   },
 
   methods: {
-
+    isUpcoming(booking) {
+      const now = new Date();
+      return new Date(booking.endDate) >= now;
+    },
+    isPast(booking) {
+      const now = new Date();
+      return new Date(booking.endDate) < now;
+    },
   }
 }
 </script>
@@ -52,28 +50,17 @@ export default {
   <div class="booking-history-container">
     <div v-if="isLoading">Lade Buchungen...</div>
     <div v-else>
-      <div v-for="(booking) in upcomingBookings" :key="booking.id">
+      <div v-for="booking in paginatedBookings" :key="booking.id">
         <BookingHistoryCard
-            v-for="booking in upcomingBookings"
-            :key="booking.id"
             :data="booking"
-            class="bright"
-        />
-      </div>
-
-      <div v-for="(booking) in pastBookings" :key="booking.id">
-        <BookingHistoryCard
-            v-for="booking in pastBookings"
-            :key="booking.id"
-            :data="booking"
-            class="muted"
+            :class="{ bright: isUpcoming(booking), muted: isPast(booking) }"
         />
       </div>
     </div>
 
 
 
-    <room-pagination :rows="bookings.length"></room-pagination>
+    <bookings-pagination :rows="bookings.length"></bookings-pagination>
   </div>
 </template>
 
