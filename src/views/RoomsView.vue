@@ -55,10 +55,11 @@ export default {
       this.isBookingModalVisible = true;
       this.modalRoomNumber = roomNumber;
     },
-    changePage(page) {
+    //TODO: delete code snippet if really not needed anymore
+    /*changePage(page) {
       console.log(page)
       this.currentPage = page;
-    },
+    },*/
   },
   async mounted() {
     try {
