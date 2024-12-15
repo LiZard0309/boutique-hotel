@@ -5,6 +5,7 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
+          @confirmTest="test"
           @confirm="confirmBooking"
           @edit="editBooking"
           @close="closeModal"
@@ -60,6 +61,18 @@ export default {
     editBooking() {
       this.currentStep = "booking"; // Zurück zum Buchungsformular
     },
+    async test() {
+      const bookingPayload = {
+        firstname: useRoomsStore().bookingData.firstname,
+        lastname: useRoomsStore().bookingData.lastname,
+        email: useRoomsStore().bookingData.email,
+        birthdate: useRoomsStore().bookingData.birthdate,
+      };
+
+      this.$router.push({path: '/bookingConfirmation'});
+      alert(`Buchung erfolgreich! Ihre Buchungs-ID ist `);
+      this.closeModal();
+    },
     async confirmBooking() {
       const bookingPayload = {
         firstname: useRoomsStore().bookingData.firstname,
@@ -70,6 +83,7 @@ export default {
 
       const response = await useRoomsStore().postBookingData(this.roomNumber(), bookingPayload);
       if (response) {
+        this.$router.push({ path: '/bookingConfirmation' });
         alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
         this.closeModal();
       } else {
