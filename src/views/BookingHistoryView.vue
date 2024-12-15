@@ -68,4 +68,14 @@ export default {
 .booking-history-container {
   padding: 0.5rem;
 }
+
+.bright {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.muted {
+  background-color: #e0e0e0;
+  color: #666;
+}
 </style>
