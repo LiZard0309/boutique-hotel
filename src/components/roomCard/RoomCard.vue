@@ -107,8 +107,9 @@ export default {
             img-alt="Image"
             img-top="true"
             tag="article"
-            style="max-width: 50rem;"
+            style="max-width: 60rem;"
             class="mb-4 shadow-sm"
+
         >
           <div class="button-section">
             <b-card-text>

@@ -35,8 +35,6 @@ export default {
 
 <template>
   <div class="booking-confirmation">
-
-    <h1>Buchungsbestätigung</h1>
     <div class="stay-details">
       <h3>Details zu Ihrem Aufenthalt:</h3>
       <p><strong>Buchungs-ID:</strong> {{ bookingData.bookingId || "unkown"  }}</p>

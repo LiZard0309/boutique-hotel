@@ -4,6 +4,8 @@ import ConfirmationNotification from "@/components/booking/ConfirmationNotificat
 import BookingDataOverview from "@/components/booking/BookingDataOverview.vue";
 import RoomCard from "@/components/roomCard/RoomCard.vue";
 import {useRoomsStore} from "@/stores/rooms";
+import Directions from "@/components/staticHotelInfo/Directions.vue";
+import PrintConfirmationButtons from "@/components/booking/PrintConfirmationButtons.vue";
 
 const header = ref("Ihre Buchung war erfolgreich!");
 const message = ref("Vielen Dank, hier ist Ihre Buchungsbestätigung");
@@ -15,22 +17,23 @@ const roomStore = useRoomsStore().bookingData
 </script>
 
 <template>
+  <h1>Buchungsbestätigung</h1>
   <div>
     <div class="confirmation-content">
       <ConfirmationNotification :header="header" :message="message" :is-successful=true />
+      <BookingDataOverview></BookingDataOverview>
     </div>
-    <BookingDataOverview></BookingDataOverview>
-    <div class="roomCard">
-      <RoomCard
-          :extras="roomStore.room.extras"
-          :beds="roomStore.room.beds"
-          :image="ROOM_IMAGES[roomStore.roomID]"
-          :price-per-night="roomStore.room.pricePerNight"
-          :rooms-name="roomStore.room.roomsName"
-          :room-id="roomStore.roomID"
-          :buttons=false>
-      </RoomCard>
-    </div>
+    <RoomCard
+        :extras="roomStore.room.extras"
+        :beds="roomStore.room.beds"
+        :image="ROOM_IMAGES[roomStore.roomID]"
+        :price-per-night="roomStore.room.pricePerNight"
+        :rooms-name="roomStore.room.roomsName"
+        :room-id="roomStore.roomID"
+        :buttons=false>
+    </RoomCard>
+    <Directions></Directions>
+    <PrintConfirmationButtons></PrintConfirmationButtons>
   </div>
 
 </template>
@@ -39,12 +42,10 @@ const roomStore = useRoomsStore().bookingData
 
 .confirmation-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
-.roomCard {
 
-}
 
 </style>
