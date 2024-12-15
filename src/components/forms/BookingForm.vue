@@ -77,6 +77,9 @@ export default {
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
+      <RouterLink to="/bookingConfirmation">
+        <b-button variant="primary" as="router-link" :to="'/bookingConfirmation'">Test2</b-button>
+      </RouterLink>
     </div>
   </b-form>
 </template>

@@ -1,4 +1,4 @@
-<script setup>
+<script>
 export default {
   name: "ConfirmationNotification",
   props: {
@@ -26,16 +26,18 @@ export default {
       <i-CodiconError v-else width="35" height="35" color="red"/>
     </div>
 
-    <h2 class="header">{{ header }}</h2>
+    <div class="text-content">
+      <h2 class="header">{{ header }}</h2>
 
-    <p class="message">{{ message }}</p>
+      <p class="message">{{ message }}</p>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .booking-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -46,6 +48,17 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 0 auto;
+  gap: 20px;
+}
+
+.icon {
+  margin-left: 15px;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
