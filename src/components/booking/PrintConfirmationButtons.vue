@@ -14,9 +14,6 @@ export default {
 
 <template>
   <div class="help-section">
-    <h1>Noch Fragen?</h1>
-    <p>Kontaktieren Sie uns: <span class="email">email@hotel.at</span></p>
-
     <div class="button-group">
       <b-button variant="primary" @click="printPage">Buchungsbestätigung drucken</b-button>
       <b-button @click="register">Registrieren</b-button>
@@ -27,11 +24,6 @@ export default {
 <style scoped>
 .help-section {
   max-width: 300px;
-}
-
-.email {
-  font-weight: bold;
-  color: #0056b3;
 }
 
 .button-group {

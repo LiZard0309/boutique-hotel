@@ -53,7 +53,7 @@ export default {
 </script>
 
 <template>
-  <div class="rooms-view-container">
+  <div class="rooms-view-container col-12 col-lg-6 mx-auto">
     <div v-if="isLoading">Loading rooms...</div>
     <div v-else>
       <div v-for="(room) in paginatedRooms" :key="room.id">
