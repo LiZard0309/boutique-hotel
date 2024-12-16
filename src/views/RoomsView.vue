@@ -7,6 +7,7 @@ import RoomPagination from "../components/RoomPagination.vue";
 import {usePaginationStore} from "../stores/usePaginationStore";
 import {getRoomImage} from "../components/roomCard/roomImages";
 
+//TODO: cleanup
 /*const ROOM_IMAGES = {
   1: '/src/assets/images/default_double_bedroom.jpg',
   2: '/src/assets/images/default_double_bedroom.jpg',
