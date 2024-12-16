@@ -5,8 +5,9 @@ import BookingModal from "@/components/modals/BookingModal.vue";
 import {useRoomsStore} from "@/stores/rooms";
 import RoomPagination from "../components/RoomPagination.vue";
 import {usePaginationStore} from "../stores/usePaginationStore";
+import {getRoomImage} from "../components/roomCard/roomImages";
 
-const ROOM_IMAGES = {
+/*const ROOM_IMAGES = {
   1: '/src/assets/images/default_double_bedroom.jpg',
   2: '/src/assets/images/default_double_bedroom.jpg',
   3: '/src/assets/images/default_single_bedroom.jpg',
@@ -17,7 +18,7 @@ const ROOM_IMAGES = {
   8: '/src/assets/images/room_with_a_view.jpg',
   9: '/src/assets/images/room_with_a_view.jpg',
   10: '/src/assets/images/honeymoon_suite.jpg',
-};
+};*/
 
 export default {
   name: "RoomsView",
@@ -42,15 +43,16 @@ export default {
     roomsStore() {
       return useRoomsStore();
     },
-    getRoomImage() {
+    /*getRoomImage() {
       return (roomId) => ROOM_IMAGES[roomId] || bedroomImage; // Bild aus Mapping, sonst Fallback
-    },
+    },*/
     currentPage() {
       return usePaginationStore().currentPage
     }
   },
 
   methods: {
+    getRoomImage,
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
       this.modalRoomNumber = roomNumber;
