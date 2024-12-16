@@ -61,16 +61,10 @@ export default {
     editBooking() {
       this.currentStep = "booking"; // Zurück zum Buchungsformular
     },
+    //delete dies Test()
     async test() {
-      const bookingPayload = {
-        firstname: useRoomsStore().bookingData.firstname,
-        lastname: useRoomsStore().bookingData.lastname,
-        email: useRoomsStore().bookingData.email,
-        birthdate: useRoomsStore().bookingData.birthdate,
-      };
-
       this.$router.push({path: '/bookingConfirmation'});
-      alert(`Buchung erfolgreich! Ihre Buchungs-ID ist `);
+      //alert(`Buchung erfolgreich! Ihre Buchungs-ID ist `);
       this.closeModal();
     },
     async confirmBooking() {
@@ -84,7 +78,7 @@ export default {
       const response = await useRoomsStore().postBookingData(this.roomNumber(), bookingPayload);
       if (response) {
         this.$router.push({ path: '/bookingConfirmation' });
-        alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
+        //alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
         this.closeModal();
       } else {
         if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen.")) {
