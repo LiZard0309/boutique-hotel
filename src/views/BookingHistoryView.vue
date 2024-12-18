@@ -51,8 +51,8 @@ export default {
     },
   },
   async mounted() {
-    console.log("Mounting starts");
-    try{
+    await console.log("Bookings: ", this.bookings);
+    /*try{
       this.isLoading = true;
       console.log(this.userStore.bookings);
       await this.userStore.fetchBookingHistory();
@@ -60,7 +60,7 @@ export default {
       console.error("Error fetching booking history: ", error);
     } finally {
       this.isLoading = false;
-    }
+    }*/
   }
 }
 </script>
@@ -71,14 +71,15 @@ export default {
   <div class="booking-history-container">
 
     <div v-if="isLoading">Lade Buchungen...</div>
-    <div v-for="booking in paginatedBookings" :key="booking.booking.id">
-      <BookingHistoryCard
-          :booking="booking.booking"
-          :room="booking.room"
-          :isUpcoming="new Date(booking.booking.endDate) >= new Date()"
-      />
+    <div class="list-container">
+      <div v-for="booking in paginatedBookings" :key="booking.booking.id">
+        <BookingHistoryCard
+            :booking="booking.booking"
+            :room="booking.room"
+            :isUpcoming="isUpcoming(booking.booking)"
+        />
+      </div>
     </div>
-
     <bookings-pagination :rows="bookings.length"></bookings-pagination>
   </div>
 </template>
@@ -86,15 +87,20 @@ export default {
 <style scoped>
 .booking-history-container {
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.bright {
-  background-color: #f9f9f9;
-  color: #333;
+.list-container{
+  margin: 0 auto;
+  width: 80%;
 }
 
-.muted {
-  background-color: #e0e0e0;
-  color: #666;
+@media (max-width: 480px) { /* Mobile screens */
+  .list-container{
+    margin: 0 auto;
+    width: 100%;
+  }
 }
 </style>
