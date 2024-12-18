@@ -6,15 +6,17 @@ const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/"
 export const useUserStore = defineStore('user', {
     state: () => ({
         bookings: [],
-        token: "",
+        token: "DnlYJwNAcbKDHKJiK7lFcAl42zgewdhvl8C68PcH", //hardcoded placeholder
     }),
 
     actions: {
-        async fetchBookingHistory(token) {
+        async fetchBookingHistory() {
             try {
-                const response = await axios.get('${apiUrl}/user/bookings', {
+                console.log(this.token);
+                console.log(`URL: ${apiUrl}/user/bookings`);
+                const response = await axios.get(`${apiUrl}user/bookings`, {
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${this.token}`
                     }
                 })
                 this.bookings = response.data;
