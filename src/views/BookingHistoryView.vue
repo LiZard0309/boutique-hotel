@@ -49,6 +49,18 @@ export default {
       const now = new Date();
       return new Date(booking.endDate) < now;
     },
+  },
+  async mounted() {
+    console.log("Mounting starts");
+    try{
+      this.isLoading = true;
+      console.log(this.userStore.bookings);
+      await this.userStore.fetchBookingHistory();
+    } catch (error) {
+      console.error("Error fetching booking history: ", error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
 </script>
