@@ -1,9 +1,10 @@
 <script>
 import Contact from "@/components/staticHotelInfo/Contact.vue";
+import RegisterForm from "../components/forms/RegisterForm.vue";
 
 export default {
   name: "ImpressumView",
-  components: {Contact}
+  components: {RegisterForm, Contact}
 }
 </script>
 
@@ -13,7 +14,6 @@ export default {
       <div class="col-md-6 mx-auto">
         <h1>Impressum</h1>
         <br/>
-
         <p>Hotel Alpenblick<br/>
           Inhaberin: Marie Dupont<br/>
           Höchstädtplatz 6<br/>
