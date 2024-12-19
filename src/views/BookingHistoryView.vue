@@ -1,8 +1,8 @@
 <script>
 import BookingHistoryCard from "@/components/booking/BookingHistoryCard.vue";
 import {useUserStore} from "@/stores/user";
-import {usePaginationStore} from "../stores/usePaginationStore";
-import BookingsPagination from "../components/booking/BookingsPagination.vue";
+import {usePaginationStore} from "@/stores/usePaginationStore";
+import BookingsPagination from "@/components/booking/BookingsHistoryPagination.vue";
 
 export default {
   name: "BookingHistoryView",
