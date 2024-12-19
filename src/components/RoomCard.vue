@@ -161,16 +161,17 @@ export default {
 </template>
 
 <style scoped>
+
 .priceStyle {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: bold ;
 }
 
 .button-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 8px !important;
 }
 
 .left-content p {
