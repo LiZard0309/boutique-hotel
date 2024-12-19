@@ -3,8 +3,7 @@ import bedroomImage from "@/assets/Images/default_double_bedroom.jpg";
 import RoomCard from "@/components/roomCard/RoomCard.vue";
 import BookingModal from "@/components/modals/BookingModal.vue";
 import {useRoomsStore} from "@/stores/rooms";
-
-const ROOM_IMAGES = useRoomsStore().roomImages
+import {getRoomImage} from "@/components/roomCard/roomImages";
 
 export default {
   name: "RoomsView",
@@ -29,14 +28,16 @@ export default {
     roomsStore() {
       return useRoomsStore();
     },
-    getRoomImage() {
+    /*getRoomImage() {
       return (roomId) => ROOM_IMAGES[roomId] || bedroomImage; // Bild aus Mapping, sonst Fallback
-    },
+    },*/
   },
 
   methods: {
+    getRoomImage,
     openBookingModal(roomNumber) {
       this.isBookingModalVisible = true;
+      this.modalRoomNumber = roomNumber;
     },
   },
   async mounted() {

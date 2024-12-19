@@ -7,13 +7,12 @@ import {useRoomsStore} from "@/stores/rooms";
 import Directions from "@/components/staticHotelInfo/Directions.vue";
 import PrintConfirmationButtons from "@/components/booking/PrintConfirmationButtons.vue";
 import Contact from "@/components/staticHotelInfo/Contact.vue";
+import {getRoomImage} from "@/components/roomCard/roomImages";
 
 const header = ref("Ihre Buchung war erfolgreich!");
 const message = ref("Vielen Dank, hier ist Ihre Buchungsbestätigung");
 
-const ROOM_IMAGES = useRoomsStore().roomImages
 const roomStore = useRoomsStore().bookingData
-
 
 </script>
 <template>
@@ -36,7 +35,7 @@ const roomStore = useRoomsStore().bookingData
         <RoomCard
             :extras="roomStore.room.extras"
             :beds="roomStore.room.beds"
-            :image="ROOM_IMAGES[roomStore.roomID]"
+            :image="getRoomImage(roomStore.roomID)"
             :price-per-night="roomStore.room.pricePerNight"
             :rooms-name="roomStore.room.roomsName"
             :room-id="roomStore.roomID"
