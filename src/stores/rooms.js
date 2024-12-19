@@ -10,11 +10,16 @@ export const useRoomsStore = defineStore('rooms', {
             endDate: null
         },
         bookingData:  {
+            bookingId: null,
+            roomID: null,
+            roomNumber: null,
+            room: [],
             firstname: '',
             lastname: '',
             birthdate: null,
             email: '',
         },
+        rooms: [],
         apiData: null,
         rooms:[],
     }),
@@ -39,9 +44,9 @@ export const useRoomsStore = defineStore('rooms', {
                 console.error("Error fetching data:", error);
             }
         },
-        postBookingData(roomNumber, bookingPayload) {
+        postBookingData(roomId, bookingPayload) {
             return axios.post(
-                    `${apiUrl}room/${roomNumber}/from/${this.getDateRange().startDate}/to/${this.getDateRange().endDate}`,
+                    `${apiUrl}room/${roomId}/from/${this.getDateRange().startDate}/to/${this.getDateRange().endDate}`,
                     bookingPayload,
                     {
                         headers: {
@@ -50,13 +55,33 @@ export const useRoomsStore = defineStore('rooms', {
                     }
                 )
                 .then((response) => {
-                    console.log(response);
+                    if (response.data && response.data.id) {
+                        // Speichert die Buchungs-ID
+                        this.setBookingId(response.data.id);
+                    } else {
+                        console.error("Keine Buchungs-ID in der Antwort gefunden");
+                    }
                     return response;
                 })
                 .catch((error) => {
                     console.error("Fehler bei der Buchung:", error);
                     return false;
                 });
+        },
+        setBookingRoom(roomId) {
+            this.bookingData.room = this.rooms[roomId - 1];
+        },
+        setBookingId(bookingId) {
+            this.bookingData.bookingId = bookingId;
+        },
+        setRoomNumber(id){
+
+            this.bookingData.roomNumber = this.rooms[id - 1].roomsNumber;
+        },
+        setSelectedRoomID(roomId) {
+            this.bookingData.roomID = roomId;
+            this.setRoomNumber(roomId);
+            this.setBookingRoom(roomId);
         },
         setDateRange(startDate, endDate) {
             this.dateRange.startDate = startDate;
@@ -66,7 +91,10 @@ export const useRoomsStore = defineStore('rooms', {
             return this.dateRange;
         },
         setBookingData(bookingData){
-            this.bookingData = bookingData;
+            this.bookingData.firstname = bookingData.firstname;
+            this.bookingData.lastname = bookingData.lastname;
+            this.bookingData.birthdate = bookingData.birthdate;
+            this.bookingData.email = bookingData.email;
         }
     }
 })

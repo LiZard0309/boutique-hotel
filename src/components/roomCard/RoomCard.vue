@@ -29,6 +29,7 @@ export default {
     image: {type: String, required: true,},
     beds: {type: Number, required: true,},
     extras: {type: Array, required: true,},
+    buttons: {type: Boolean, required: true}
   },
   methods: {
     displayDatePickerModal() {
@@ -39,6 +40,7 @@ export default {
       //check again if room is still available at requested dates and to reset date range in store - right before booking
       await this.submitDates();
       const response = this.roomsStore.apiData;
+      this.roomsStore.setSelectedRoomID(this.roomId)
 
       //if room is still available - booking modal opens to start process
       if (response === true) {
@@ -97,65 +99,66 @@ export default {
 
 <template>
   <div>
-    <div class="row">
-      <div class="col-md-6 mx-auto">
-        <b-card
-            :title="roomsName"
-            :img-src="image"
-            img-alt="Image"
-            img-top="true"
-            tag="article"
-            style="max-width: 50rem;"
-            class="mb-4 shadow-sm"
-        >
-          <div class="button-section">
-            <b-card-text>
-              <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
-            </b-card-text>
-            <RoomActions
-                :availabilityChecked="availabilityChecked"
-                :isAvailable="isAvailable"
-                @display-date-picker-modal="displayDatePickerModal"
-                @reserve-room="reserveRoom"
-            />
-          </div>
+    <b-card
+        :title="roomsName"
+        :img-src="image"
+        img-alt="Image"
+        img-top="true"
+        tag="article"
+        style="max-width: 60rem;"
+        class="mb-4 shadow-sm"
 
-          <b-collapse :visible="showDetails">
-            <div class="extras">
-              <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
-              </div>
-            </div>
-          </b-collapse>
-
-          <!-- Verfügbarkeit und Datum -->
-          <RoomAvailabilityInfo
-              :availabilityChecked="availabilityChecked"
-              :isAvailable="isAvailable"
-              :showModal="showModal"
-              :selectedDateRange="selectedDateRange"
-              @open-availability-modal="displayDatePickerModal"
-          />
-
-          <!-- Zimmerdetails und Extras -->
-          <RoomDetails
-              :_showDetails="showDetails"
-              :beds="beds"
-              :extras="extras"
-          />
-        </b-card>
-
-        <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="startDateCheck">
-          <DateRangePicker @date-selected="handleDateSelection"/>
-        </b-modal>
-
-        <AlertNotification
-            :showAlert="showAlert"
-            :message="alertMessage"
-            @update:showAlert="showAlert = $event"
+    >
+      <div class="button-section">
+        <b-card-text>
+          <span class="priceStyle"> Preis {{ pricePerNight }} €/Nacht </span>
+        </b-card-text>
+        <RoomActions v-if="buttons"
+                     :availabilityChecked="availabilityChecked"
+                     :isAvailable="isAvailable"
+                     @display-date-picker-modal="displayDatePickerModal"
+                     @reserve-room="reserveRoom"
         />
-
+        <div class="d-flex align-items-center gap-2" v-else>
+          <i-LaCheckCircle width="35" height="35" color="green"/>
+          <p class="mb-0">Frühstück ist inbegriffen</p>
+        </div>
       </div>
-    </div>
+
+      <b-collapse :visible="showDetails">
+        <div class="extras">
+          <div v-for="(extra, index) in extras" :key="index" class="extra-icon">
+          </div>
+        </div>
+      </b-collapse>
+
+      <!-- Verfügbarkeit und Datum -->
+      <RoomAvailabilityInfo
+          :availabilityChecked="availabilityChecked"
+          :isAvailable="isAvailable"
+          :showModal="showModal"
+          :selectedDateRange="selectedDateRange"
+          @open-availability-modal="displayDatePickerModal"
+      />
+
+      <!-- Zimmerdetails und Extras -->
+      <RoomDetails
+          :_showDetails="showDetails"
+          :beds="beds"
+          :extras="extras"
+      />
+    </b-card>
+
+    <b-modal v-model="showModal" title="Wählen Sie Ihre Reisedaten" @ok="startDateCheck">
+      <DateRangePicker @date-selected="handleDateSelection"/>
+    </b-modal>
+
+    <AlertNotification
+        :showAlert="showAlert"
+        :message="alertMessage"
+        @update:showAlert="showAlert = $event"
+    />
+
   </div>
 </template>
 

@@ -16,6 +16,7 @@ const router = createRouter({
             component: () => import('../views/RoomsView.vue')
         },
 
+
         {
             path:
                 '/about',
@@ -45,7 +46,16 @@ const router = createRouter({
             name: 'imprint',
             component: () => import('../views/ImprintView.vue')
         },
-    ]
+        {
+            path: '/bookingConfirmation',
+            name: 'bookingConfirmation',
+            component: () => import('../views/BookingConfirmationView.vue')
+        },
+    ],
+    scrollBehavior (to, from, savedPosition) {
+
+        return { top: 0 };
+    }
 })
 
 export default router

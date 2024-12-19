@@ -5,7 +5,6 @@
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
-          :bookingNumber="roomNumber"
           @confirm="confirmBooking"
           @edit="editBooking"
           @close="closeModal"
@@ -26,10 +25,6 @@ export default {
     ReviewBooking,
   },
   props: {
-    roomNumber: {
-      type: Number,
-      required: true,
-    },
     isVisible: {
       type: Boolean,
       default: false,
@@ -49,7 +44,13 @@ export default {
       this.$emit("update:isVisible", newVal);
     },
   },
+  computed: {
+
+  },
   methods: {
+    roomNumber() {
+      return useRoomsStore().bookingData.roomID
+    },
     closeModal() {
       this.$emit("update:isVisible", false); // Schließt das Modal
     },
@@ -67,9 +68,10 @@ export default {
         birthdate: useRoomsStore().bookingData.birthdate,
       };
 
-      const response = await useRoomsStore().postBookingData(this.roomNumber, bookingPayload);
+      const response = await useRoomsStore().postBookingData(this.roomNumber(), bookingPayload);
       if (response) {
-        alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${response.data.id}`);
+        this.$router.push({ path: '/bookingConfirmation' });
+        //alert(`Buchung erfolgreich! Ihre Buchungs-ID ist ${useRoomsStore().bookingData.bookingId}`);
         this.closeModal();
       } else {
         if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen.")) {
