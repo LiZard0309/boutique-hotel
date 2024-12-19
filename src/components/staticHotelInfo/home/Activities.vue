@@ -30,7 +30,7 @@ export default {
 
 <template>
   <div>
-    <h2 class="headline">Das erwartet dich</h2>
+    <h2 class="headline">Das erwartet Sie</h2>
     <div class="container">
       <div class="image-item" v-for="(image, index) in images" :key="index">
         <img
