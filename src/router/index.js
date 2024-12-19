@@ -51,7 +51,17 @@ const router = createRouter({
             name: 'history',
             component: () => import('../views/BookingHistoryView.vue')
         },
-    ]
+
+        {
+            path: '/bookingConfirmation',
+            name: 'bookingConfirmation',
+            component: () => import('../views/BookingConfirmationView.vue')
+        },
+    ],
+    scrollBehavior(to, from, savedPosition) {
+
+        return {top: 0};
+    }
 })
 
 export default router

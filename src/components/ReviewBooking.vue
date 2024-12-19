@@ -1,6 +1,6 @@
 <template>
   <div class="review-content">
-    <p><strong>Zimmer: </strong>{{ bookingNumber}}</p>
+    <p><strong>Zimmer: </strong>{{ bookingData.roomNumber}}</p>
     <p><strong>Zeitraum:</strong> {{ dates.startDate }} - {{ dates.endDate }}</p>
     <p><strong>Frühstück:</strong> {{ 'im Preis inbegriffen' }}</p>
     <br/>
@@ -13,6 +13,7 @@
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('edit')">Daten ändern</b-button>
       <b-button variant="primary" @click="$emit('confirm')">Buchung bestätigen</b-button>
+      <b-button variant="primary" @click="$emit('confirmTest')">Buchung bestätigen test</b-button>
     </div>
   </div>
 </template>
@@ -22,12 +23,6 @@ import {useRoomsStore} from "@/stores/rooms";
 
 export default {
   name: "ReviewBooking",
-  props: {
-    bookingNumber: {
-      type: Number,
-      required: true,
-    },
-  },
   computed: {
     dates () {
       return useRoomsStore().getDateRange();

@@ -1,6 +1,6 @@
 <script>
 import VueDatePicker from '@vuepic/vue-datepicker';
-import {useRoomsStore} from "@/stores/rooms";
+import { useRoomsStore } from "@/stores/rooms";
 
 export default {
   name: "BookingForm",
