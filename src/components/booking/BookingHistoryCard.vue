@@ -1,15 +1,13 @@
 <script>
 import {BCard} from "bootstrap-vue-3";
-//import BookingDataOverview from "@/BookingDataOverview.vue";
 import RoomCard from "@/components/roomCard/RoomCard.vue"
-import {getRoomImage} from "../roomCard/roomImages";
+import {getRoomImage} from "@/roomCard/roomImages";
 
 export default {
   name: "BookingHistoryCard",
   methods: {getRoomImage},
   components: {
     BCard,
-    //BookingDataOverview,
     RoomCard,
   },
   props: {
@@ -17,6 +15,11 @@ export default {
     room: {type: Object, required: true},
     isUpcoming: {type: Boolean, required: true},
   },
+  computed: {
+    buttons() {
+      return !this.isUpcoming;
+    }
+  }
 }
 </script>
 
@@ -37,6 +40,7 @@ export default {
         :image="getRoomImage(room.id)"
         :beds="room.beds"
         :extras="room.extras"
+        :buttons="buttons"
     />
   </div>
 </template>
