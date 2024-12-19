@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
+import {useAuthStore} from "@/stores/login";
 
 const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/";
 
@@ -9,7 +10,7 @@ export const useRoomsStore = defineStore('rooms', {
             startDate: null,
             endDate: null
         },
-        bookingData:  {
+        bookingData: {
             firstname: '',
             lastname: '',
             birthdate: null,
@@ -21,7 +22,12 @@ export const useRoomsStore = defineStore('rooms', {
     actions: {
         async fetchRoomInfo() {
             try {
-                const response = await axios.get(`${apiUrl}rooms`);
+                const response = await axios.get(`${apiUrl}rooms`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${useAuthStore().token}`,
+                        },
+                    });
                 this.rooms = response.data;
             } catch (error) {
                 console.log("Error fetching room info:", error);
@@ -29,25 +35,32 @@ export const useRoomsStore = defineStore('rooms', {
         },
 
         async fetchRoomAvailability(roomId) {
-            try{
-            const response = await axios.get(`${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
-                .then(response => {
-                    this.apiData = response.data.available
-                })
-            }catch (error){
+            try {
+                const response = await axios.get(
+                    `${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${useAuthStore().token}`,
+                        },
+                    }
+                )
+                    .then(response => {
+                        this.apiData = response.data.available
+                    })
+            } catch (error) {
                 console.error("Error fetching data:", error);
             }
         },
         postBookingData(roomNumber, bookingPayload) {
             return axios.post(
-                    `${apiUrl}room/${roomNumber}/from/${this.getDateRange().startDate}/to/${this.getDateRange().endDate}`,
-                    bookingPayload,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`, // Token wird aus dem lokalen Speicher abgerufen
-                        },
-                    }
-                )
+                `${apiUrl}room/${roomNumber}/from/${this.getDateRange().startDate}/to/${this.getDateRange().endDate}`,
+                bookingPayload,
+                {
+                    headers: {
+                        Authorization: `Bearer ${useAuthStore().token}`,
+                    },
+                }
+            )
                 .then((response) => {
                     console.log(response);
                     return response;
@@ -64,7 +77,7 @@ export const useRoomsStore = defineStore('rooms', {
         getDateRange() {
             return this.dateRange;
         },
-        setBookingData(bookingData){
+        setBookingData(bookingData) {
             this.bookingData = bookingData;
         }
     }

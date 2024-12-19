@@ -12,8 +12,9 @@ export const useAuthStore = defineStore('auth', {
         async login(username, password) {
             return axios.post(apiUrl + 'login', {clientId: username, secret: password})
                 .then((response) => {
-                    this.token = response.data.token;
-                    localStorage.setItem('token', response.data.token);
+                    this.token = response.data;
+                    localStorage.setItem('token', response.data);
+                    localStorage.setItem('user', username);
                     this.user = username;
                     return true;
                 })
@@ -31,8 +32,10 @@ export const useAuthStore = defineStore('auth', {
 
         initializeAuth() {
             const savedToken = localStorage.getItem('token');
+            const savedUser = localStorage.getItem('user');
             if (savedToken) {
                 this.token = savedToken;
+                this.user = savedUser;
             }
         },
     },
