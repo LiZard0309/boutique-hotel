@@ -1,7 +1,7 @@
 <script>
 import {BCard} from "bootstrap-vue-3";
 import RoomCard from "@/components/roomCard/RoomCard.vue"
-import {getRoomImage} from "@/roomCard/roomImages";
+import {getRoomImage} from "../roomCard/roomImages";
 
 export default {
   name: "BookingHistoryCard",
