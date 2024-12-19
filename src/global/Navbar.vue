@@ -1,6 +1,6 @@
 <script>
 import { RouterLink } from 'vue-router';
-import { useAuthStore } from '@/stores/login';
+import { useAuthStore } from '@/stores/user';
 import LoginForm from '@/components/forms/Login.vue';
 
 export default {

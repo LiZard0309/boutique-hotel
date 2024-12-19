@@ -15,7 +15,7 @@
 
 <script>
 
-import {useAuthStore} from "@/stores/login";
+import {useAuthStore} from "@/stores/user";
 
 export default {
   name: "LoginForm",
