@@ -15,11 +15,6 @@ export default {
     room: {type: Object, required: true},
     isUpcoming: {type: Boolean, required: true},
   },
-  computed: {
-    buttons() {
-      return !this.isUpcoming;
-    }
-  }
 }
 </script>
 
@@ -40,7 +35,7 @@ export default {
         :image="getRoomImage(room.id)"
         :beds="room.beds"
         :extras="room.extras"
-        :buttons="buttons"
+        :buttons=false
     />
   </div>
 </template>
@@ -58,16 +53,16 @@ p {
 }
 
 @media (max-width: 768px) {
-  .booking-details h3 {
+  .booking-details h2 {
     font-size: 1rem;
   }
 }
 
-@media (max-width: 480px) {
-  .booking-details h3 {
+/*@media (max-width: 480px) {
+  .booking-details h2 {
     font-size: 0.875rem;
   }
-}
+}*/
 
 .booking-history-card {
   position: relative;
