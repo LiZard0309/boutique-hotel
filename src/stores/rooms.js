@@ -22,6 +22,7 @@ export const useRoomsStore = defineStore('rooms', {
         },
         rooms: [],
         apiData: null,
+        rooms: [],
     }),
 
     actions: {

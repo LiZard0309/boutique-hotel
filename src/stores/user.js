@@ -1,13 +1,14 @@
-import {defineStore} from 'pinia';
-import axios from 'axios';
+import {defineStore} from "pinia";
+import axios from "axios";
 
 const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/";
 
-export const useAuthStore = defineStore('auth', {
+export const useUserStore = defineStore('user', {
     state: () => ({
         token: null,
         user: null,
     }),
+
     actions: {
         async login(username, password) {
             return axios.post(apiUrl + 'login', {clientId: username, secret: password})
@@ -38,5 +39,20 @@ export const useAuthStore = defineStore('auth', {
                 this.user = savedUser;
             }
         },
+
+        async postUserData(registerData) {
+            await axios.post(`${apiUrl}register`, registerData, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    this.token = response.data;
+                })
+                .catch((error) => {
+                    console.log("Error registering user:", error);
+                })
+        }
     },
 });
