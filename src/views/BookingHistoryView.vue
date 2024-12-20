@@ -94,13 +94,17 @@ export default {
 
 .list-container{
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
-@media (max-width: 480px) { /* Mobile screens */
+@media (min-width: 768px) { /* Tablet and larger screens */
+  /*.booking-history-container {
+    width: 100%;
+  }*/
+
   .list-container{
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
   }
 }
 </style>
