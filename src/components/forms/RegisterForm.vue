@@ -1,5 +1,6 @@
 <script>
 import {useUserStore} from "../../stores/user";
+import {useModalVisibilityStore} from "../../stores/modalVisibility";
 
 export default {
   name: "RegisterForm",
@@ -16,6 +17,11 @@ export default {
       }
     }
   },
+  computed: {
+    modalVisibilityStore() {
+      return useModalVisibilityStore()
+    },
+  },
   methods: {
     async submitRegisterForm() {
       this.userRegisterData.username = this.userRegisterData.email;
@@ -25,8 +31,7 @@ export default {
       if (validInputData) {
         await useUserStore().postUserData(this.userRegisterData);
         this.userToken = useUserStore().registerToken;
-        console.log("Token", this.userToken)
-        console.log("Userdata:", this.userRegisterData);
+        this.closeModal();
         this.showRegisterSuccessMessage();
       } else {
         console.error("Fehler bei der Dateneingabe")
@@ -45,6 +50,9 @@ export default {
     },
     showRegisterSuccessMessage(){
       alert(`Herzlich willkommen ${this.userRegisterData.firstname} ${this.userRegisterData.lastname}! Sie haben sich erfolgreich registriert.`)
+    },
+    closeModal() {
+      this.modalVisibilityStore.closeRegistrationModal();
     }
 
   }
@@ -79,7 +87,7 @@ export default {
     </b-form-group>
 
     <div class="button-container mt-4">
-      <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
+      <b-button variant="secondary" class="mr-2" @click="closeModal">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Registrieren</b-button>
     </div>
   </b-form>
@@ -89,7 +97,7 @@ export default {
 <style scoped>
 .button-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .mr-2 {
