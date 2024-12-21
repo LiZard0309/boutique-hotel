@@ -22,6 +22,9 @@ export default {
     closeLoginModal() {
       this.showLoginModal = false;
     },
+    handleCancelLogin() {
+      this.closeLoginModal(); // Close the modal when the "Abbrechen" button is clicked
+    },
   },
 };
 </script>
@@ -85,7 +88,7 @@ export default {
 
   <!-- Login Modal -->
   <b-modal v-model="showLoginModal" title="Login" hide-footer>
-    <login-form @finish="closeLoginModal"/>
+    <login-form @finish="closeLoginModal" @cancel="handleCancelLogin"/>
   </b-modal>
 </template>
 
