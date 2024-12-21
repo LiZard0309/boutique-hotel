@@ -1,6 +1,6 @@
 <script>
 import { RouterLink } from 'vue-router';
-import { useAuthStore } from '@/stores/user';
+import { useUserStore } from '@/stores/user';
 import LoginForm from '@/components/forms/Login.vue';
 
 export default {
@@ -12,7 +12,7 @@ export default {
     };
   },
   methods: {
-    useAuthStore,
+    useUserStore,
     hide() {
       this.$refs.navCollapse.classList.remove('show');
     },
@@ -68,14 +68,14 @@ export default {
             </b-nav-item>
 
             <!-- Show Login Link -->
-            <b-nav-item v-if="!useAuthStore().user" @click="openLoginModal">Login</b-nav-item>
+            <b-nav-item v-if="!useUserStore().user" @click="openLoginModal">Login</b-nav-item>
 
             <!-- Show Dropdown if Logged In -->
-            <b-nav-item-dropdown v-if="useAuthStore().user" right>
+            <b-nav-item-dropdown v-if="useUserStore().user" right>
               <template #button-content>
                 <em>User</em>
               </template>
-              <b-dropdown-item @click="useAuthStore().logout()">Logout</b-dropdown-item>
+              <b-dropdown-item @click="useUserStore().logout()">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
