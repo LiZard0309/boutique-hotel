@@ -44,9 +44,6 @@ export default {
       this.$emit("update:isVisible", newVal);
     },
   },
-  computed: {
-
-  },
   methods: {
     roomNumber() {
       return useRoomsStore().bookingData.roomID
@@ -76,7 +73,7 @@ export default {
       } else {
         if (window.confirm("Die Buchung ist leider fehlgeschlagen. Möglicherweise wurde das Zimmer in der Zwischenzeit bereits gebucht. Klicken Sie auf Ok, um zurück zur Zimmerübersicht zu kommen.")) {
           window.location.href = '/rooms';
-        };
+        }
       }
     },
   },
