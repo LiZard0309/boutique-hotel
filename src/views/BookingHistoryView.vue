@@ -45,7 +45,7 @@ export default {
       if (!newVal) {
         // User has logged out
         this.userStore.bookings = []; // Clear bookings locally
-        this.$router.push("/"); // Optionally redirect to the home page or login
+        this.$router.push("/");
       }
     },
   },
