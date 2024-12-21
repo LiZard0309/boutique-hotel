@@ -13,7 +13,6 @@
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('edit')">Daten ändern</b-button>
       <b-button variant="primary" @click="$emit('confirm')">Buchung bestätigen</b-button>
-      <b-button variant="primary" @click="$emit('confirmTest')">Buchung bestätigen test</b-button>
     </div>
   </div>
 </template>

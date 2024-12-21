@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
+import {useUserStore} from "@/stores/user";
 
 const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/";
 
@@ -21,13 +22,17 @@ export const useRoomsStore = defineStore('rooms', {
         },
         rooms: [],
         apiData: null,
-        rooms:[],
     }),
 
     actions: {
         async fetchRoomInfo() {
             try {
-                const response = await axios.get(`${apiUrl}rooms`);
+                const response = await axios.get(`${apiUrl}rooms`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${useUserStore().token}`,
+                        },
+                    });
                 this.rooms = response.data;
             } catch (error) {
                 console.log("Error fetching room info:", error);
@@ -35,12 +40,19 @@ export const useRoomsStore = defineStore('rooms', {
         },
 
         async fetchRoomAvailability(roomId) {
-            try{
-            const response = await axios.get(`${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`)
-                .then(response => {
-                    this.apiData = response.data.available
-                })
-            }catch (error){
+            try {
+                const response = await axios.get(
+                    `${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${useUserStore().token}`,
+                        },
+                    }
+                )
+                    .then(response => {
+                        this.apiData = response.data.available
+                    })
+            } catch (error) {
                 console.error("Error fetching data:", error);
             }
         },

@@ -1,15 +1,29 @@
 <script>
-import {RouterLink} from 'vue-router'
-import * as $ from "jquery";
+import { RouterLink } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import LoginForm from '@/components/forms/Login.vue';
 
 export default {
-  name: "Navbar",
+  name: 'Navbar',
+  components: {LoginForm},
+  data() {
+    return {
+      showLoginModal: false, // Controls modal visibility
+    };
+  },
   methods: {
+    useUserStore,
     hide() {
-      $('#nav-collapse').removeClass('show');
+      this.$refs.navCollapse.classList.remove('show');
     },
-  }
-}
+    openLoginModal() {
+      this.showLoginModal = true;
+    },
+    closeLoginModal() {
+      this.showLoginModal = false;
+    },
+  },
+};
 </script>
 
 <template>
@@ -31,12 +45,11 @@ export default {
 
       <!-- Burger-Menu rechts -->
       <div class="navbar-right">
-        <b-navbar-toggle class="navbar-burger" target="nav-collapse">
-        </b-navbar-toggle>
+        <b-navbar-toggle class="navbar-burger" target="nav-collapse"></b-navbar-toggle>
       </div>
 
       <div>
-        <b-collapse id="nav-collapse" class="navbar-collapse" @mouseleave="hide">
+        <b-collapse id="nav-collapse" ref="navCollapse" class="navbar-collapse" @mouseleave="hide">
           <b-navbar-nav class="menu-items">
 
             <b-nav-item>
@@ -59,16 +72,16 @@ export default {
               <RouterLink to="/imprint">Impressum</RouterLink>
             </b-nav-item>
 
-            <b-nav-item href="#">Login</b-nav-item>
+            <!-- Show Login Link -->
+            <b-nav-item v-if="!useUserStore().user" @click="openLoginModal">Login</b-nav-item>
 
-
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
+            <!-- Show Dropdown if Logged In -->
+            <b-nav-item-dropdown v-if="useUserStore().user" right>
               <template #button-content>
                 <em>User</em>
               </template>
               <b-dropdown-item><RouterLink to="/history">Meine Buchungen</RouterLink></b-dropdown-item>
-              <b-dropdown-item href="#">Logout</b-dropdown-item>
+              <b-dropdown-item @click="useUserStore().logout()">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -76,6 +89,10 @@ export default {
     </b-container>
   </b-navbar>
 
+  <!-- Login Modal -->
+  <b-modal v-model="showLoginModal" title="Login" hide-footer>
+    <login-form @finish="closeLoginModal"/>
+  </b-modal>
 </template>
 
 <style scoped>
@@ -84,7 +101,8 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+  background-color: white !important; /* Stelle sicher, dass der Hintergrund weiß bleibt */
 }
 
 .navbar-container {
@@ -97,12 +115,12 @@ export default {
 }
 
 .navbar-container a {
-  color: #000;
+  color: #000 !important;
   text-decoration: none;
 }
 
 .navbar-container a:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 /* Stil für den Hotelnamen */
@@ -117,9 +135,9 @@ export default {
 
 .navbar-collapse {
   width: 100%;
-  background-color: white;
+  background-color: white !important;
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 .navbar-logo {
@@ -128,7 +146,8 @@ export default {
 }
 
 .menu-items a {
-  white-space: nowrap; /* Prevents breaking text into multiple lines */
+  white-space: nowrap;
+  font-weight: normal; /* Stelle sicher, dass es normal bleibt */
 }
 
 @media (max-width: 768px) {
@@ -152,16 +171,15 @@ export default {
   }
 
   .menu-items a {
-    font-size: 0.9rem; /* Slightly smaller text */
-    padding: 0 0.5rem; /* Reduce horizontal spacing */
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
   }
-
 }
 
 @media (min-width: 992px) {
   .navbar-collapse {
-    background-color: transparent;
-    box-shadow: none;
+    background-color: transparent !important;
+    box-shadow: none !important;
   }
 
   .menu-items {
@@ -176,8 +194,8 @@ export default {
     max-height: 50px;
   }
   .navbar-collapse {
-    background-color: transparent;
-    box-shadow: none;
+    background-color: transparent !important;
+    box-shadow: none !important;
   }
 }
 
