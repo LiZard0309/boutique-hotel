@@ -51,8 +51,7 @@ export default {
     },
   },
   async mounted() {
-    await console.log("Bookings: ", this.bookings);
-    /*try{
+    try{
       this.isLoading = true;
       console.log(this.userStore.bookings);
       await this.userStore.fetchBookingHistory();
@@ -60,7 +59,7 @@ export default {
       console.error("Error fetching booking history: ", error);
     } finally {
       this.isLoading = false;
-    }*/
+    }
   }
 }
 </script>
