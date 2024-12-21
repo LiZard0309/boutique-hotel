@@ -1,8 +1,11 @@
 <script>
 import {useUserStore} from "@/stores/user";
+import RegistrationModal from "../modals/RegistrationModal.vue";
+import {useModalVisibilityStore} from "../../stores/modalVisibility";
 
 export default {
   name: "LoginForm",
+  components: {RegistrationModal},
   data() {
     return {
       email: '',
@@ -21,6 +24,9 @@ export default {
             this.$emit('finish');
           });
     },
+    openRegistrationModal(){
+      useModalVisibilityStore().openRegistrationModal()
+    },
   },
 };
 </script>
@@ -33,6 +39,9 @@ export default {
     <b-form-group label="Passwort" label-for="password">
       <b-form-input id="password" type="password" v-model="password" required placeholder="Passwort eingeben" />
     </b-form-group>
+    <p>Noch kein registrierter User? <b-button variant="outline-primary" @click="openRegistrationModal">Hier registrieren!</b-button> </p>
+
+    <RegistrationModal/>
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit" class="ml-2">Login</b-button>

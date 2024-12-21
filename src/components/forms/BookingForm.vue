@@ -1,10 +1,12 @@
 <script>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import {useRoomsStore} from "@/stores/rooms";
+import RegistrationModal from "../modals/RegistrationModal.vue";
 
 export default {
   name: "BookingForm",
   components: {
+    RegistrationModal,
     VueDatePicker
   },
   data() {
@@ -31,6 +33,9 @@ export default {
     format(date) {
       if (!date) return null;
       return new Intl.DateTimeFormat('de-DE').format(date);
+    },
+    openRegistrationModal(){
+      useModalVisibilityStore().openRegistrationModal();
     }
   },
   computed: {
@@ -44,6 +49,7 @@ export default {
 </script>
 
 <template>
+
   <b-form @submit.prevent="submitBooking">
     <b-form-group label="Vorname" label-for="firstname">
       <b-form-input id="firstname" v-model="bookingData.firstname" required placeholder="Vorname eingeben"/>
@@ -74,6 +80,13 @@ export default {
                     placeholder="E-Mail erneut eingeben"/>
     </b-form-group>
 
+    <div class="registration-container">
+      <p>Noch kein registrierter User?
+        <b-button variant="outline-primary" @click="openRegistrationModal">Hier registrieren!</b-button>
+      </p>
+    </div>
+
+    <RegistrationModal/>
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
@@ -90,4 +103,5 @@ export default {
 .mr-2 {
   margin-right: 10px;
 }
+
 </style>
