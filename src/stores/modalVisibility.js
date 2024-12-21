@@ -1,11 +1,11 @@
 import {defineStore} from "pinia";
 
 export const useModalVisibilityStore = defineStore("modalVisibility", {
-    getter: {
+    state: () => ({
         isRegistrationModalVisible() {
             return false;
         },
-    },
+    }),
     actions: {
         openRegistrationModal() {
             this.isRegistrationModalVisible = true;

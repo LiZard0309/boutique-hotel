@@ -30,7 +30,7 @@ export default {
 
       if (validInputData) {
         await useUserStore().postUserData(this.userRegisterData);
-        this.userToken = useUserStore().registerToken;
+        this.userToken = useUserStore().token;
         this.closeModal();
         this.showRegisterSuccessMessage();
       } else {
