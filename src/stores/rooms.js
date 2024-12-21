@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import axios from 'axios'
-import {useAuthStore} from "@/stores/user";
+import {useUserStore} from "@/stores/user";
 
 const apiUrl = "https://boutique-hotel.helmuth-lammer.at/api/v1/";
 
@@ -22,7 +22,6 @@ export const useRoomsStore = defineStore('rooms', {
         },
         rooms: [],
         apiData: null,
-        rooms: [],
     }),
 
     actions: {
@@ -31,7 +30,7 @@ export const useRoomsStore = defineStore('rooms', {
                 const response = await axios.get(`${apiUrl}rooms`,
                     {
                         headers: {
-                            Authorization: `Bearer ${useAuthStore().token}`,
+                            Authorization: `Bearer ${useUserStore().token}`,
                         },
                     });
                 this.rooms = response.data;
@@ -46,7 +45,7 @@ export const useRoomsStore = defineStore('rooms', {
                     `${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`,
                     {
                         headers: {
-                            Authorization: `Bearer ${useAuthStore().token}`,
+                            Authorization: `Bearer ${useUserStore().token}`,
                         },
                     }
                 )

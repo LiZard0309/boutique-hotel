@@ -1,3 +1,30 @@
+<script>
+import {useUserStore} from "@/stores/user";
+
+export default {
+  name: "LoginForm",
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    handleLogin() {
+      useUserStore().login(this.email, this.password)
+          .then(() => {
+            alert("Login erfolgreich!");
+            this.$emit('finish');
+          })
+          .catch(() => {
+            alert("Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
+            this.$emit('finish');
+          });
+    },
+  },
+};
+</script>
+
 <template>
   <b-form @submit.prevent="handleLogin">
     <b-form-group label="E-Mail" label-for="email">
@@ -13,33 +40,7 @@
   </b-form>
 </template>
 
-<script>
 
-import {useAuthStore} from "@/stores/user";
-
-export default {
-  name: "LoginForm",
-  data() {
-    return {
-      email: '',
-      password: '',
-    };
-  },
-  methods: {
-    handleLogin() {
-      useAuthStore().login(this.email, this.password)
-          .then(() => {
-            alert("Login erfolgreich!");
-            this.$emit('finish');
-          })
-          .catch(() => {
-            alert("Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
-            this.$emit('finish');
-          });
-    },
-  },
-};
-</script>
 <style scoped>
 .button-container {
   display: flex;
