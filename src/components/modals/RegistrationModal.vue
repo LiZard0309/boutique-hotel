@@ -22,7 +22,7 @@ export default {
   <b-modal
       v-model="isModalVisible"
       title="Registrieren"
-      @hidden="closeModal"
+      @close="closeModal"
       hide-footer>
     <RegisterForm/>
   </b-modal>
