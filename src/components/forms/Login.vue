@@ -53,7 +53,7 @@ export default {
 <style scoped>
 .button-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .mr-2 {
