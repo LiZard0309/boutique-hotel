@@ -7,6 +7,7 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: null,
         user: null,
+        userData: []
     }),
 
     actions: {
@@ -52,6 +53,21 @@ export const useUserStore = defineStore('user', {
                 })
                 .catch((error) => {
                     console.log("Error registering user:", error);
+                })
+        },
+
+        async fetchUserData() {
+            await axios.get(`${apiUrl}user`, {
+                headers: {
+                    Authorization: `Bearer ${this.token}`
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    this.userData = response.data;
+                })
+                .catch((error) => {
+                    console.log("Error fetching userdata:", error);
                 })
         }
     },
