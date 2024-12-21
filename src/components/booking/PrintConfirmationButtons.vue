@@ -1,12 +1,16 @@
 <script>
+import RegistrationModal from "../modals/RegistrationModal.vue";
+import {useModalVisibilityStore} from "../../stores/modalVisibility";
+
 export default {
   name: "PrintConfirmationButtons",
+  components: {RegistrationModal},
   methods: {
     printPage() {
       window.print();
     },
-    register() {
-      console.log("Registrierung wird später implementiert.");
+    openRegistrationModal() {
+      useModalVisibilityStore().openRegistrationModal();
     },
   },
 };
@@ -16,7 +20,9 @@ export default {
   <div class="help-section">
     <div class="button-group">
       <b-button variant="primary" @click="printPage">Buchungsbestätigung drucken</b-button>
-      <b-button @click="register">Registrieren</b-button>
+      <b-button @click="openRegistrationModal">Registrieren</b-button>
+
+      <RegistrationModal/>
     </div>
   </div>
 </template>

@@ -62,27 +62,27 @@ export default {
 <template>
 
   <b-form @submit.prevent="submitRegisterForm">
-    <b-form-group label="Vorname" label-for="firstName">
-      <b-form-input id="firstName" type="text" v-model="userRegisterData.firstname" required
+    <b-form-group label="Vorname" label-for="firstNameForRegistration">
+      <b-form-input id="firstNameForRegistration" type="text" v-model="userRegisterData.firstname" required
                     placeholder="Vorname eingeben"/>
     </b-form-group>
 
-    <b-form-group label="Nachname" label-for="lastName">
-      <b-form-input id="lastName" type="text" v-model="userRegisterData.lastname" required
+    <b-form-group label="Nachname" label-for="lastNameForRegistration">
+      <b-form-input id="lastNameForRegistration" type="text" v-model="userRegisterData.lastname" required
                     placeholder="Nachname eingeben"/>
     </b-form-group>
 
-    <b-form-group label="E-Mail-Adresse" label-for="email">
-      <b-form-input id="email" type="email" v-model="userRegisterData.email" required placeholder="E-Mail eingeben"/>
+    <b-form-group label="E-Mail-Adresse" label-for="emailForRegistration">
+      <b-form-input id="emailForRegistration" type="email" v-model="userRegisterData.email" required placeholder="E-Mail eingeben"/>
     </b-form-group>
 
-    <b-form-group label="Passwort" label-for="password">
-      <b-form-input id="password" type="password" v-model="userRegisterData.password" required
+    <b-form-group label="Passwort" label-for="passwordForRegistration">
+      <b-form-input id="passwordForRegistration" type="password" v-model="userRegisterData.password" required
                     placeholder="Passwort eingeben"/>
     </b-form-group>
 
-    <b-form-group label="Passwort bestätigen" label-for="confirmPassword">
-      <b-form-input id="confirmPassword" type="password" v-model="confirmPassword" required
+    <b-form-group label="Passwort bestätigen" label-for="confirmPasswordForRegistration">
+      <b-form-input id="confirmPasswordForRegistration" type="password" v-model="confirmPassword" required
                     placeholder="Passwort erneut eingeben"/>
     </b-form-group>
 
