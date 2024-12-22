@@ -31,7 +31,7 @@ export default {
   },
   watch: {
     registeredUserData: {
-      immediate: true, //initializes userData right away after component is mounted
+      immediate: true,
       handler(newData) {
         if (newData) {
           this.bookingData = {

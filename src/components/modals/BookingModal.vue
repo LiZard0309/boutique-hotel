@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       internalVisible: this.isVisible,
-      currentStep: "booking", // Start direkt mit "booking"
+      currentStep: "booking",
     };
   },
   watch: {
@@ -56,13 +56,13 @@ export default {
       return useRoomsStore().bookingData.roomID
     },
     closeModal() {
-      this.$emit("update:isVisible", false); // Schließt das Modal
+      this.$emit("update:isVisible", false);
     },
     handleBookingSubmit() {
-      this.currentStep = "review"; // Wechselt zu ReviewBooking
+      this.currentStep = "review";
     },
     editBooking() {
-      this.currentStep = "booking"; // Zurück zum Buchungsformular
+      this.currentStep = "booking";
     },
     async confirmBooking() {
       const bookingPayload = {
