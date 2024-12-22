@@ -1,18 +1,20 @@
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import RegistrationModal from "../modals/RegistrationModal.vue";
-import {useModalVisibilityStore} from "../../stores/modalVisibility";
 import {useRoomsStore} from "../../stores/rooms";
+import LoginForm from "./Login.vue";
 
 export default {
   name: "BookingFormNotLoggedIn",
   components: {
+    LoginForm,
     RegistrationModal,
     VueDatePicker
   },
   data() {
     return {
       confirmEmail: '',
+      showLoginModal: false,
       bookingData: {
         firstname: '',
         lastname: '',
@@ -35,9 +37,15 @@ export default {
       if (!date) return null;
       return new Intl.DateTimeFormat('de-DE').format(date);
     },
-    openRegistrationModal() {
-      useModalVisibilityStore().openRegistrationModal();
-    }
+    openLoginModal() {
+      this.showLoginModal = true;
+    },
+    closeLoginModal() {
+      this.showLoginModal = false;
+    },
+    handleCancelLogin() {
+      this.closeLoginModal(); // Close the modal when the "Abbrechen" button is clicked
+    },
   },
   computed: {
     maxDate() {
@@ -81,12 +89,14 @@ export default {
     </b-form-group>
 
     <div class="registration-container">
-      <p>Noch kein registrierter User?
-        <b-button variant="outline-primary" @click="openRegistrationModal">Hier registrieren!</b-button>
+      <p>Schon ein registrierter User?
+        <b-button variant="outline-primary" @click="openLoginModal">Zum Login</b-button>
       </p>
     </div>
 
-    <RegistrationModal/>
+    <b-modal v-model="showLoginModal" title="Login" hide-footer>
+      <login-form @finish="closeLoginModal" @cancel="handleCancelLogin"/>
+    </b-modal>
     <div class="button-container mt-4">
       <b-button variant="secondary" class="mr-2" @click="$emit('cancel')">Abbrechen</b-button>
       <b-button variant="primary" type="submit">Buchung überprüfen</b-button>
