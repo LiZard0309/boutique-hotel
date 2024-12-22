@@ -22,11 +22,13 @@ export const useRoomsStore = defineStore('rooms', {
         },
         rooms: [],
         apiData: null,
+        loading: false,
     }),
 
     actions: {
         async fetchRoomInfo() {
             try {
+                this.loading = true;
                 const response = await axios.get(`${apiUrl}rooms`,
                     {
                         headers: {
@@ -36,11 +38,14 @@ export const useRoomsStore = defineStore('rooms', {
                 this.rooms = response.data;
             } catch (error) {
                 console.log("Error fetching room info:", error);
-            }
+            } finally {
+            this.loading = false;
+        }
         },
 
         async fetchRoomAvailability(roomId) {
             try {
+                this.loading = true;
                 const response = await axios.get(
                     `${apiUrl}room/${roomId}/from/${this.dateRange.startDate}/to/${this.dateRange.endDate}`,
                     {
@@ -54,7 +59,9 @@ export const useRoomsStore = defineStore('rooms', {
                     })
             } catch (error) {
                 console.error("Error fetching data:", error);
-            }
+            } finally {
+            this.loading = false;
+        }
         },
         postBookingData(roomId, bookingPayload) {
             return axios.post(
