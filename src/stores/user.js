@@ -8,9 +8,8 @@ export const useUserStore = defineStore('user', {
         bookings: [],
         token: null,
         user: null,
-        userData: []
+        userData: [],
     }),
-
     actions: {
         async login(username, password) {
             return axios.post(apiUrl + 'login', {clientId: username, secret: password})
@@ -84,6 +83,7 @@ export const useUserStore = defineStore('user', {
                 })
                 .catch((error) => {
                     console.log("Error fetching userdata:", error);
+                    this.userData = null;
                 })
         }
     },

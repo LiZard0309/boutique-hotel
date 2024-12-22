@@ -1,7 +1,10 @@
 <template>
   <b-modal v-model="internalVisible" title="Zimmer buchen" @hide="closeModal" hide-footer>
-    <div v-if="currentStep === 'booking'">
-      <BookingForm @approve="handleBookingSubmit" @cancel="closeModal"/>
+    <div v-if="currentStep === 'booking' && useUserStore().user">
+      <BookingFormLoggedIn @approve="handleBookingSubmit" @cancel="closeModal"/>
+    </div>
+    <div v-if="currentStep === 'booking' && !useUserStore().user">
+      <BookingFormNotLoggedIn @approve="handleBookingSubmit" @cancel="closeModal"/>
     </div>
     <div v-if="currentStep === 'review'">
       <ReviewBooking
@@ -17,10 +20,15 @@
 import BookingForm from "@/components/forms/BookingForm.vue"; // Buchungsformular-Komponente
 import ReviewBooking from "@/components/ReviewBooking.vue";
 import {useRoomsStore} from "@/stores/rooms";
+import {useUserStore} from "../../stores/user";
+import BookingFormLoggedIn from "../forms/BookingFormLoggedIn.vue";
+import BookingFormNotLoggedIn from "../forms/BookingFormNotLoggedIn.vue";
 
 export default {
   name: "BookingModal",
   components: {
+    BookingFormNotLoggedIn,
+    BookingFormLoggedIn,
     BookingForm,
     ReviewBooking,
   },
@@ -45,6 +53,7 @@ export default {
     },
   },
   methods: {
+    useUserStore,
     roomNumber() {
       return useRoomsStore().bookingData.roomID
     },
