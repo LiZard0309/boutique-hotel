@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import BookingForm from "@/components/forms/BookingForm.vue"; // Buchungsformular-Komponente
 import ReviewBooking from "@/components/ReviewBooking.vue";
 import {useRoomsStore} from "@/stores/rooms";
 import {useUserStore} from "../../stores/user";
@@ -29,7 +28,6 @@ export default {
   components: {
     BookingFormNotLoggedIn,
     BookingFormLoggedIn,
-    BookingForm,
     ReviewBooking,
   },
   props: {

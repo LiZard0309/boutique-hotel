@@ -105,5 +105,12 @@ export default {
 </template>
 
 <style scoped>
+.button-container {
+  display: flex;
+  justify-content: center;
+}
 
+.mr-2 {
+  margin-right: 10px;
+}
 </style>
