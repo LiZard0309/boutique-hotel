@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     closeAlert() {
-      this.$emit('update:showAlert', false); // Close the alert
+      this.$emit('update:showAlert', false);
     }
   }
 }

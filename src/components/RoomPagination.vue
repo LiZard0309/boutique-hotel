@@ -20,7 +20,6 @@ export default {
   },
   watch: {
     currentPage(latest) {
-      console.log("changing to: "+latest)
       usePaginationStore().setCurrentPage(latest);
     }
   }
