@@ -75,7 +75,7 @@ export default {
 
 <template>
   <div v-if="isLoading">
-    <p>Loading...</p>
+    <p>Lade Userdaten ...</p>
   </div>
   <b-form @submit.prevent="submitBooking">
     <b-form-group label="Vorname" label-for="firstname">
