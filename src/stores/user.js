@@ -51,6 +51,7 @@ export const useUserStore = defineStore('user', {
                 .then((response) => {
                     console.log(response);
                     this.token = response.data;
+                    localStorage.setItem('token', response.data);
                 })
                 .catch((error) => {
                     console.log("Error registering user:", error);
