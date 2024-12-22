@@ -63,7 +63,6 @@ export default {
     try {
       this.isLoading = true;
       await useUserStore().fetchUserData();
-      console.log("userData:", this.registeredUserData)
     } catch (error) {
       console.error("Error fetching user info:", error);
     } finally {

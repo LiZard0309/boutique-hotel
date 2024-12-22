@@ -51,9 +51,8 @@ export default {
     },
   },
   async mounted() {
-    try{
+    try {
       this.isLoading = true;
-      console.log(this.userStore.bookings);
       await this.userStore.fetchBookingHistory();
     } catch (error) {
       console.error("Error fetching booking history: ", error);
@@ -91,17 +90,17 @@ export default {
   width: 100%;
 }
 
-.list-container{
+.list-container {
   margin: 0 auto;
   width: 100%;
 }
 
-@media (min-width: 768px) { /* Tablet and larger screens */
+@media (min-width: 768px) {
+  /* Tablet and larger screens */
   /*.booking-history-container {
     width: 100%;
   }*/
-
-  .list-container{
+  .list-container {
     margin: 0 auto;
     width: 80%;
   }

@@ -48,7 +48,6 @@ export const useUserStore = defineStore('user', {
                 }
             })
                 .then((response) => {
-                    console.log(response);
                     this.token = response.data;
                     localStorage.setItem('token', response.data);
                 })
@@ -58,15 +57,12 @@ export const useUserStore = defineStore('user', {
         },
         async fetchBookingHistory() {
             try {
-                console.log(this.token);
-                console.log(`URL: ${apiUrl}/user/bookings`);
                 const response = await axios.get(`${apiUrl}user/bookings`, {
                     headers: {
                         Authorization: `Bearer ${this.token}`
                     }
                 })
                 this.bookings = response.data;
-                console.log(this.bookings);
             } catch (error) {
                 console.error("Error fetching booking history:", error);
             }
@@ -79,7 +75,6 @@ export const useUserStore = defineStore('user', {
                 }
             })
                 .then((response) => {
-                    console.log(response);
                     this.userData = response.data;
                 })
                 .catch((error) => {
